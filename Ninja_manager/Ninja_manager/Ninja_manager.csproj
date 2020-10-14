@@ -109,6 +109,7 @@
     <Compile Include="Ninja.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Repository\CategoryRepository.cs" />
     <Compile Include="Repository\NinjaRepository.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\NinjaEditViewModel.cs" />

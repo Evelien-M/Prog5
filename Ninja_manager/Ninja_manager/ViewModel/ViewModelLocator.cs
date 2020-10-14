@@ -60,7 +60,7 @@ namespace Ninja_manager.ViewModel
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<NinjaEditViewModel>();
+                return new NinjaEditViewModel(this.NinjaList.SelectedNinja);
             }
         }
 

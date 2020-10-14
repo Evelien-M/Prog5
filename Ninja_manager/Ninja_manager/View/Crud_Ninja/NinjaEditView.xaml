@@ -25,10 +25,17 @@
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
                 <Label Grid.Row="0" Content="Ninja name:" HorizontalAlignment="Left" Foreground="White" Margin="15,0,0,0" VerticalAlignment="Top"/>
-                <TextBox Grid.Row="1" HorizontalAlignment="Stretch" Height="25"  Margin="15,0,15,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" />
-                <StackPanel x:Name="Footer" Grid.Row="2" Height="45" Background="#728196" VerticalAlignment="Top">
-                    <Button Margin="0, 15, 0, 15" Content="Save" HorizontalAlignment="Center" VerticalAlignment="Center" Width="75"/>
-                </StackPanel>
+                <TextBox Grid.Row="1" HorizontalAlignment="Stretch" Height="25"  Margin="15,0,15,0" TextWrapping="Wrap" Text="{Binding Name}" VerticalAlignment="Top" />
+                <Label Grid.Row="1" Content="{Binding ErrorMessage}" HorizontalAlignment="Center" Foreground="#E07E7E" VerticalAlignment="Bottom"/>
+                <Label Grid.Row="1" Content="{Binding SuccesMessage}" HorizontalAlignment="Center" Foreground="#7EE09A" VerticalAlignment="Bottom"/>
+                <Grid x:Name="Footer" Grid.Row="2" Height="45" Background="#728196" VerticalAlignment="Top">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Command="{Binding ResetNinjaCommand}" Grid.Column="0" Margin="15, 0, 0, 0" Content="Reset" HorizontalAlignment="Left" VerticalAlignment="Center" Width="75"/>
+                    <Button Command="{Binding SaveNinjaCommand}" Grid.Column="1" Margin="0, 0, 15, 0" Content="Save" HorizontalAlignment="Right" VerticalAlignment="Center" Width="75"/>
+                </Grid>
             </Grid>
             <Grid x:Name="RightSection" Grid.Column="1" HorizontalAlignment="Stretch" Margin="15,0,15,0" VerticalAlignment="Center">
                 <Grid.RowDefinitions>
@@ -222,5 +229,6 @@
             </Grid>
 
         </Grid>
+
     </Grid>
 </Window>
