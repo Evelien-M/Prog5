@@ -65,15 +65,14 @@
     <Build Include="Tables\Inventory.sql" />
     <Build Include="Tables\Gear.sql" />
     <Build Include="Tables\Category.sql" />
-    <PostDeploy Include="Scripts\Seed\Category.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="Database.refactorlog" />
   </ItemGroup>
   <ItemGroup>
+    <PostDeploy Include="Scripts\Script.PostDeployment.sql" />
     <None Include="Scripts\Seed\Ninja.sql" />
-  </ItemGroup>
-  <ItemGroup>
+    <None Include="Scripts\Seed\Category.sql" />
     <None Include="Scripts\Seed\Inventory.sql" />
   </ItemGroup>
 </Project>

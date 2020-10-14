@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Command;
+using Ninja_manager.Repository;
 using Ninja_manager.View.Crud_Ninja;
 using System;
 using System.Collections.Generic;
@@ -13,14 +14,17 @@ namespace Ninja_manager.ViewModel
     {
 
         public ICommand AddNewItemCommand { get; set; }
-
+        public List<Ninja> NinjaList { get; private set; }
 
 
         private NinjaEditView _newNinjaView;
+        private NinjaRepository _ninjaRepository;
 
         public NinjaListViewModel()
         {
             this.AddNewItemCommand = new RelayCommand(CreateNewItem, true);
+            this._ninjaRepository = new NinjaRepository();
+            this.NinjaList = this._ninjaRepository.GetNinjas();
         }
 
 

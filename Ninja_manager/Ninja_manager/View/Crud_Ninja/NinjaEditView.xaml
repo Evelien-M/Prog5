@@ -7,36 +7,70 @@
         mc:Ignorable="d"
                 Background="#909396"
         DataContext="{Binding NinjaEdit, Source={StaticResource Locator}}"
-        Title="NinjaEditView" Height="450" Width="auto">
+        Title="NinjaEditView" Height="auto" Width="800">
     <Grid>
-        <Grid x:Name="Container" Margin="15,30,15,0">
+        <!-- HEADER -->
+        <StackPanel x:Name="Header" Grid.Row="0" Height="45" Background="#728196" VerticalAlignment="Top">
+            <Label Content="Ninja berwerken" HorizontalAlignment="Center" Margin="0,8,0,0" FontSize="16" FontWeight="Bold" Foreground="White" FontFamily="Open Sans" />
+        </StackPanel>
+        <Grid x:Name="Container" Margin="0,45,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="30" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Grid x:Name="LeftSection" Grid.Column="0" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Top">
+            <Grid x:Name="LeftSection" Background="#40444A" Grid.Column="0" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch">
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
-            <TextBox Grid.Row="1" HorizontalAlignment="Stretch" Height="23"  TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" />
+                <Label Grid.Row="0" Content="Ninja name:" HorizontalAlignment="Left" Foreground="White" Margin="15,0,0,0" VerticalAlignment="Top"/>
+                <TextBox Grid.Row="1" HorizontalAlignment="Stretch" Height="25"  Margin="15,0,15,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" />
+                <StackPanel x:Name="Footer" Grid.Row="2" Height="45" Background="#728196" VerticalAlignment="Top">
+                    <Button Margin="0, 15, 0, 15" Content="Save" HorizontalAlignment="Center" VerticalAlignment="Center" Width="75"/>
+                </StackPanel>
             </Grid>
-            <Grid x:Name="RightSection" Grid.Column="2" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Top">
+            <Grid x:Name="RightSection" Grid.Column="1" HorizontalAlignment="Stretch" Margin="15,0,15,0" VerticalAlignment="Center">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
-                    <RowDefinition Height="15"/>
                     <RowDefinition Height="auto"/>
-                    <RowDefinition Height="15"/>
                     <RowDefinition Height="auto"/>
-                    <RowDefinition Height="15"/>
                     <RowDefinition Height="auto"/>
-                    <RowDefinition Height="15"/>
                     <RowDefinition Height="auto"/>
-                    <RowDefinition Height="15"/>
+                    <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
                 <!-- HEAD -->
-                <Grid x:Name="GearItem1" Grid.Row="0" Background="#40444A">
+                <Grid x:Name="GearItem1" Margin="0, 15, 0, 0" Grid.Row="0" Background="#40444A">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Rectangle Grid.Column="0" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="50" Stroke="Black" VerticalAlignment="Center" Width="50"/>
+                    <Label Grid.Column="1" Content="{Binding Head.Name}" Foreground="White" FontWeight="Bold" HorizontalAlignment="Left" Margin="5,0,0,0" VerticalAlignment="Top"/>
+                    <Grid Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Content="Strength:" FontSize="10" Foreground="#E07E7E" HorizontalAlignment="Right" Margin="5,15,0,0" VerticalAlignment="Bottom"/>
+                        <Label Grid.Column="1" Content="{Binding Head.Strength}" FontSize="10" Foreground="#E07E7E" FontWeight="Bold" HorizontalAlignment="Right" Margin="5,15,0,0" VerticalAlignment="Bottom"/>
+                        <Label Grid.Column="2" Content="Intelligence:" FontSize="10" Foreground="#8991E0" HorizontalAlignment="Right" Margin="5,15,0,0" VerticalAlignment="Bottom"/>
+                        <Label Grid.Column="3" Content="{Binding Head.Intelligence}" FontSize="10" Foreground="#8991E0" FontWeight="Bold" HorizontalAlignment="Right" Margin="5,15,0,0" VerticalAlignment="Bottom"/>
+                        <Label Grid.Column="4" Content="Agility:" FontSize="10" Foreground="#7EE09A" HorizontalAlignment="Right" Margin="5,15,0,0" VerticalAlignment="Bottom"/>
+                        <Label Grid.Column="5" Content="{Binding Head.Agility}" FontSize="10" Foreground="#7EE09A" FontWeight="Bold" HorizontalAlignment="Right" Margin="5,15,0,0" VerticalAlignment="Bottom"/>
+                    </Grid>
+                    <Label Grid.Column="2" Foreground="White" Content="Head" HorizontalAlignment="Right" Margin="0,0,0,0" VerticalAlignment="Top"/>
+                    <Button Grid.Column="2" Content="Sell" HorizontalAlignment="Right"  VerticalAlignment="Bottom" Width="75"/>
+                </Grid>
+
+                <!-- Shoulder -->
+                <Grid x:Name="GearItem2" Margin="0, 15, 0, 0" Grid.Row="1" Background="#40444A">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="50"/>
                         <ColumnDefinition Width="auto"/>
@@ -61,16 +95,132 @@
                         <Label Grid.Column="5" Content="{Binding Head.Agility}" FontSize="10" Foreground="#7EE09A" FontWeight="Bold" HorizontalAlignment="Right" Margin="5,15,0,0" VerticalAlignment="Bottom"/>
                     </Grid>
 
-                    <Label Grid.Column="2" Foreground="White" Content="Head" HorizontalAlignment="Right" Margin="0,0,0,0" VerticalAlignment="Top"/>
+                    <Label Grid.Column="2" Foreground="White" Content="Shoulder" HorizontalAlignment="Right" Margin="0,0,0,0" VerticalAlignment="Top"/>
+                    <Button Grid.Column="2" Content="Sell" HorizontalAlignment="Right"  VerticalAlignment="Bottom" Width="75"/>
+                </Grid>
+
+                <!-- Chest -->
+                <Grid x:Name="GearItem3" Margin="0, 15, 0, 0" Grid.Row="2" Background="#40444A">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Rectangle Grid.Column="0" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="50" Stroke="Black" VerticalAlignment="Center" Width="50"/>
+                    <Label Grid.Column="1" Content="{Binding Head.Name}" Foreground="White" FontWeight="Bold" HorizontalAlignment="Left" Margin="5,0,0,0" VerticalAlignment="Top"/>
+                    <Grid Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Content="Strength:" FontSize="10" Foreground="#E07E7E" HorizontalAlignment="Right" Margin="5,15,0,0" VerticalAlignment="Bottom"/>
+                        <Label Grid.Column="1" Content="{Binding Head.Strength}" FontSize="10" Foreground="#E07E7E" FontWeight="Bold" HorizontalAlignment="Right" Margin="5,15,0,0" VerticalAlignment="Bottom"/>
+                        <Label Grid.Column="2" Content="Intelligence:" FontSize="10" Foreground="#8991E0" HorizontalAlignment="Right" Margin="5,15,0,0" VerticalAlignment="Bottom"/>
+                        <Label Grid.Column="3" Content="{Binding Head.Intelligence}" FontSize="10" Foreground="#8991E0" FontWeight="Bold" HorizontalAlignment="Right" Margin="5,15,0,0" VerticalAlignment="Bottom"/>
+                        <Label Grid.Column="4" Content="Agility:" FontSize="10" Foreground="#7EE09A" HorizontalAlignment="Right" Margin="5,15,0,0" VerticalAlignment="Bottom"/>
+                        <Label Grid.Column="5" Content="{Binding Head.Agility}" FontSize="10" Foreground="#7EE09A" FontWeight="Bold" HorizontalAlignment="Right" Margin="5,15,0,0" VerticalAlignment="Bottom"/>
+                    </Grid>
+
+                    <Label Grid.Column="2" Foreground="White" Content="Chest" HorizontalAlignment="Right" Margin="0,0,0,0" VerticalAlignment="Top"/>
+                    <Button Grid.Column="2" Content="Sell" HorizontalAlignment="Right"  VerticalAlignment="Bottom" Width="75"/>
+                </Grid>
+
+                <!-- Belt -->
+                <Grid x:Name="GearItem4" Margin="0, 15, 0, 0" Grid.Row="3" Background="#40444A">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Rectangle Grid.Column="0" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="50" Stroke="Black" VerticalAlignment="Center" Width="50"/>
+                    <Label Grid.Column="1" Content="{Binding Head.Name}" Foreground="White" FontWeight="Bold" HorizontalAlignment="Left" Margin="5,0,0,0" VerticalAlignment="Top"/>
+                    <Grid Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Content="Strength:" FontSize="10" Foreground="#E07E7E" HorizontalAlignment="Right" Margin="5,15,0,0" VerticalAlignment="Bottom"/>
+                        <Label Grid.Column="1" Content="{Binding Head.Strength}" FontSize="10" Foreground="#E07E7E" FontWeight="Bold" HorizontalAlignment="Right" Margin="5,15,0,0" VerticalAlignment="Bottom"/>
+                        <Label Grid.Column="2" Content="Intelligence:" FontSize="10" Foreground="#8991E0" HorizontalAlignment="Right" Margin="5,15,0,0" VerticalAlignment="Bottom"/>
+                        <Label Grid.Column="3" Content="{Binding Head.Intelligence}" FontSize="10" Foreground="#8991E0" FontWeight="Bold" HorizontalAlignment="Right" Margin="5,15,0,0" VerticalAlignment="Bottom"/>
+                        <Label Grid.Column="4" Content="Agility:" FontSize="10" Foreground="#7EE09A" HorizontalAlignment="Right" Margin="5,15,0,0" VerticalAlignment="Bottom"/>
+                        <Label Grid.Column="5" Content="{Binding Head.Agility}" FontSize="10" Foreground="#7EE09A" FontWeight="Bold" HorizontalAlignment="Right" Margin="5,15,0,0" VerticalAlignment="Bottom"/>
+                    </Grid>
+
+                    <Label Grid.Column="2" Foreground="White" Content="Belt" HorizontalAlignment="Right" Margin="0,0,0,0" VerticalAlignment="Top"/>
                     <Button Grid.Column="2" Content="Sell" HorizontalAlignment="Right"  VerticalAlignment="Bottom" Width="75"/>
                 </Grid>
                 
-                <Rectangle Grid.Row="2" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="50" Stroke="Black" VerticalAlignment="Top" Width="50"/>
-                <Rectangle Grid.Row="4" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="50" Stroke="Black" VerticalAlignment="Top" Width="50"/>
-                <Rectangle Grid.Row="6" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="50" Stroke="Black" VerticalAlignment="Top" Width="50"/>
-                <Rectangle Grid.Row="8" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="50" Stroke="Black" VerticalAlignment="Top" Width="50"/>
-                <Rectangle Grid.Row="10" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="50" Stroke="Black" VerticalAlignment="Top" Width="50"/>
+                <!-- Legs -->
+                <Grid x:Name="GearItem5" Margin="0, 15, 0, 0" Grid.Row="4" Background="#40444A">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Rectangle Grid.Column="0" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="50" Stroke="Black" VerticalAlignment="Center" Width="50"/>
+                    <Label Grid.Column="1" Content="{Binding Head.Name}" Foreground="White" FontWeight="Bold" HorizontalAlignment="Left" Margin="5,0,0,0" VerticalAlignment="Top"/>
+                    <Grid Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Content="Strength:" FontSize="10" Foreground="#E07E7E" HorizontalAlignment="Right" Margin="5,15,0,0" VerticalAlignment="Bottom"/>
+                        <Label Grid.Column="1" Content="{Binding Head.Strength}" FontSize="10" Foreground="#E07E7E" FontWeight="Bold" HorizontalAlignment="Right" Margin="5,15,0,0" VerticalAlignment="Bottom"/>
+                        <Label Grid.Column="2" Content="Intelligence:" FontSize="10" Foreground="#8991E0" HorizontalAlignment="Right" Margin="5,15,0,0" VerticalAlignment="Bottom"/>
+                        <Label Grid.Column="3" Content="{Binding Head.Intelligence}" FontSize="10" Foreground="#8991E0" FontWeight="Bold" HorizontalAlignment="Right" Margin="5,15,0,0" VerticalAlignment="Bottom"/>
+                        <Label Grid.Column="4" Content="Agility:" FontSize="10" Foreground="#7EE09A" HorizontalAlignment="Right" Margin="5,15,0,0" VerticalAlignment="Bottom"/>
+                        <Label Grid.Column="5" Content="{Binding Head.Agility}" FontSize="10" Foreground="#7EE09A" FontWeight="Bold" HorizontalAlignment="Right" Margin="5,15,0,0" VerticalAlignment="Bottom"/>
+                    </Grid>
+
+                    <Label Grid.Column="2" Foreground="White" Content="Legs" HorizontalAlignment="Right" Margin="0,0,0,0" VerticalAlignment="Top"/>
+                    <Button Grid.Column="2" Content="Sell" HorizontalAlignment="Right"  VerticalAlignment="Bottom" Width="75"/>
+                </Grid>
+                
+                <!-- Boots -->
+                <Grid x:Name="GearItem6" Margin="0, 15, 0, 0" Grid.Row="5" Background="#40444A">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Rectangle Grid.Column="0" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="50" Stroke="Black" VerticalAlignment="Center" Width="50"/>
+                    <Label Grid.Column="1" Content="{Binding Head.Name}" Foreground="White" FontWeight="Bold" HorizontalAlignment="Left" Margin="5,0,0,0" VerticalAlignment="Top"/>
+                    <Grid Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Content="Strength:" FontSize="10" Foreground="#E07E7E" HorizontalAlignment="Right" Margin="5,15,0,0" VerticalAlignment="Bottom"/>
+                        <Label Grid.Column="1" Content="{Binding Head.Strength}" FontSize="10" Foreground="#E07E7E" FontWeight="Bold" HorizontalAlignment="Right" Margin="5,15,0,0" VerticalAlignment="Bottom"/>
+                        <Label Grid.Column="2" Content="Intelligence:" FontSize="10" Foreground="#8991E0" HorizontalAlignment="Right" Margin="5,15,0,0" VerticalAlignment="Bottom"/>
+                        <Label Grid.Column="3" Content="{Binding Head.Intelligence}" FontSize="10" Foreground="#8991E0" FontWeight="Bold" HorizontalAlignment="Right" Margin="5,15,0,0" VerticalAlignment="Bottom"/>
+                        <Label Grid.Column="4" Content="Agility:" FontSize="10" Foreground="#7EE09A" HorizontalAlignment="Right" Margin="5,15,0,0" VerticalAlignment="Bottom"/>
+                        <Label Grid.Column="5" Content="{Binding Head.Agility}" FontSize="10" Foreground="#7EE09A" FontWeight="Bold" HorizontalAlignment="Right" Margin="5,15,0,0" VerticalAlignment="Bottom"/>
+                    </Grid>
+
+                    <Label Grid.Column="2" Foreground="White" Content="Boots" HorizontalAlignment="Right" Margin="0,0,0,0" VerticalAlignment="Top"/>
+                    <Button Grid.Column="2" Content="Sell" HorizontalAlignment="Right"  VerticalAlignment="Bottom" Width="75"/>
+                </Grid>
+                <Button Grid.Row="6"  Margin="0, 15, 0, 15" Content="Shop" HorizontalAlignment="Right" VerticalAlignment="Top" Width="75"/>
             </Grid>
+
         </Grid>
     </Grid>
 </Window>
