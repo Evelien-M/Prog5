@@ -17,7 +17,7 @@ namespace Ninja_manager
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Ninja()
         {
-            this.Gear = new HashSet<Gear>();
+            this.Inventory = new HashSet<Inventory>();
         }
     
         public int Id { get; set; }
@@ -25,6 +25,6 @@ namespace Ninja_manager
         public int Gold { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Gear> Gear { get; set; }
+        public virtual ICollection<Inventory> Inventory { get; set; }
     }
 }

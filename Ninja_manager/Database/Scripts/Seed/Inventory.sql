@@ -9,3 +9,19 @@ Post-Deployment Script Template
                SELECT * FROM [$(TableName)]					
 --------------------------------------------------------------------------------------
 */
+MERGE INTO dbo.Inventory AS Target  
+USING (values 
+	(1, 'Head', NULL),
+	(1, 'Shoulders', NULL),
+	(1, 'Chest', NULL),
+	(1, 'Belt', NULL),
+	(1, 'Legs', NULL),
+	(1, 'Boots', NULL)
+) AS Source (Id_Ninja, Category, Id_Gear)  
+ON Target.Id_Ninja = Source.Id_Ninja AND Target.Category = Source.Category
+WHEN NOT MATCHED BY TARGET THEN  
+	INSERT (Id_Ninja, Category, Id_Gear)  
+	VALUES (Id_Ninja, Category, Id_Gear)  
+WHEN MATCHED THEN
+	UPDATE SET
+		Id_Gear = Source.Id_Gear;

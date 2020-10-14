@@ -2,6 +2,7 @@
 (
 	[Id] INT NOT NULL PRIMARY KEY, 
     [Name] NCHAR(35) NOT NULL, 
+    [Image] NCHAR(35) NULL, 
     [Price] INT NOT NULL, 
     [Strength] INT NULL, 
     [Intelligence] INT NULL, 

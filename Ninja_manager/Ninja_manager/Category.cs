@@ -18,11 +18,14 @@ namespace Ninja_manager
         public Category()
         {
             this.Gear = new HashSet<Gear>();
+            this.Inventory = new HashSet<Inventory>();
         }
     
         public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Gear> Gear { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Inventory> Inventory { get; set; }
     }
 }
