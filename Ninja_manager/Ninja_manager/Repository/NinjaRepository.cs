@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Text;
@@ -15,7 +16,7 @@ namespace Ninja_manager.Repository
             var list = new List<Ninja>();
             using (Ninja_managerEntities db = new Ninja_managerEntities())
             {
-                list = db.Ninja.ToList();      
+                list = db.Ninja.Include(l => l.Inventory).Include(a => a.Inventory.Select(s => s.Category1)).ToList();   
             }      
             return list;
         }

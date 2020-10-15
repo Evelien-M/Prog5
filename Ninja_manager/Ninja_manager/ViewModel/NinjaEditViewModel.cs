@@ -31,6 +31,7 @@ namespace Ninja_manager.ViewModel
             get { return this._errorMessage; }
             set { this._errorMessage = value; base.RaisePropertyChanged(); }
         }
+        public List<Inventory> Inventory { get; private set; }
         public Gear Head { get; set; }
 
         private Ninja _ninja;
@@ -41,6 +42,9 @@ namespace Ninja_manager.ViewModel
         public NinjaEditViewModel(Ninja ninja)
         {
             this._ninja = ninja;
+
+            this.Inventory = ninja.Inventory.OrderBy(o => o.Category1.Order).ToList();
+
             this._ninjaRepository = new NinjaRepository();
 
             this.SaveNinjaCommand = new RelayCommand(SaveNinja, CanExecuteSaveNinja);

@@ -10,6 +10,7 @@
             <PropertyRef Name="Name" />
           </Key>
           <Property Name="Name" Type="nchar" MaxLength="35" Nullable="false" />
+          <Property Name="Order" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Gear">
           <Key>
@@ -121,6 +122,7 @@
             <PropertyRef Name="Name" />
           </Key>
           <Property Name="Name" Type="String" MaxLength="35" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Order" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Gear" Relationship="Self.FK_Gear_Category" FromRole="Category" ToRole="Gear" />
           <NavigationProperty Name="Inventory" Relationship="Self.FK_Inventory_Category" FromRole="Category" ToRole="Inventory" />
         </EntityType>
@@ -240,6 +242,7 @@
             <EntityTypeMapping TypeName="Ninja_managerModel.Category">
               <MappingFragment StoreEntitySet="Category">
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Order" ColumnName="Order" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

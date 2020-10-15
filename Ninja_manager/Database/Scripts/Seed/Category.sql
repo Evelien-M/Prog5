@@ -11,17 +11,17 @@ Post-Deployment Script Template
 */
 MERGE INTO dbo.Category AS Target  
 USING (values 
-	('Head'),
-	('Shoulders'),
-	('Chest'),
-	('Belt'),
-	('Legs'),
-	('Boots')
-) AS Source (Name)  
+	('Head', 0),
+	('Shoulders', 1),
+	('Chest', 2),
+	('Belt', 3),
+	('Legs', 4),
+	('Boots', 5)
+) AS Source (Name, [Order])  
 ON Target.Name = Source.Name  
 WHEN NOT MATCHED BY TARGET THEN  
-	INSERT (Name)  
-	VALUES (Name)  
+	INSERT (Name, [Order])  
+	VALUES (Name, [Order])  
 WHEN MATCHED THEN
 	UPDATE SET
-		Name = Source.Name;
+		[Order] = Source.[Order];
