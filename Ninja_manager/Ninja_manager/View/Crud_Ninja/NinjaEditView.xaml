@@ -11,7 +11,7 @@
     <Grid>
         <!-- HEADER -->
         <StackPanel x:Name="Header" Grid.Row="0" Height="45" Background="#728196" VerticalAlignment="Top">
-            <Label Content="Ninja berwerken" HorizontalAlignment="Center" Margin="0,8,0,0" FontSize="16" FontWeight="Bold" Foreground="White" FontFamily="Open Sans" />
+            <Label Content="Ninja berwerken/aanmaken" HorizontalAlignment="Center" Margin="0,8,0,0" FontSize="16" FontWeight="Bold" Foreground="White" FontFamily="Open Sans" />
         </StackPanel>
         <Grid x:Name="Container" Margin="0,45,0,0">
             <Grid.ColumnDefinitions>
@@ -21,14 +21,23 @@
             <Grid x:Name="LeftSection" Background="#40444A" Grid.Column="0" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="30"/>
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
-                <Label Grid.Row="0" Content="Ninja name:" HorizontalAlignment="Left" Foreground="White" Margin="15,0,0,0" VerticalAlignment="Top"/>
+                <Label Grid.Row="0" Content="Ninja name:" HorizontalAlignment="Left" Foreground="White" Margin="15,15,0,0" VerticalAlignment="Top"/>
                 <TextBox Grid.Row="1" HorizontalAlignment="Stretch" Height="25"  Margin="15,0,15,0" TextWrapping="Wrap" Text="{Binding Name}" VerticalAlignment="Top" />
-                <Label Grid.Row="1" Content="{Binding ErrorMessage}" HorizontalAlignment="Center" Foreground="#E07E7E" VerticalAlignment="Bottom"/>
-                <Label Grid.Row="1" Content="{Binding SuccesMessage}" HorizontalAlignment="Center" Foreground="#7EE09A" VerticalAlignment="Bottom"/>
-                <Grid x:Name="Footer" Grid.Row="2" Height="45" Background="#728196" VerticalAlignment="Top">
+                <Label Grid.Row="2" Content="Gold Amount:" HorizontalAlignment="Left" Foreground="White" Margin="15,15,0,0" VerticalAlignment="Top"/>
+                <Label Grid.Row="3" Content="{Binding Gold}" HorizontalAlignment="Left" FontWeight="Bold" Foreground="White" Margin="15,0,0,15" VerticalAlignment="Top"/>
+                <StackPanel Grid.Row="4" Background="#4A4640">
+                    
+                </StackPanel>
+                <Label Grid.Row="5" Content="{Binding ErrorMessage}" Margin="0, 0, 0 ,5" HorizontalAlignment="Center" Foreground="#E07E7E" VerticalAlignment="Bottom"/>
+                <Label Grid.Row="5" Content="{Binding SuccesMessage}" Margin="0, 0, 0 ,5" HorizontalAlignment="Center" Foreground="#7EE09A" VerticalAlignment="Bottom"/>
+                <Grid x:Name="Footer" Grid.Row="6" Height="45" Background="#728196" VerticalAlignment="Top">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
@@ -37,7 +46,7 @@
                     <Button Command="{Binding SaveNinjaCommand}" Grid.Column="1" Margin="0, 0, 15, 0" Content="Save" HorizontalAlignment="Right" VerticalAlignment="Center" Width="75"/>
                 </Grid>
             </Grid>
-            <Grid x:Name="RightSection" Grid.Column="1" HorizontalAlignment="Stretch" Margin="15,0,15,0" VerticalAlignment="Center">
+            <Grid x:Name="RightSection" Grid.Column="1" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Center">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
      

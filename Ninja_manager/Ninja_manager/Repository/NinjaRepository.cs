@@ -28,6 +28,10 @@ namespace Ninja_manager.Repository
                 using (Ninja_managerEntities db = new Ninja_managerEntities())
                 {
                     db.Ninja.AddOrUpdate(ninja);
+                    foreach(var i in ninja.Inventory)
+                    {
+                      db.Inventory.AddOrUpdate(i);
+                    }
                     db.SaveChanges();
                 }
                 return true;

@@ -21,6 +21,11 @@ namespace Ninja_manager.ViewModel
             get { return this._name; }
             set { this._name = value; base.RaisePropertyChanged(); }
         }
+        public int Gold
+        {
+            get { return this._gold; }
+            set { this._gold = value; base.RaisePropertyChanged(); }
+        }
         public string SuccesMessage
         {
             get { return this._succesMessage; }
@@ -32,10 +37,10 @@ namespace Ninja_manager.ViewModel
             set { this._errorMessage = value; base.RaisePropertyChanged(); }
         }
         public List<Inventory> Inventory { get; private set; }
-        public Gear Head { get; set; }
 
         private Ninja _ninja;
         private string _name;
+        private int _gold;
         private string _succesMessage;
         private string _errorMessage;
         private NinjaRepository _ninjaRepository;
@@ -51,6 +56,7 @@ namespace Ninja_manager.ViewModel
             this.ResetNinjaCommand = new RelayCommand(ResetNinja);
 
             this.Name = ninja.Name;
+            this.Gold = ninja.Gold;
         }
 
         private void SaveNinja()

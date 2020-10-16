@@ -8,12 +8,12 @@ namespace Ninja_manager.Repository
 {
     public class CategoryRepository
     {
-        public List<string> GetCategories()
+        public List<Category> GetCategories()
         {
-            var list = new List<string>();
+            var list = new List<Category>();
             using (Ninja_managerEntities db = new Ninja_managerEntities())
             {
-                list = db.Category.Select(s => s.Name).ToList();
+                list = db.Category.ToList();
             }
             return list;
         }

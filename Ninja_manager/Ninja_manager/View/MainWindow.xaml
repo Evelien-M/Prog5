@@ -5,8 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Ninja_manager.View"
         mc:Ignorable="d"
+        Background="#40444A"
+        DataContext="{Binding Main, Source={StaticResource Locator}}"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <Button Content="Ninja Manager" Command="{Binding GoToNinjaCrudCommand}" HorizontalAlignment="Left" Margin="356,106,0,0" VerticalAlignment="Top" Width="150"/>
+        <Button Content="Gear Manager" HorizontalAlignment="Left" Margin="382,216,0,0" VerticalAlignment="Top" Width="150"/>
+
     </Grid>
 </Window>

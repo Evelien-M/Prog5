@@ -21,7 +21,7 @@ namespace Ninja_manager.ViewModel
 
         private NinjaEditView _ninjaEditView;
         private NinjaRepository _ninjaRepository;
-        private List<string> _gearcategories;
+        private List<Category> _gearcategories;
         private int _newId;
 
         public NinjaListViewModel()
@@ -44,10 +44,10 @@ namespace Ninja_manager.ViewModel
             var list = new List<Inventory>();
             foreach(var cat in this._gearcategories)
             {
-                var inv = new Inventory() { Id_Ninja = this._newId, Category = cat, Ninja = this.SelectedNinja };
+                var inv = new Inventory() { Id_Ninja = this._newId, Category = cat.Name, Category1 = cat, Ninja = this.SelectedNinja };
                 list.Add(inv);
             }
-            
+            this.SelectedNinja.Inventory = list;
             this._ninjaEditView = new NinjaEditView();
             this._ninjaEditView.Show();
         }
