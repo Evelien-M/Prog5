@@ -111,13 +111,20 @@
     </Compile>
     <Compile Include="Repository\CategoryRepository.cs" />
     <Compile Include="Repository\NinjaRepository.cs" />
+    <Compile Include="ViewModel\Crud_Gear\GearListViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="ViewModel\NinjaEditViewModel.cs" />
-    <Compile Include="ViewModel\NinjaListViewModel.cs" />
+    <Compile Include="ViewModel\Crud_Ninja\NinjaEditViewModel.cs" />
+    <Compile Include="ViewModel\Crud_Ninja\NinjaListViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="View\Crud_Gear\GearEditView.xaml.cs">
+      <DependentUpon>GearEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Crud_Gear\GearListView.xaml.cs">
+      <DependentUpon>GearListView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Crud_Ninja\NinjaEditView.xaml.cs">
       <DependentUpon>NinjaEditView.xaml</DependentUpon>
@@ -128,6 +135,14 @@
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\Crud_Gear\GearEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Crud_Gear\GearListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Crud_Ninja\NinjaEditView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -179,7 +194,6 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="View\Crud_Gear\" />
     <Folder Include="View\Shop\" />
   </ItemGroup>
   <ItemGroup>

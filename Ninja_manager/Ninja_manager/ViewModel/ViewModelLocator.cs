@@ -15,6 +15,7 @@
 using CommonServiceLocator;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
+using Ninja_manager.ViewModel.Crud_Gear;
 
 namespace Ninja_manager.ViewModel
 {
@@ -69,6 +70,22 @@ namespace Ninja_manager.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<NinjaListViewModel>();
+            }
+        }
+
+        public NinjaEditViewModel GearEdit
+        {
+            get
+            {
+                return new NinjaEditViewModel(this.NinjaList.SelectedNinja);
+            }
+        }
+
+        public GearListViewModel GearList
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<GearListViewModel>();
             }
         }
 
