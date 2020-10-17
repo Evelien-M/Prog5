@@ -29,7 +29,7 @@
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
                 <Label Grid.Row="0" Content="Ninja name:" HorizontalAlignment="Left" Foreground="White" Margin="15,15,0,0" VerticalAlignment="Top"/>
-                <TextBox Grid.Row="1" HorizontalAlignment="Stretch" Height="25"  Margin="15,0,15,0" TextWrapping="Wrap" Text="{Binding Name}" VerticalAlignment="Top" />
+                <TextBox Grid.Row="1" HorizontalAlignment="Stretch" Height="25"  Margin="15,0,15,0" TextWrapping="Wrap" Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" />
                 <Label Grid.Row="2" Content="Gold Amount:" HorizontalAlignment="Left" Foreground="White" Margin="15,15,0,0" VerticalAlignment="Top"/>
                 <Label Grid.Row="3" Content="{Binding Gold}" HorizontalAlignment="Left" FontWeight="Bold" Foreground="White" Margin="15,0,0,15" VerticalAlignment="Top"/>
                 <StackPanel Grid.Row="4" Background="#4A4640">
@@ -43,7 +43,7 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Button Command="{Binding ResetNinjaCommand}" Grid.Column="0" Margin="15, 0, 0, 0" Content="Reset" HorizontalAlignment="Left" VerticalAlignment="Center" Width="75"/>
-                    <Button Command="{Binding SaveNinjaCommand}" Grid.Column="1" Margin="0, 0, 15, 0" Content="Save" HorizontalAlignment="Right" VerticalAlignment="Center" Width="75"/>
+                    <Button Command="{Binding SaveNinjaCommand}" IsEnabled="{Binding CanExecuteSave}" Grid.Column="1" Margin="0, 0, 15, 0" Content="Save" HorizontalAlignment="Right" VerticalAlignment="Center" Width="75"/>
                 </Grid>
             </Grid>
             <Grid x:Name="RightSection" Grid.Column="1" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Center">

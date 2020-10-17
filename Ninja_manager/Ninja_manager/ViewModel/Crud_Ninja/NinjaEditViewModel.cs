@@ -20,7 +20,7 @@ namespace Ninja_manager.ViewModel
         public string Name
         {
             get { return this._name; }
-            set { this._name = value; base.RaisePropertyChanged(); }
+            set { this._name = value; base.RaisePropertyChanged(); this.CanExecuteSaveNinja(); }
         }
         public int Gold
         {
@@ -37,9 +37,15 @@ namespace Ninja_manager.ViewModel
             get { return this._errorMessage; }
             set { this._errorMessage = value; base.RaisePropertyChanged(); }
         }
+        public bool CanExecuteSave
+        {
+            get { return this._canExecuteSave; }
+            set { this._canExecuteSave = value; base.RaisePropertyChanged(); }
+        }
         public List<Inventory> Inventory { get; private set; }
 
         private NinjaListViewModel _ninjaList;
+        private bool _canExecuteSave;
         private string _name;
         private int _gold;
         private string _succesMessage;
@@ -57,12 +63,9 @@ namespace Ninja_manager.ViewModel
 
             this.Inventory = this._ninja.Inventory.OrderBy(o => o.Category1.Order).ToList();
 
-
-
-
             this._ninjaRepository = new NinjaRepository();
 
-            this.SaveNinjaCommand = new RelayCommand(SaveNinja, CanExecuteSaveNinja);
+            this.SaveNinjaCommand = new RelayCommand(SaveNinja);
             this.ResetNinjaCommand = new RelayCommand(ResetNinja);
 
             this.Name = this._ninja.Name;
@@ -90,7 +93,7 @@ namespace Ninja_manager.ViewModel
             else
             {
                 this.SuccesMessage = "";
-                this.ErrorMessage = "Something went wrong!";
+                this.ErrorMessage = "An error occured with the database!";
             }
         }
 
@@ -101,17 +104,16 @@ namespace Ninja_manager.ViewModel
 
         private bool CanExecuteSaveNinja()
         {
-            return true;
-
-            // TODO
             if (this.Name.Length > 3)
             {
                 this.ErrorMessage = "";
+                this.CanExecuteSave = true;
                 return true;
             }
 
             this.SuccesMessage = "";
             this.ErrorMessage = "Name has to be more than 3 characters!";
+            this.CanExecuteSave = false;
             return false;
         }
     }
