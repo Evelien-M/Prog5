@@ -111,6 +111,7 @@
     </Compile>
     <Compile Include="Repository\CategoryRepository.cs" />
     <Compile Include="Repository\NinjaRepository.cs" />
+    <Compile Include="ViewModel\Crud_Gear\GearEditViewModel.cs" />
     <Compile Include="ViewModel\Crud_Gear\GearListViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\Crud_Ninja\NinjaEditViewModel.cs" />

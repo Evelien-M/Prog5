@@ -9,7 +9,7 @@
           <Key>
             <PropertyRef Name="Name" />
           </Key>
-          <Property Name="Name" Type="nchar" MaxLength="35" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Order" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Gear">
@@ -17,13 +17,13 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="Name" Type="nchar" MaxLength="35" Nullable="false" />
-          <Property Name="Image" Type="nchar" MaxLength="35" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Image" Type="varchar" MaxLength="50" />
           <Property Name="Price" Type="int" Nullable="false" />
           <Property Name="Strength" Type="int" />
           <Property Name="Intelligence" Type="int" />
           <Property Name="Agility" Type="int" />
-          <Property Name="Category" Type="nchar" MaxLength="35" Nullable="false" />
+          <Property Name="Category" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Inventory">
           <Key>
@@ -31,7 +31,7 @@
             <PropertyRef Name="Category" />
           </Key>
           <Property Name="Id_Ninja" Type="int" Nullable="false" />
-          <Property Name="Category" Type="nchar" MaxLength="35" Nullable="false" />
+          <Property Name="Category" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Id_Gear" Type="int" />
         </EntityType>
         <EntityType Name="Ninja">
@@ -39,7 +39,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="Name" Type="nchar" MaxLength="35" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Gold" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_Gear_Category">
@@ -121,7 +121,7 @@
           <Key>
             <PropertyRef Name="Name" />
           </Key>
-          <Property Name="Name" Type="String" MaxLength="35" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Order" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Gear" Relationship="Self.FK_Gear_Category" FromRole="Category" ToRole="Gear" />
           <NavigationProperty Name="Inventory" Relationship="Self.FK_Inventory_Category" FromRole="Category" ToRole="Inventory" />
@@ -131,13 +131,13 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="35" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="Image" Type="String" MaxLength="35" FixedLength="true" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Image" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Price" Type="Int32" Nullable="false" />
           <Property Name="Strength" Type="Int32" />
           <Property Name="Intelligence" Type="Int32" />
           <Property Name="Agility" Type="Int32" />
-          <Property Name="Category" Type="String" MaxLength="35" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Category1" Relationship="Self.FK_Gear_Category" FromRole="Gear" ToRole="Category" />
           <NavigationProperty Name="Inventory" Relationship="Self.FK_Inventory_Gear" FromRole="Gear" ToRole="Inventory" />
         </EntityType>
@@ -147,7 +147,7 @@
             <PropertyRef Name="Category" />
           </Key>
           <Property Name="Id_Ninja" Type="Int32" Nullable="false" />
-          <Property Name="Category" Type="String" MaxLength="35" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Id_Gear" Type="Int32" />
           <NavigationProperty Name="Category1" Relationship="Self.FK_Inventory_Category" FromRole="Inventory" ToRole="Category" />
           <NavigationProperty Name="Gear" Relationship="Self.FK_Inventory_Gear" FromRole="Inventory" ToRole="Gear" />
@@ -158,7 +158,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="35" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Gold" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Inventory" Relationship="Self.FK_Inventory_Ninja" FromRole="Ninja" ToRole="Inventory" />
         </EntityType>

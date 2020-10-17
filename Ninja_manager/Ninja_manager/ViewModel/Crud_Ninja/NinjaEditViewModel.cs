@@ -50,6 +50,9 @@ namespace Ninja_manager.ViewModel
 
             this.Inventory = ninja.Inventory.OrderBy(o => o.Category1.Order).ToList();
 
+
+
+
             this._ninjaRepository = new NinjaRepository();
 
             this.SaveNinjaCommand = new RelayCommand(SaveNinja, CanExecuteSaveNinja);
@@ -62,12 +65,12 @@ namespace Ninja_manager.ViewModel
         private void SaveNinja()
         {
             this._ninja.Name = this.Name;
-
-            if (this._ninjaRepository.AddOrUpdateNinja(this._ninja) && this._ninja.Name.Length == 0)
+            bool feedback = this._ninjaRepository.AddOrUpdateNinja(this._ninja);
+            if (feedback && this._ninja.Name.Length == 0)
             {
                 this.SuccesMessage = "Ninja " + this.Name + " succesfully added!";
             }
-            else if (this._ninjaRepository.AddOrUpdateNinja(this._ninja) && this._ninja.Name.Length != 0)
+            else if (feedback && this._ninja.Name.Length != 0)
             {
                 this.SuccesMessage = "Ninja " + this.Name + " succesfully updatet!";
             }

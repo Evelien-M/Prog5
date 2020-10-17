@@ -30,16 +30,41 @@ namespace Ninja_manager.Repository
                     db.Ninja.AddOrUpdate(ninja);
                     foreach(var i in ninja.Inventory)
                     {
+                      db.Category.Attach(i.Category1);
                       db.Inventory.AddOrUpdate(i);
                     }
                     db.SaveChanges();
                 }
+                
                 return true;
             }
             catch(Exception)
             {
+                
                 return false;
             }
+        }
+
+        public bool DeleteNinja(Ninja ninja)
+        {
+            try
+            {
+                using (Ninja_managerEntities db = new Ninja_managerEntities())
+                {
+                    for (var i = 0; i < ninja.Inventory.Count; i++)
+                        db.Entry(ninja.Inventory.ToList()[i]).State = EntityState.Deleted;
+
+                    db.Ninja.Remove(ninja);
+                    db.SaveChanges();
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
         }
     }
 }

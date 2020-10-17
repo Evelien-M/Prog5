@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="20d56e71a8ac491f9cb4eda205f81443" Name="Diagram1">
+      <Diagram DiagramId="84db58c06be14e1c94bff39c8236714e" Name="Diagram1">
         <EntityTypeShape EntityType="Ninja_managerModel.Category" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Ninja_managerModel.Gear" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="Ninja_managerModel.Inventory" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />

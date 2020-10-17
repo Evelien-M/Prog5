@@ -1,7 +1,7 @@
 ﻿CREATE TABLE [dbo].[Inventory]
 (
 	[Id_Ninja] INT NOT NULL, 
-    [Category] NCHAR(35) NOT NULL, 
+    [Category] VARCHAR(50) NOT NULL, 
     [Id_Gear] INT NULL, 
     PRIMARY KEY ([Id_Ninja], [Category]), 
     CONSTRAINT [FK_Inventory_Ninja] FOREIGN KEY ([Id_Ninja]) REFERENCES [Ninja]([Id]), 
