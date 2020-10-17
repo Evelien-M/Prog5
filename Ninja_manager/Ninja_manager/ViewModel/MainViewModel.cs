@@ -1,5 +1,6 @@
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using Ninja_manager.View.Crud_Gear;
 using Ninja_manager.View.Crud_Ninja;
 using System.Windows.Input;
 
@@ -11,6 +12,7 @@ namespace Ninja_manager.ViewModel
         public ICommand GoToGearCrudCommand { get; set; }
         
         private NinjaListView _ninjaCrudView;
+        private GearListView _gearCrudView;
         public MainViewModel()
         {
             this.GoToNinjaCrudCommand = new RelayCommand(GoToNinjaCrud);
@@ -26,7 +28,8 @@ namespace Ninja_manager.ViewModel
 
         private void GoToGearCrud()
         {
-
+            this._gearCrudView = new GearListView();
+            this._gearCrudView.Show();
         }
     }
 }

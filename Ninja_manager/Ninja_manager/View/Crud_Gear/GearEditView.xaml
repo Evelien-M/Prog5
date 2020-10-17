@@ -23,9 +23,21 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid x:Name="LeftSection" Grid.Column="0" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch">
+                <TextBox HorizontalAlignment="Left" Height="23" Margin="24,22,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Width="120"/>
+                <TextBox HorizontalAlignment="Left" Height="23" Margin="197,22,0,0" TextWrapping="Wrap" Text="Price" VerticalAlignment="Top" Width="120"/>
+                <TextBox HorizontalAlignment="Left" Height="23" Margin="24,95,0,0" TextWrapping="Wrap" Text="Intelligence" VerticalAlignment="Top" Width="120"/>
+                <TextBox HorizontalAlignment="Left" Height="23" Margin="197,95,0,0" TextWrapping="Wrap" Text="Agility" VerticalAlignment="Top" Width="120"/>
+                <TextBox HorizontalAlignment="Left" Height="23" Margin="24,146,0,0" TextWrapping="Wrap" Text="Strength" VerticalAlignment="Top" Width="120"/>
             </Grid>
             <Grid x:Name="RightSection" Grid.Column="1" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch">
                 <Image HorizontalAlignment="Left" Height="100" Margin="287,10,0,0" VerticalAlignment="Top" Width="100" RenderTransformOrigin="1.355,-0.488"/>
+                <ListView HorizontalAlignment="Left" Height="100" Margin="25,111,0,0" VerticalAlignment="Top" Width="100">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
             </Grid>
         </Grid>
         <!-- HEADER -->

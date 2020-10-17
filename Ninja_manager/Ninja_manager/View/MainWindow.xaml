@@ -10,7 +10,7 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Button Content="Ninja Manager" Command="{Binding GoToNinjaCrudCommand}" HorizontalAlignment="Left" Margin="356,106,0,0" VerticalAlignment="Top" Width="150"/>
-        <Button Content="Gear Manager" HorizontalAlignment="Left" Margin="382,216,0,0" VerticalAlignment="Top" Width="150"/>
+        <Button Content="Gear Manager" Command="{Binding GoToGearCrudCommand}" HorizontalAlignment="Left" Margin="382,216,0,0" VerticalAlignment="Top" Width="150"/>
 
     </Grid>
 </Window>

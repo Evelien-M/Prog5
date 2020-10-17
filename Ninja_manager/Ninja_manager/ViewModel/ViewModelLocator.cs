@@ -73,11 +73,11 @@ namespace Ninja_manager.ViewModel
             }
         }
 
-        public NinjaEditViewModel GearEdit
+        public GearEditViewModel GearEdit
         {
             get
             {
-                return new NinjaEditViewModel(this.NinjaList);
+                return new GearEditViewModel(this.GearList);
             }
         }
 
