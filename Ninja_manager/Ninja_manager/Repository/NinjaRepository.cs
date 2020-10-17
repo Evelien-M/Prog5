@@ -30,7 +30,9 @@ namespace Ninja_manager.Repository
                     db.Ninja.AddOrUpdate(ninja);
                     foreach(var i in ninja.Inventory)
                     {
-                      db.Category.Attach(i.Category1);
+                        if(db.Entry(i.Category1).State != EntityState.Detached)
+                            db.Category.Attach(i.Category1);
+
                       db.Inventory.AddOrUpdate(i);
                     }
                     db.SaveChanges();
@@ -40,7 +42,6 @@ namespace Ninja_manager.Repository
             }
             catch(Exception)
             {
-                
                 return false;
             }
         }

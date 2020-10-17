@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using Ninja_manager.Helper;
 using Ninja_manager.Repository;
 using System;
 using System.Collections.Generic;
@@ -38,17 +39,23 @@ namespace Ninja_manager.ViewModel
         }
         public List<Inventory> Inventory { get; private set; }
 
-        private Ninja _ninja;
+        private NinjaListViewModel _ninjaList;
         private string _name;
         private int _gold;
         private string _succesMessage;
         private string _errorMessage;
         private NinjaRepository _ninjaRepository;
-        public NinjaEditViewModel(Ninja ninja)
+        private Ninja _ninja;
+        private bool _isNew = false;
+        public NinjaEditViewModel(NinjaListViewModel ninjaList)
         {
-            this._ninja = ninja;
+            this._ninjaList = ninjaList;
+            this._ninja = ninjaList.SelectedNinja;
+            
+            if (this._ninja.Name.Length == 0)
+                this._isNew = true;
 
-            this.Inventory = ninja.Inventory.OrderBy(o => o.Category1.Order).ToList();
+            this.Inventory = this._ninja.Inventory.OrderBy(o => o.Category1.Order).ToList();
 
 
 
@@ -58,24 +65,31 @@ namespace Ninja_manager.ViewModel
             this.SaveNinjaCommand = new RelayCommand(SaveNinja, CanExecuteSaveNinja);
             this.ResetNinjaCommand = new RelayCommand(ResetNinja);
 
-            this.Name = ninja.Name;
-            this.Gold = ninja.Gold;
+            this.Name = this._ninja.Name;
+            this.Gold = this._ninja.Gold;
         }
 
         private void SaveNinja()
         {
             this._ninja.Name = this.Name;
-            bool feedback = this._ninjaRepository.AddOrUpdateNinja(this._ninja);
-            if (feedback && this._ninja.Name.Length == 0)
+
+            if (this._ninjaRepository.AddOrUpdateNinja(this._ninja))
             {
-                this.SuccesMessage = "Ninja " + this.Name + " succesfully added!";
-            }
-            else if (feedback && this._ninja.Name.Length != 0)
-            {
-                this.SuccesMessage = "Ninja " + this.Name + " succesfully updatet!";
+                if (this._isNew)
+                {
+                    this._ninjaList.NinjaList.Add(this._ninja);
+                    this._isNew = false;
+                    this.SuccesMessage = "Ninja " + this.Name + " succesfully added!";
+                }
+                else
+                {
+                    this._ninjaList.NinjaList.Update(this._ninja);
+                    this.SuccesMessage = "Ninja " + this.Name + " succesfully updatet!";
+                }
             }
             else
             {
+                this.SuccesMessage = "";
                 this.ErrorMessage = "Something went wrong!";
             }
         }

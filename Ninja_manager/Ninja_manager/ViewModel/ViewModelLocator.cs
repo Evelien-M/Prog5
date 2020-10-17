@@ -61,7 +61,7 @@ namespace Ninja_manager.ViewModel
         {
             get
             {
-                return new NinjaEditViewModel(this.NinjaList.SelectedNinja);
+                return new NinjaEditViewModel(this.NinjaList);
             }
         }
 
@@ -77,7 +77,7 @@ namespace Ninja_manager.ViewModel
         {
             get
             {
-                return new NinjaEditViewModel(this.NinjaList.SelectedNinja);
+                return new NinjaEditViewModel(this.NinjaList);
             }
         }
 

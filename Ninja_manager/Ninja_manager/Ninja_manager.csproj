@@ -88,6 +88,7 @@
     <Compile Include="Gear.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Helper\ObservableExtension.cs" />
     <Compile Include="Inventory.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
