@@ -8,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Ninja_manager.ViewModel.Crud_Gear
@@ -19,7 +20,7 @@ namespace Ninja_manager.ViewModel.Crud_Gear
         public ICommand DeleteItemCommand { get; set; }
         public ObservableCollection<Gear> GearList { get; private set; }
 
-        public Ninja SelectedNinja { get; set; }
+        public Gear SelectedGear { get; set; }
 
         private GearEditView _gearEditView;
         private GearRepository _gearRepository;
@@ -36,21 +37,48 @@ namespace Ninja_manager.ViewModel.Crud_Gear
             var repo = new CategoryRepository();
             this._gearcategories = repo.GetCategories();
 
-            this.GearList = new ObservableCollection<Gear>(this._gearRepository.GetGear());
+            this.GearList = new ObservableCollection<Gear>(this._gearRepository.Get());
             this._newId = this.GearList.OrderByDescending(o => o.Id).Select(s => s.Id).FirstOrDefault() + 1;
         }
 
         private void AddItem()
         {
-            throw new NotImplementedException();
+            if (this._gearEditView != null)
+                this._gearEditView.Close();
+         
+            this.SelectedGear = new Gear() { Id = this._newId};
+
+            this._gearEditView = new GearEditView();
+            this._gearEditView.Show();
         }
         private void EditItem()
         {
-            throw new NotImplementedException();
+            if (this._gearEditView != null)
+                this._gearEditView.Close();
+
+            this._gearEditView = new GearEditView();
+            this._gearEditView.Show();
         }
         private void DeleteItem()
         {
-            throw new NotImplementedException();
+            if (this.SelectedGear != null)
+            {
+                string sMessageBoxText = "Are you sure you want to delete " + this.SelectedGear.Name + "?";
+                string sCaption = "Deleting " + this.SelectedGear.Name;
+
+                MessageBoxButton btnMessageBox = MessageBoxButton.YesNo;
+                MessageBoxImage icnMessageBox = MessageBoxImage.Warning;
+
+                MessageBoxResult rsltMessageBox = MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
+
+                if (rsltMessageBox.Equals(MessageBoxResult.Yes))
+                {
+                    if (this._gearRepository.Delete(this.SelectedGear))
+                    {
+                        this.GearList.Remove(this.SelectedGear);
+                    }
+                }
+            }
         }
 
     }

@@ -13,7 +13,17 @@ namespace Ninja_manager.Repository
             var list = new List<Category>();
             using (Ninja_managerEntities db = new Ninja_managerEntities())
             {
-                list = db.Category.ToList();
+                list = db.Category.OrderBy(o => o.Order).ToList();
+            }
+            return list;
+        }
+
+        public List<string> GetCategoryNames()
+        {
+            var list = new List<string>();
+            using (Ninja_managerEntities db = new Ninja_managerEntities())
+            {
+                list = db.Category.Select(s => s.Name).ToList();
             }
             return list;
         }

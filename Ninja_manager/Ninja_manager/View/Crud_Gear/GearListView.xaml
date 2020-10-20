@@ -22,15 +22,17 @@
                 <Button Content="Add new Gear" Command="{Binding AddItemCommand}" Height="30" HorizontalAlignment="Center" Margin="0,15,0,15" VerticalAlignment="Top" Width="186"/>
             </StackPanel>
 
-            <DataGrid Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedNinja}" ItemsSource="{Binding NinjaList}" Margin="0,6,0,0" BorderBrush="#FF979494" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#FFF0E0E0" HeadersVisibility="Column">
+            <DataGrid Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedGear}" ItemsSource="{Binding GearList}" Margin="0,6,0,0" BorderBrush="#FF979494" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#FFF0E0E0" HeadersVisibility="Column">
                 <DataGrid.InputBindings>
                     <MouseBinding MouseAction="LeftClick" Command="{Binding DataContext.EditItemCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
                 </DataGrid.InputBindings>
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="#" Binding="{Binding Id}" Foreground="#FF1D1616" />
                     <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*" />
-                    <DataGridTextColumn Header="Gold" Binding="{Binding Gold}" Width="*" />
-
+                    <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="*" />
+                    <DataGridTextColumn Header="S" Binding="{Binding Strength}"/>
+                    <DataGridTextColumn Header="A" Binding="{Binding Agility}"/>
+                    <DataGridTextColumn Header="I" Binding="{Binding Intelligence}"/>
                     <DataGridTemplateColumn Width="35" >
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
@@ -42,7 +44,7 @@
                     <DataGridTemplateColumn Width="50">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Command="{Binding DataContext.DeleteSongCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                <Button Command="{Binding DataContext.DeleteItemCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                         BorderThickness="0,0,0,1" BorderBrush="#FF999A9B" Foreground="White" Margin="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="60" Height="30" Background="#FFD45134">Delete</Button>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
