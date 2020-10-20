@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using Ninja_manager.Repository;
 using Ninja_manager.View.Shop;
 using Ninja_manager.ViewModel.Crud_Ninja;
@@ -8,12 +9,14 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Ninja_manager.ViewModel.Shop
 {
     public class ShopViewModel : ViewModelBase
     {
-
+        public ICommand BuyItemCommand { get; set; }
+        public int Gold { get; private set; }
         public List<Category> Categories { get; private set; }
 
         public Category SelectedCategory 
@@ -50,6 +53,7 @@ namespace Ninja_manager.ViewModel.Shop
             {
                 this._selectedGear = value;
                 this.UpdateGearItem();
+                this.CanExecuteBuyGearItem();
             }
         }
 
@@ -66,19 +70,29 @@ namespace Ninja_manager.ViewModel.Shop
             } 
         }
 
+        public bool CanExecuteBuyItem
+        {
+            get { return this._canExecuteBuyItem; }
+            set { this._canExecuteBuyItem = value; base.RaisePropertyChanged(); }
+        }
+
         private List<Gear> _gearList;
         private Category _selectedCategory;
         private Gear _selectedGear;
         private GearRepository _gearRepsotory;
         private GearItemView _gearItemView;
         private NinjaEditViewModel _ninjaEdit;
+        private bool _canExecuteBuyItem = false;
 
         public ShopViewModel(NinjaEditViewModel ninjaEdit)
         {
             this._ninjaEdit = ninjaEdit;
+            this.Gold = ninjaEdit.Gold;
             var repo = new CategoryRepository();
             this.Categories = repo.GetCategories();
             this._gearRepsotory = new GearRepository();
+
+            this.BuyItemCommand = new RelayCommand(BuyItem);
         }
 
         private void UpdateGearList()
@@ -89,6 +103,25 @@ namespace Ninja_manager.ViewModel.Shop
         private void UpdateGearItem()
         {
             this.GearItemView = new GearItemView();
+        }
+
+        public void BuyItem()
+        {
+
+        }
+        public bool CanExecuteBuyGearItem()
+        {
+            if (this._selectedGear != null)
+            {
+                if (this._selectedGear.Price <= this.Gold)
+                {
+                    this.CanExecuteBuyItem = true;
+                    return true;
+                }
+            }
+
+            this.CanExecuteBuyItem = false;
+            return false;
         }
     }
 }

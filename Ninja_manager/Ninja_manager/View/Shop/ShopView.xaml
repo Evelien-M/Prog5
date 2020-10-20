@@ -22,7 +22,7 @@
                             <StackPanel>
                                 <Label Content="{Binding Name}"/>
                             </StackPanel>
-                            
+
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
@@ -36,16 +36,24 @@
                                     <Label Content="{Binding Name}"/>
                                 </StackPanel>
                             </Grid>
-                            
+
 
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
             </Grid>
             <Grid x:Name="Section3" Grid.Column="2">
-                <DockPanel>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <DockPanel Grid.Row="0">
                     <Frame x:Name="GearItem" Content="{Binding GearItemView}" NavigationUIVisibility="Hidden" />
                 </DockPanel>
+                <Grid Grid.Row="1">
+                    <Button Content="Buy" Command="{Binding BuyItemCommand}" IsEnabled="{Binding CanExecuteBuyItem}" Width="50" Margin="0 15 0 0" VerticalAlignment="Top"/>
+                    <Label Content="{Binding Gold}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,15" ContentStringFormat="You have {0} gold left" />
+                </Grid>
             </Grid>
         </Grid>
     </Grid>

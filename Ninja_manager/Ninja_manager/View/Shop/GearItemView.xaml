@@ -7,7 +7,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Background="Yellow"
-      DataContext="{Binding Shop.SelectedGear, Source={StaticResource Locator}}"
+        DataContext="{Binding GearItem, Source={StaticResource Locator}}"
       Title="GearItemView">
 
     <Grid>
@@ -17,8 +17,19 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Image Grid.Column="0" HorizontalAlignment="Stretch" Height="100" VerticalAlignment="Stretch" Width="100"/>
-            <Grid x:Name="Stats">
-                
+            <Label Content="{Binding Category}" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,15"/>
+            <Grid x:Name="Stats" Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Content="{Binding Name}" VerticalAlignment="Bottom" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,15,0,15"/>
+                <Label Grid.Row="1" Content="{Binding Strength}" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,15,0,0"/>
+                <Label Grid.Row="2" Content="{Binding Agility}" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,15,0,0"/>
+                <Label Grid.Row="3" Content="{Binding Intelligence}" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,15,0,15"/>
+                <Label Grid.Row="4" Content="{Binding Price}" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,15,0,0"/>
             </Grid>
         </Grid>
 
