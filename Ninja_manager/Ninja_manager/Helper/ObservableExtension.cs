@@ -17,5 +17,12 @@ namespace Ninja_manager.Helper
             observer[j] = ninja;
             CollectionViewSource.GetDefaultView(observer).Refresh();
         }
+        public static void Update(this ObservableCollection<Gear> observer, Gear gear)
+        {
+            var item = observer.FirstOrDefault(i => i.Id == gear.Id);
+            int j = observer.IndexOf(item);
+            observer[j] = gear;
+            CollectionViewSource.GetDefaultView(observer).Refresh();
+        }
     }
 }

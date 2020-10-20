@@ -111,12 +111,14 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Repository\CategoryRepository.cs" />
+    <Compile Include="Repository\GearRepository.cs" />
     <Compile Include="Repository\NinjaRepository.cs" />
     <Compile Include="ViewModel\Crud_Gear\GearEditViewModel.cs" />
     <Compile Include="ViewModel\Crud_Gear\GearListViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\Crud_Ninja\NinjaEditViewModel.cs" />
     <Compile Include="ViewModel\Crud_Ninja\NinjaListViewModel.cs" />
+    <Compile Include="ViewModel\Shop\ShopViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -137,6 +139,12 @@
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Shop\GearItemView.xaml.cs">
+      <DependentUpon>GearItemView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Shop\ShopView.xaml.cs">
+      <DependentUpon>ShopView.xaml</DependentUpon>
+    </Compile>
     <Page Include="View\Crud_Gear\GearEditView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -154,6 +162,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Shop\GearItemView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Shop\ShopView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -195,9 +211,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="View\Shop\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

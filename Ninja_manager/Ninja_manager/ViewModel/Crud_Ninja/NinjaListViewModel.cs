@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
-namespace Ninja_manager.ViewModel
+namespace Ninja_manager.ViewModel.Crud_Ninja
 {
     public class NinjaListViewModel : ViewModelBase
     {
@@ -38,13 +38,16 @@ namespace Ninja_manager.ViewModel
             var repo = new CategoryRepository();
             this._gearcategories = repo.GetCategories();
             
-            this.NinjaList = new ObservableCollection<Ninja>(this._ninjaRepository.GetNinjas());
+            this.NinjaList = new ObservableCollection<Ninja>(this._ninjaRepository.Get());
             this._newId = this.NinjaList.OrderByDescending(o => o.Id).Select(s => s.Id).FirstOrDefault() + 1;
         }
 
 
         private void AddItem()
         {
+            if (this._ninjaEditView != null)
+                this._ninjaEditView.Close();
+
             var rng = new Random();
             var gold = rng.Next(40, 80) * 10;
             this.SelectedNinja = new Ninja() { Id = this._newId, Name = "" , Gold = gold };
@@ -60,6 +63,9 @@ namespace Ninja_manager.ViewModel
         }
         private void EditItem()
         {
+            if (this._ninjaEditView != null)
+                this._ninjaEditView.Close();
+
             this._ninjaEditView = new NinjaEditView();
             this._ninjaEditView.Show();
         }
@@ -77,7 +83,7 @@ namespace Ninja_manager.ViewModel
 
                 if (rsltMessageBox.Equals(MessageBoxResult.Yes))
                 {
-                    if (this._ninjaRepository.DeleteNinja(this.SelectedNinja))
+                    if (this._ninjaRepository.Delete(this.SelectedNinja))
                     {
                         this.NinjaList.Remove(this.SelectedNinja);
                     }
