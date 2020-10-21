@@ -1,11 +1,13 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using Ninja_manager.Helper;
 using Ninja_manager.Repository;
 using Ninja_manager.View.Shop;
 using Ninja_manager.ViewModel.Crud_Ninja;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +15,7 @@ using System.Windows.Input;
 
 namespace Ninja_manager.ViewModel.Shop
 {
-    public class ShopViewModel : ViewModelBase
+    public class ShopViewModel : ViewModelBase, INotifyPropertyChanged
     {
         public ICommand BuyItemCommand { get; set; }
         public int Gold { get; private set; }
@@ -76,6 +78,17 @@ namespace Ninja_manager.ViewModel.Shop
             set { this._canExecuteBuyItem = value; base.RaisePropertyChanged(); }
         }
 
+        public string SuccesMessage
+        {
+            get { return this._succesMessage; }
+            set { this._succesMessage = value; base.RaisePropertyChanged(); }
+        }
+        public string ErrorMessage
+        {
+            get { return this._errorMessage; }
+            set { this._errorMessage = value; base.RaisePropertyChanged(); }
+        }
+
         private List<Gear> _gearList;
         private Category _selectedCategory;
         private Gear _selectedGear;
@@ -83,6 +96,8 @@ namespace Ninja_manager.ViewModel.Shop
         private GearItemView _gearItemView;
         private NinjaEditViewModel _ninjaEdit;
         private bool _canExecuteBuyItem = false;
+        private string _succesMessage;
+        private string _errorMessage;
 
         public ShopViewModel(NinjaEditViewModel ninjaEdit)
         {
@@ -107,7 +122,8 @@ namespace Ninja_manager.ViewModel.Shop
 
         public void BuyItem()
         {
-
+            this._ninjaEdit.InventoryList.Update(this.SelectedGear);
+            // this._ninjaEdit.AddGear(this.SelectedGear);
         }
         public bool CanExecuteBuyGearItem()
         {
@@ -115,11 +131,13 @@ namespace Ninja_manager.ViewModel.Shop
             {
                 if (this._selectedGear.Price <= this.Gold)
                 {
+                    this.ErrorMessage = "";
                     this.CanExecuteBuyItem = true;
                     return true;
                 }
             }
 
+            this.ErrorMessage = "You don't have enough gold.";
             this.CanExecuteBuyItem = false;
             return false;
         }

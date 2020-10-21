@@ -23,7 +23,7 @@ namespace Ninja_manager.ViewModel.Crud_Ninja
 
         public Ninja SelectedNinja { get; set; }
 
-        private NinjaEditView _ninjaEditView;
+        public NinjaEditView _ninjaEditView;
         private NinjaRepository _ninjaRepository;
         private List<Category> _gearcategories;
         private int _newId;
@@ -38,7 +38,7 @@ namespace Ninja_manager.ViewModel.Crud_Ninja
             var repo = new CategoryRepository();
             this._gearcategories = repo.GetCategories();
             
-            this.NinjaList = new ObservableCollection<Ninja>(this._ninjaRepository.Get());
+            this.NinjaList = new ObservableCollection<Ninja>(this._ninjaRepository.GetNinjas());
             this._newId = this.NinjaList.OrderByDescending(o => o.Id).Select(s => s.Id).FirstOrDefault() + 1;
         }
 

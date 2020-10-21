@@ -11,13 +11,23 @@ namespace Ninja_manager.Repository
     public class NinjaRepository
     {
 
-        public List<Ninja> Get()
+        public List<Ninja> GetNinjas()
         {
             var list = new List<Ninja>();
             using (Ninja_managerEntities db = new Ninja_managerEntities())
             {
-                list = db.Ninja.Include(l => l.Inventory).Include(a => a.Inventory.Select(s => s.Category1)).ToList();   
+                list = db.Ninja.ToList();   
             }      
+            return list;
+        }
+
+        public List<Inventory> GetInventory(int ninjaId)
+        {
+            var list = new List<Inventory>();
+            using (Ninja_managerEntities db = new Ninja_managerEntities())
+            {
+                list = db.Inventory.Include(i => i.Category1).Include(j => j.Gear).Where(w => w.Id_Ninja == ninjaId).OrderBy(o => o.Category1.Order).ToList();
+            }
             return list;
         }
 

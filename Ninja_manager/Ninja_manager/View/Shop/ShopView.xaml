@@ -51,8 +51,15 @@
                     <Frame x:Name="GearItem" Content="{Binding GearItemView}" NavigationUIVisibility="Hidden" />
                 </DockPanel>
                 <Grid Grid.Row="1">
-                    <Button Content="Buy" Command="{Binding BuyItemCommand}" IsEnabled="{Binding CanExecuteBuyItem}" Width="50" Margin="0 15 0 0" VerticalAlignment="Top"/>
-                    <Label Content="{Binding Gold}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,15" ContentStringFormat="You have {0} gold left" />
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Content="{Binding ErrorMessage}" Margin="0, 0, 0 ,15" HorizontalAlignment="Center" Foreground="#E07E7E" VerticalAlignment="Bottom"/>
+                    <Label Grid.Row="0" Content="{Binding SuccesMessage}" Margin="0, 0, 0 ,15" HorizontalAlignment="Center" Foreground="#7EE09A" VerticalAlignment="Bottom"/>
+                    <Button Grid.Row="1" Content="Buy" Command="{Binding BuyItemCommand}" IsEnabled="{Binding CanExecuteBuyItem}" Width="50" Margin="0 15 0 0" VerticalAlignment="Top"/>
+                    <Label Grid.Row="2" Content="{Binding Gold}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,15" ContentStringFormat="You have {0} gold left" />
                 </Grid>
             </Grid>
         </Grid>

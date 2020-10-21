@@ -5,6 +5,8 @@ using Ninja_manager.Repository;
 using Ninja_manager.View.Shop;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +14,7 @@ using System.Windows.Input;
 
 namespace Ninja_manager.ViewModel.Crud_Ninja
 {
-    public class NinjaEditViewModel : ViewModelBase
+    public class NinjaEditViewModel : ViewModelBase, INotifyPropertyChanged
     {
 
         public ICommand SaveNinjaCommand { get; set; }
@@ -43,7 +45,8 @@ namespace Ninja_manager.ViewModel.Crud_Ninja
             get { return this._canExecuteSave; }
             set { this._canExecuteSave = value; base.RaisePropertyChanged(); }
         }
-        public List<Inventory> Inventory { get; private set; }
+        public ObservableCollection<Inventory> InventoryList { get; private set; }
+        public Inventory SelectedInventory { get; set; }
 
         private NinjaListViewModel _ninjaList;
         private bool _canExecuteSave;
@@ -55,17 +58,21 @@ namespace Ninja_manager.ViewModel.Crud_Ninja
         private Ninja _ninja;
         private bool _isNew = false;
         private ShopView _shopView;
+
         public NinjaEditViewModel(NinjaListViewModel ninjaList)
         {
             this._ninjaList = ninjaList;
             this._ninja = ninjaList.SelectedNinja;
-            
+
+
             if (this._ninja.Name.Length == 0)
                 this._isNew = true;
 
-            this.Inventory = this._ninja.Inventory.OrderBy(o => o.Category1.Order).ToList();
 
             this._ninjaRepository = new NinjaRepository();
+
+            var list = this._ninjaRepository.GetInventory(this._ninja.Id);
+            this.InventoryList = new ObservableCollection<Inventory>(list);
 
             this.SaveNinjaCommand = new RelayCommand(SaveNinja);
             this.ResetNinjaCommand = new RelayCommand(ResetNinja);
@@ -102,6 +109,11 @@ namespace Ninja_manager.ViewModel.Crud_Ninja
 
         private void ResetNinja()
         {
+            var list = this._ninjaRepository.GetInventory(this._ninja.Id);
+            this.InventoryList.Clear();
+            foreach (var i in list)
+                this.InventoryList.Add(i);
+
             this.Name = this._ninja.Name;
         }
 
@@ -128,5 +140,9 @@ namespace Ninja_manager.ViewModel.Crud_Ninja
             this._shopView = new ShopView();
             this._shopView.Show();
         }
+
+
     }
+
+      
 }

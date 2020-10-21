@@ -27,6 +27,7 @@ namespace Ninja_manager.ViewModel
     /// </summary>
     public class ViewModelLocator
     {
+        private NinjaEditViewModel _ninjaEdit;
         private ShopViewModel _shop;
         /// <summary>
         /// Initializes a new instance of the ViewModelLocator class.
@@ -69,7 +70,8 @@ namespace Ninja_manager.ViewModel
         {
             get
             {
-                return new NinjaEditViewModel(this.NinjaList);
+                this._ninjaEdit = new NinjaEditViewModel(this.NinjaList);
+                return this._ninjaEdit;
             }
         }
 
@@ -101,7 +103,7 @@ namespace Ninja_manager.ViewModel
         {
             get
             {
-                this._shop = new ShopViewModel(this.NinjaEdit);
+                this._shop = new ShopViewModel(this._ninjaEdit);
                 return this._shop;
             }
         }
