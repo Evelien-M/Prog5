@@ -13,8 +13,8 @@ namespace Ninja_manager.ViewModel.Crud_Gear
 {
     public class GearEditViewModel : ViewModelBase
     {
-        public ICommand SaveNinjaCommand { get; set; }
-        public ICommand ResetNinjaCommand { get; set; }
+        public ICommand SaveGearCommand { get; set; }
+        public ICommand ResetGearCommand { get; set; }
 
         public string Name
         {
@@ -93,12 +93,14 @@ namespace Ninja_manager.ViewModel.Crud_Gear
             this.Strength = this._gear.Strength;
             this.Agility = this._gear.Agility;
             this.Intelligence = this._gear.Intelligence;
+            this.Category = this._gear.Category;
 
             this._gearRepository = new GearRepository();
             var repo = new CategoryRepository();
             this.Categories = repo.GetCategoryNames();
 
-            this.SaveNinjaCommand = new RelayCommand(SaveGear);
+            this.SaveGearCommand = new RelayCommand(SaveGear);
+            this.ResetGearCommand = new RelayCommand(ResetGear);
         }
 
 
@@ -135,7 +137,12 @@ namespace Ninja_manager.ViewModel.Crud_Gear
 
         public void ResetGear()
         {
-
+            this.Name = this._gear.Name;
+            this.Price = this._gear.Price;
+            this.Intelligence = this._gear.Intelligence;
+            this.Strength = this._gear.Strength;
+            this.Agility = this._gear.Agility;
+            this.Category = this._gear.Category;
         }
     }
 }

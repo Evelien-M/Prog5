@@ -44,10 +44,14 @@
         <Label Grid.Row="2" Content="{Binding ErrorMessage}" Margin="0, 0, 0 ,5" HorizontalAlignment="Center" Foreground="#E07E7E" VerticalAlignment="Bottom"/>
         <Label Grid.Row="2" Content="{Binding SuccesMessage}" Margin="0, 0, 0 ,5" HorizontalAlignment="Center" Foreground="#7EE09A" VerticalAlignment="Bottom"/>
         <!-- HEADER -->
-        <StackPanel x:Name="Footer" Grid.Row="3" Height="45" Background="#728196" VerticalAlignment="Bottom">
-            <Button Content="Save" Command="{Binding SaveNinjaCommand}" Width="45" Margin="0, 13, 0, 0"/>
-
-        </StackPanel>
+        <Grid x:Name="Footer" Grid.Row="3" Height="45" Background="#728196" VerticalAlignment="Bottom">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button Content="Reset" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Right" Command="{Binding ResetGearCommand}" Width="45" Margin="0, 13, 15, 0"/>
+            <Button Content="Save" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Left" Command="{Binding SaveGearCommand}" Width="45" Margin="15, 13, 0, 0"/>
+        </Grid>
         
     </Grid>
 </Window>
