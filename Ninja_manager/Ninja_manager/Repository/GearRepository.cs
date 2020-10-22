@@ -54,18 +54,30 @@ namespace Ninja_manager.Repository
 
         public bool Delete(Gear gear)
         {
-            throw new NotImplementedException();
             try
             {
                 using (Ninja_managerEntities db = new Ninja_managerEntities())
-                {  
-                    db.Gear.Remove(gear);
+                {
+                    var used = db.Inventory.Where(w => w.Gear.Id == gear.Id);
+                    foreach(var i in used)
+                    {
+                        // refund the money
+                        var ninja = i.Ninja;
+                        ninja.Gold += i.Gear.Price;
+                        db.Ninja.AddOrUpdate(ninja);
+
+                        i.Id_Gear = null;
+                        i.Gear = null;
+                        db.Inventory.AddOrUpdate(i);
+                    }
+                    var g = db.Gear.FirstOrDefault(i => i.Id == gear.Id);
+                    db.Gear.Remove(g);
                     db.SaveChanges();
                 }
 
                 return true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return false;
             }

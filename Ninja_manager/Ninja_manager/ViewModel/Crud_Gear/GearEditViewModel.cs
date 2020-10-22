@@ -88,12 +88,7 @@ namespace Ninja_manager.ViewModel.Crud_Gear
             if (this._gear.Name == null)
                 this._isNew = true;
 
-            this.Name = this._gear.Name;
-            this.Price = this._gear.Price;
-            this.Strength = this._gear.Strength;
-            this.Agility = this._gear.Agility;
-            this.Intelligence = this._gear.Intelligence;
-            this.Category = this._gear.Category;
+            this.ResetGear();
 
             this._gearRepository = new GearRepository();
             var repo = new CategoryRepository();
