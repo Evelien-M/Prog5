@@ -15,10 +15,9 @@ using System.Windows.Input;
 
 namespace Ninja_manager.ViewModel.Shop
 {
-    public class ShopViewModel : ViewModelBase, INotifyPropertyChanged
+    public class ShopViewModel : ViewModelBase
     {
         public ICommand BuyItemCommand { get; set; }
-        public int Gold { get; private set; }
         public List<Category> Categories { get; private set; }
 
         public Category SelectedCategory 
@@ -71,7 +70,11 @@ namespace Ninja_manager.ViewModel.Shop
                 base.RaisePropertyChanged();
             } 
         }
-
+        public int Gold
+        {
+            get { return this._gold; }
+            set { this._gold = value; base.RaisePropertyChanged(); }
+        }
         public bool CanExecuteBuyItem
         {
             get { return this._canExecuteBuyItem; }
@@ -98,6 +101,7 @@ namespace Ninja_manager.ViewModel.Shop
         private bool _canExecuteBuyItem = false;
         private string _succesMessage;
         private string _errorMessage;
+        private int _gold;
 
         public ShopViewModel(NinjaEditViewModel ninjaEdit)
         {
@@ -106,7 +110,7 @@ namespace Ninja_manager.ViewModel.Shop
             var repo = new CategoryRepository();
             this.Categories = repo.GetCategories();
             this._gearRepsotory = new GearRepository();
-
+            this._ninjaEdit.ShopViewModel = this;
             this.BuyItemCommand = new RelayCommand(BuyItem);
         }
 
@@ -122,24 +126,43 @@ namespace Ninja_manager.ViewModel.Shop
 
         public void BuyItem()
         {
-            this._ninjaEdit.InventoryList.Update(this.SelectedGear);
-            // this._ninjaEdit.AddGear(this.SelectedGear);
+            this._ninjaEdit.AddToInventory(this.SelectedGear);
         }
         public bool CanExecuteBuyGearItem()
         {
             if (this._selectedGear != null)
             {
-                if (this._selectedGear.Price <= this.Gold)
+                var invItem = this._ninjaEdit.InventoryList.FirstOrDefault(i => i.Category == this._selectedCategory.Name);
+                if (invItem.Id_Gear != null)
                 {
-                    this.ErrorMessage = "";
-                    this.CanExecuteBuyItem = true;
-                    return true;
+                    this.ErrorMessage = "You already have " + invItem.Category + " item";
+                    this.CanExecuteBuyItem = false;
+                    return false;
                 }
+                if (this._selectedGear.Price > this.Gold)
+                    {
+                    this.ErrorMessage = "You don't have enough gold.";
+                    this.CanExecuteBuyItem = false;
+                    return false;
+                }
+
+                this.ErrorMessage = "";
+                this.CanExecuteBuyItem = true;
+                return true;
             }
 
-            this.ErrorMessage = "You don't have enough gold.";
+
+
+            this.ErrorMessage = "";
             this.CanExecuteBuyItem = false;
             return false;
+        }
+
+        public void Update(NinjaEditViewModel ninjaEditViewModel)
+        {
+            this._ninjaEdit = ninjaEditViewModel;
+            this.Gold = ninjaEditViewModel.Gold;
+            this.CanExecuteBuyGearItem();
         }
     }
 }

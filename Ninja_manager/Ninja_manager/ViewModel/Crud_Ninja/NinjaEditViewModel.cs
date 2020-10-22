@@ -3,6 +3,7 @@ using GalaSoft.MvvmLight.Command;
 using Ninja_manager.Helper;
 using Ninja_manager.Repository;
 using Ninja_manager.View.Shop;
+using Ninja_manager.ViewModel.Shop;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -14,12 +15,13 @@ using System.Windows.Input;
 
 namespace Ninja_manager.ViewModel.Crud_Ninja
 {
-    public class NinjaEditViewModel : ViewModelBase, INotifyPropertyChanged
+    public class NinjaEditViewModel : ViewModelBase
     {
 
         public ICommand SaveNinjaCommand { get; set; }
         public ICommand ResetNinjaCommand { get; set; }
         public ICommand ShopNinjaGearCommand { get; set; }
+        public ICommand SellItemCommand { get; set; }
         public string Name
         {
             get { return this._name; }
@@ -46,7 +48,7 @@ namespace Ninja_manager.ViewModel.Crud_Ninja
             set { this._canExecuteSave = value; base.RaisePropertyChanged(); }
         }
         public ObservableCollection<Inventory> InventoryList { get; private set; }
-        public Inventory SelectedInventory { get; set; }
+        public ShopViewModel ShopViewModel { get; set; }
 
         private NinjaListViewModel _ninjaList;
         private bool _canExecuteSave;
@@ -77,6 +79,7 @@ namespace Ninja_manager.ViewModel.Crud_Ninja
             this.SaveNinjaCommand = new RelayCommand(SaveNinja);
             this.ResetNinjaCommand = new RelayCommand(ResetNinja);
             this.ShopNinjaGearCommand = new RelayCommand(ShopNinjaGear);
+            this.SellItemCommand = new RelayCommand<Gear>(RemoveFromInventory);
 
             this.Name = this._ninja.Name;
             this.Gold = this._ninja.Gold;
@@ -85,6 +88,7 @@ namespace Ninja_manager.ViewModel.Crud_Ninja
         private void SaveNinja()
         {
             this._ninja.Name = this.Name;
+            this._ninja.Gold = this.Gold;
 
             if (this._ninjaRepository.AddOrUpdate(this._ninja))
             {
@@ -115,6 +119,10 @@ namespace Ninja_manager.ViewModel.Crud_Ninja
                 this.InventoryList.Add(i);
 
             this.Name = this._ninja.Name;
+            this.Gold = this._ninja.Gold;
+
+            if (this.ShopViewModel != null)
+                this.ShopViewModel.Update(this);
         }
 
         private bool CanExecuteSaveNinja()
@@ -141,6 +149,27 @@ namespace Ninja_manager.ViewModel.Crud_Ninja
             this._shopView.Show();
         }
 
+
+        public void AddToInventory(Gear gear)
+        {
+            this.Gold -= gear.Price;
+            this.InventoryList.Update(gear.Category, gear);
+
+            if (this.ShopViewModel != null)
+                this.ShopViewModel.Update(this);
+        }
+
+        public void RemoveFromInventory(Gear gear)
+        {
+            if (gear != null)
+            {
+                this.Gold += gear.Price;
+                this.InventoryList.Update(gear.Category, null);
+
+                if (this.ShopViewModel != null)
+                    this.ShopViewModel.Update(this);
+            }
+        }
 
     }
 

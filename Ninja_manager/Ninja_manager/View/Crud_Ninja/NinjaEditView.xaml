@@ -53,7 +53,7 @@
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
 
-                <ListView Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Top" ItemsSource="{Binding InventoryList}" SelectedItem="{Binding Path=SelectedInventory}">
+                <ListView Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Top" ItemsSource="{Binding InventoryList}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <Grid x:Name="GearItem" HorizontalAlignment="Stretch" Width="450" VerticalAlignment="Stretch" Background="#40444A">
@@ -69,19 +69,13 @@
                                         <ColumnDefinition Width="auto"/>
                                         <ColumnDefinition Width="auto"/>
                                         <ColumnDefinition Width="auto"/>
-                                        <ColumnDefinition Width="auto"/>
-                                        <ColumnDefinition Width="auto"/>
-                                        <ColumnDefinition Width="auto"/>
                                     </Grid.ColumnDefinitions>
-                                    <Label Grid.Column="0" Content="Strength:" FontSize="10" Foreground="#E07E7E" HorizontalAlignment="Right" Margin="5,15,0,0" VerticalAlignment="Bottom"/>
-                                    <Label Grid.Column="1" Content="{Binding Gear.Strength}" FontSize="10" Foreground="#E07E7E" FontWeight="Bold" HorizontalAlignment="Right" Margin="5,15,0,0" VerticalAlignment="Bottom"/>
-                                    <Label Grid.Column="2" Content="Intelligence:" FontSize="10" Foreground="#8991E0" HorizontalAlignment="Right" Margin="5,15,0,0" VerticalAlignment="Bottom"/>
-                                    <Label Grid.Column="3" Content="{Binding Gear.Intelligence}" FontSize="10" Foreground="#8991E0" FontWeight="Bold" HorizontalAlignment="Right" Margin="5,15,0,0" VerticalAlignment="Bottom"/>
-                                    <Label Grid.Column="4" Content="Agility:" FontSize="10" Foreground="#7EE09A" HorizontalAlignment="Right" Margin="5,15,0,0" VerticalAlignment="Bottom"/>
-                                    <Label Grid.Column="5" Content="{Binding Gear.Agility}" FontSize="10" Foreground="#7EE09A" FontWeight="Bold" HorizontalAlignment="Right" Margin="5,15,0,0" VerticalAlignment="Bottom"/>
+                                    <Label Grid.Column="0" Content="{Binding Gear.Strength}" ContentStringFormat="Strength: {0}" FontSize="10" Foreground="#E07E7E" FontWeight="Bold" HorizontalAlignment="Right" Margin="5,15,0,0" VerticalAlignment="Bottom"/>
+                                    <Label Grid.Column="1" Content="{Binding Gear.Intelligence}" ContentStringFormat="Intelligence: {0}" FontSize="10" Foreground="#8991E0" FontWeight="Bold" HorizontalAlignment="Right" Margin="5,15,0,0" VerticalAlignment="Bottom"/>
+                                    <Label Grid.Column="2" Content="{Binding Gear.Agility}" ContentStringFormat="Agility: {0}"  FontSize="10" Foreground="#7EE09A" FontWeight="Bold" HorizontalAlignment="Right" Margin="5,15,0,0" VerticalAlignment="Bottom"/>
                                 </Grid>
                                 <Label Grid.Column="2" Foreground="White" Content="{Binding Category}" HorizontalAlignment="Right" Margin="0,0,0,0" VerticalAlignment="Top"/>
-                                <Button Grid.Column="2" Content="Sell" HorizontalAlignment="Right"  VerticalAlignment="Bottom" Width="75"/>
+                                <Button Grid.Column="2" Content="{Binding Gear.Price}" Command="{Binding DataContext.SellItemCommand, RelativeSource={RelativeSource AncestorType=ListView}}" CommandParameter="{Binding Gear}" ContentStringFormat="Sell ({0}g)" HorizontalAlignment="Right"  VerticalAlignment="Bottom" Width="75"/>
                             </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>
