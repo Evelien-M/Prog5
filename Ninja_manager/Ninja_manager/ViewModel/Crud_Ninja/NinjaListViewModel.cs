@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using Ninja_manager.Helper;
 using Ninja_manager.Repository;
 using Ninja_manager.View.Crud_Ninja;
 using System;
@@ -46,7 +47,8 @@ namespace Ninja_manager.ViewModel.Crud_Ninja
         private void AddItem()
         {
             if (this._ninjaEditView != null)
-                this._ninjaEditView.Close();
+                if (!this._ninjaEditView.ClosePrompt())
+                    return;
 
             var rng = new Random();
             var gold = rng.Next(40, 80) * 10;
@@ -64,7 +66,8 @@ namespace Ninja_manager.ViewModel.Crud_Ninja
         private void EditItem()
         {
             if (this._ninjaEditView != null)
-                this._ninjaEditView.Close();
+                if (!this._ninjaEditView.ClosePrompt())
+                    return;
 
             this._ninjaEditView = new NinjaEditView();
             this._ninjaEditView.Show();

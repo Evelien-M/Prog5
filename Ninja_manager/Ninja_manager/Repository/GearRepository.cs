@@ -77,7 +77,7 @@ namespace Ninja_manager.Repository
 
                 return true;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return false;
             }

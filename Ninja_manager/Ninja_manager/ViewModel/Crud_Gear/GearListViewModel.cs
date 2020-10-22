@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using Ninja_manager.Helper;
 using Ninja_manager.Repository;
 using Ninja_manager.View.Crud_Gear;
 using System;
@@ -44,8 +45,9 @@ namespace Ninja_manager.ViewModel.Crud_Gear
         private void AddItem()
         {
             if (this._gearEditView != null)
-                this._gearEditView.Close();
-         
+                if (!this._gearEditView.ClosePrompt())
+                    return;
+
             this.SelectedGear = new Gear() { Id = this._newId};
 
             this._gearEditView = new GearEditView();
@@ -54,7 +56,8 @@ namespace Ninja_manager.ViewModel.Crud_Gear
         private void EditItem()
         {
             if (this._gearEditView != null)
-                this._gearEditView.Close();
+                if (!this._gearEditView.ClosePrompt())
+                    return;
 
             this._gearEditView = new GearEditView();
             this._gearEditView.Show();
