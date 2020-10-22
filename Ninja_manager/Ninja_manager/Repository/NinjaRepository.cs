@@ -31,14 +31,14 @@ namespace Ninja_manager.Repository
             return list;
         }
 
-        public bool AddOrUpdate(Ninja ninja)
+        public bool AddOrUpdate(Ninja ninja, List<Inventory> inventory)
         {
             try
             {
                 using (Ninja_managerEntities db = new Ninja_managerEntities())
                 {
                     db.Ninja.AddOrUpdate(ninja);
-                    foreach(var i in ninja.Inventory)
+                    foreach(var i in inventory)
                     {
                         if(db.Entry(i.Category1).State != EntityState.Detached)
                             db.Category.Attach(i.Category1);

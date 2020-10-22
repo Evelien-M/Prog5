@@ -32,9 +32,16 @@
                 <TextBox Grid.Row="1" HorizontalAlignment="Stretch" Height="25"  Margin="15,0,15,0" TextWrapping="Wrap" Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" />
                 <Label Grid.Row="2" Content="Gold Amount:" HorizontalAlignment="Left" Foreground="White" Margin="15,15,0,0" VerticalAlignment="Top"/>
                 <Label Grid.Row="3" Content="{Binding Gold}" HorizontalAlignment="Left" FontWeight="Bold" Foreground="White" Margin="15,0,0,15" VerticalAlignment="Top"/>
-                <StackPanel Grid.Row="4" Background="#4A4640">
-                    
-                </StackPanel>
+                <Grid Grid.Row="4" Background="#4A4640">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Content="{Binding TotalStrength}" ContentStringFormat="Strength: {0}" FontSize="10" Foreground="#E07E7E" FontWeight="Bold" HorizontalAlignment="Left" Margin="5,15,0,0" VerticalAlignment="Bottom"/>
+                    <Label Grid.Row="1" Content="{Binding TotalIntelligence}" ContentStringFormat="Intelligence: {0}" FontSize="10" Foreground="#8991E0" FontWeight="Bold" HorizontalAlignment="Left" Margin="5,15,0,0" VerticalAlignment="Bottom"/>
+                    <Label Grid.Row="2" Content="{Binding TotalAgility}" ContentStringFormat="Agility: {0}"  FontSize="10" Foreground="#7EE09A" FontWeight="Bold" HorizontalAlignment="Left" Margin="5,15,0,0" VerticalAlignment="Bottom"/>
+                </Grid>
                 <Label Grid.Row="5" Content="{Binding ErrorMessage}" Margin="0, 0, 0 ,5" HorizontalAlignment="Center" Foreground="#E07E7E" VerticalAlignment="Bottom"/>
                 <Label Grid.Row="5" Content="{Binding SuccesMessage}" Margin="0, 0, 0 ,5" HorizontalAlignment="Center" Foreground="#7EE09A" VerticalAlignment="Bottom"/>
                 <Grid x:Name="Footer" Grid.Row="6" Height="45" Background="#728196" VerticalAlignment="Top">
