@@ -31,19 +31,28 @@ namespace Ninja_manager.Repository
             return list;
         }
 
-        public bool AddOrUpdate(Ninja ninja, List<Inventory> inventory)
+        public bool AddOrUpdate(Ninja ninja)
         {
             try
             {
                 using (Ninja_managerEntities db = new Ninja_managerEntities())
                 {
                     db.Ninja.AddOrUpdate(ninja);
-                    foreach(var i in inventory)
+                    foreach(var i in ninja.Inventory)
                     {
-                        if(db.Entry(i.Category1).State != EntityState.Detached)
+                        if (db.Entry(i.Category1).State == EntityState.Added)
+                        {
                             db.Category.Attach(i.Category1);
+                            
+                            if (i.Gear != null)
+                            {
+                                db. Gear.Attach(i.Gear);
+                                db.Category.Attach(i.Gear.Category1);
+                            }
+                    
+                        }
 
-                      db.Inventory.AddOrUpdate(i);
+                        db.Inventory.AddOrUpdate(i);
                     }
                     db.SaveChanges();
                 }
@@ -62,11 +71,17 @@ namespace Ninja_manager.Repository
             {
                 using (Ninja_managerEntities db = new Ninja_managerEntities())
                 {
-                    for (var i = 0; i < ninja.Inventory.Count; i++)
-                        db.Entry(ninja.Inventory.ToList()[i]).State = EntityState.Deleted;
+                    var pointless = db.Ninja.FirstOrDefault(i => i.Id == ninja.Id);
+                    if (pointless != null)
+                    {
+                        var inv = db.Inventory.Where(w => w.Id_Ninja == pointless.Id);
 
-                    db.Ninja.Remove(ninja);
-                    db.SaveChanges();
+                        foreach (var i in inv)
+                            db.Inventory.Remove(i);
+
+                        db.Ninja.Remove(pointless);
+                        db.SaveChanges();
+                    }
                 }
 
                 return true;

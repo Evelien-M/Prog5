@@ -19,12 +19,12 @@ namespace Ninja_manager.ViewModel.Crud_Gear
         public string Name
         {
             get { return this._name; }
-            set { this._name = value; base.RaisePropertyChanged(); }
+            set { this._name = value; base.RaisePropertyChanged(); this.CanExecuteSaveGear(); }
         }
         public int Price
         {
             get { return this._price; }
-            set { this._price = value; base.RaisePropertyChanged(); }
+            set { this._price = value; base.RaisePropertyChanged(); this.CanExecuteSaveGear(); }
         }
         public int? Strength
         {
@@ -44,7 +44,7 @@ namespace Ninja_manager.ViewModel.Crud_Gear
         public string Category
         {
             get { return this._category; }
-            set { this._category = value; base.RaisePropertyChanged(); }
+            set { this._category = value; base.RaisePropertyChanged(); this.CanExecuteSaveGear(); }
         }
         public string SuccesMessage
         {
@@ -85,7 +85,7 @@ namespace Ninja_manager.ViewModel.Crud_Gear
             this._gearList = gearList;
             this._gear = gearList.SelectedGear;
 
-            if (this._gear.Name == null)
+            if (this._gear.Name.Length == 0)
                 this._isNew = true;
 
             this.ResetGear();
@@ -128,6 +128,34 @@ namespace Ninja_manager.ViewModel.Crud_Gear
                 this.SuccesMessage = "";
                 this.ErrorMessage = "An error occured with the database!";
             }
+        }
+        private bool CanExecuteSaveGear()
+        {
+            if (this.Name.Length <= 3)
+            {
+                this.SuccesMessage = "";
+                this.ErrorMessage = "Name has to be more than 3 characters!";
+                this.CanExecuteSave = false;
+                return false;
+            }
+            if (this.Category == null)
+            {
+                this.SuccesMessage = "";
+                this.ErrorMessage = "A category is required!";
+                this.CanExecuteSave = false;
+                return false;
+            }
+            if (this.Price < 0)
+            {
+                this.SuccesMessage = "";
+                this.ErrorMessage = "The price is not valid!";
+                this.CanExecuteSave = false;
+                return false;
+            }
+
+            this.ErrorMessage = "";
+            this.CanExecuteSave = true;
+            return true;
         }
 
         public void ResetGear()

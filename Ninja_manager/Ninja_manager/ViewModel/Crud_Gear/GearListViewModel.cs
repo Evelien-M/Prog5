@@ -48,7 +48,7 @@ namespace Ninja_manager.ViewModel.Crud_Gear
                 if (!this._gearEditView.ClosePrompt())
                     return;
 
-            this.SelectedGear = new Gear() { Id = this._newId};
+            this.SelectedGear = new Gear() { Name = "", Id = this._newId};
 
             this._gearEditView = new GearEditView();
             this._gearEditView.Show();
