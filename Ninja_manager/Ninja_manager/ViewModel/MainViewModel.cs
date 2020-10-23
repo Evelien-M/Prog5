@@ -2,6 +2,7 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using Ninja_manager.View.Crud_Gear;
 using Ninja_manager.View.Crud_Ninja;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace Ninja_manager.ViewModel
@@ -10,9 +11,24 @@ namespace Ninja_manager.ViewModel
     {
         public ICommand GoToNinjaCrudCommand { get; set; }
         public ICommand GoToGearCrudCommand { get; set; }
-        
+
+        public Page PageView
+        {
+            get
+            {
+                return this._pageView;
+            }
+            set
+            {
+                this._pageView = value;
+                base.RaisePropertyChanged();
+            }
+        }
+
         private NinjaListView _ninjaCrudView;
         private GearListView _gearCrudView;
+        private Page _pageView;
+
         public MainViewModel()
         {
             this.GoToNinjaCrudCommand = new RelayCommand(GoToNinjaCrud);
@@ -22,14 +38,12 @@ namespace Ninja_manager.ViewModel
 
         private void GoToNinjaCrud()
         {
-            this._ninjaCrudView = new NinjaListView();
-            this._ninjaCrudView.Show();
+            this.PageView = new NinjaListView();
         }
 
         private void GoToGearCrud()
         {
-            this._gearCrudView = new GearListView();
-            this._gearCrudView.Show();
+            this.PageView = new GearListView();
         }
     }
 }

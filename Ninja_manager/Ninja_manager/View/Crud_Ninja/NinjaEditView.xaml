@@ -7,7 +7,7 @@
         mc:Ignorable="d"
                 Background="#909396"
         DataContext="{Binding NinjaEdit, Source={StaticResource Locator}}"
-        Title="NinjaEditView" Height="auto" Width="800">
+        Title="NinjaEditView" Height="600" Width="800">
     <Window.Resources>
         <Style x:Key="ErrorLabel" TargetType="{x:Type Label}">
             <Style.Triggers>
@@ -33,8 +33,11 @@
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
             <!-- HEADER -->
-            <StackPanel x:Name="Header" Grid.Row="0" Height="45" Background="#7D6E65" VerticalAlignment="Top">
-                <Label Content="Ninja berwerken/aanmaken" HorizontalAlignment="Center" Margin="0,8,0,0" FontSize="16" FontWeight="Bold" Foreground="White" FontFamily="Open Sans" />
+            <StackPanel x:Name="Header" Grid.Row="0" Height="45" Background="#4D8A75" VerticalAlignment="Top">
+                <Label Content="Ninja" HorizontalAlignment="Center" Margin="0,8,0,0" FontSize="16" FontWeight="Bold" Foreground="White" FontFamily="Open Sans" />
+                <StackPanel.BitmapEffect>
+                    <DropShadowBitmapEffect Color="Black"  Direction="-100" ShadowDepth="2" Opacity="0.4" Softness=".5" />
+                </StackPanel.BitmapEffect>
             </StackPanel>
             <Grid x:Name="Content" Grid.Row="1">
                 <Grid.ColumnDefinitions>
@@ -118,14 +121,17 @@
                     <DropShadowBitmapEffect Color="Black"  ShadowDepth="0" Opacity="0.5" Softness=".2" />
                 </Label.BitmapEffect>
             </Label>
-            <Label Grid.Row="2" Content="{Binding SuccesMessage}" Margin="0, 15, 0 ,15"  Padding="15 5 15 5" HorizontalAlignment="Center" Foreground="#ffffff" VerticalAlignment="Bottom"/>
-            <Grid x:Name="Footer" Grid.Row="3" Height="45" Background="#7D6E65" VerticalAlignment="Top">
+            <Label Grid.Row="2" Content="{Binding SuccesMessage}" FontWeight="Bold" Margin="0, 15, 0 ,15"  Padding="15 5 15 5" HorizontalAlignment="Center" Foreground="#ffffff" VerticalAlignment="Bottom"/>
+            <Grid x:Name="Footer" Grid.Row="3" Height="45" Background="#4D8A75" VerticalAlignment="Top">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Button Command="{Binding ResetNinjaCommand}" Grid.Column="0" Margin="15, 0, 0, 0" Content="Reset" HorizontalAlignment="Left" VerticalAlignment="Center" Width="75"/>
                 <Button Command="{Binding SaveNinjaCommand}" IsEnabled="{Binding CanExecuteSave}" Grid.Column="1" Margin="0, 0, 15, 0" Content="Save" HorizontalAlignment="Right" VerticalAlignment="Center" Width="75"/>
+                <Grid.BitmapEffect>
+                    <DropShadowBitmapEffect Color="Black" Direction="100" ShadowDepth="2" Opacity="0.4" Softness=".5" />
+                </Grid.BitmapEffect>
             </Grid>
         </Grid>
     </Grid>

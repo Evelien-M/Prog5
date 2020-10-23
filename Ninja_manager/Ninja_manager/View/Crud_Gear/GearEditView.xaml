@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Background="#909396" 
         DataContext="{Binding GearEdit, Source={StaticResource Locator}}"
-        Title="GearEditView" Height="450" Width="800">
+        Title="GearEditView" Height="400" Width="800">
         <Window.Resources>
             <Style x:Key="ErrorLabel" TargetType="{x:Type Label}">
                 <Style.Triggers>
@@ -26,14 +26,17 @@
         </Grid.RowDefinitions>
         <!-- HEADER -->
         <StackPanel x:Name="Header" Grid.Row="0" Height="45" Background="#7D6E65" VerticalAlignment="Top">
-            <Label Content="Gear berwerken/aanmaken" HorizontalAlignment="Center" Margin="0,8,0,0" FontSize="16" FontWeight="Bold" Foreground="White" FontFamily="Open Sans" />
+            <Label Content="Gear" HorizontalAlignment="Center" Margin="0,8,0,0" FontSize="16" FontWeight="Bold" Foreground="White" FontFamily="Open Sans" />
+            <StackPanel.BitmapEffect>
+                <DropShadowBitmapEffect Color="Black"  Direction="-100" ShadowDepth="2" Opacity="0.4" Softness=".5" />
+            </StackPanel.BitmapEffect>
         </StackPanel>
         <Grid x:Name="Container" Grid.Row="1" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Grid x:Name="LeftSection" Grid.Column="0" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch">
+            <Grid x:Name="LeftSection" Grid.Column="0" HorizontalAlignment="Stretch" Margin="0,15,0,0" VerticalAlignment="Stretch">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
@@ -67,7 +70,7 @@
                 <DropShadowBitmapEffect Color="Black"  ShadowDepth="0" Opacity="0.5" Softness=".2" />
             </Label.BitmapEffect>
         </Label>
-        <Label Grid.Row="2" Content="{Binding SuccesMessage}" Margin="0, 15, 0 ,15"  Padding="15 5 15 5" HorizontalAlignment="Center" Foreground="#ffffff" VerticalAlignment="Bottom"/>
+        <Label Grid.Row="2" Content="{Binding SuccesMessage}" FontWeight="Bold" Margin="0, 15, 0 ,15"  Padding="15 5 15 5" HorizontalAlignment="Center" Foreground="#ffffff" VerticalAlignment="Bottom"/>
         <!-- HEADER -->
         <Grid x:Name="Footer" Grid.Row="3" Height="45" Background="#7D6E65" VerticalAlignment="Bottom">
             <Grid.ColumnDefinitions>
@@ -76,6 +79,9 @@
             </Grid.ColumnDefinitions>
             <Button Content="Reset" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Command="{Binding ResetGearCommand}" Width="45" Margin="15, 13, 0, 0"/>
             <Button Content="Save" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Right" Command="{Binding SaveGearCommand}" IsEnabled="{Binding CanExecuteSave}" Width="45" Margin="0, 13, 15, 0"/>
+            <Grid.BitmapEffect>
+                <DropShadowBitmapEffect Color="Black"  Direction="100" ShadowDepth="2" Opacity="0.4" Softness=".5" />
+            </Grid.BitmapEffect>
         </Grid>
         
     </Grid>

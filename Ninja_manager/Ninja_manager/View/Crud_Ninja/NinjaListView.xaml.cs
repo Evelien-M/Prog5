@@ -17,7 +17,7 @@ namespace Ninja_manager.View.Crud_Ninja
     /// <summary>
     /// Interaction logic for NinjaListView.xaml
     /// </summary>
-    public partial class NinjaListView : Window
+    public partial class NinjaListView : Page
     {
         public NinjaListView()
         {

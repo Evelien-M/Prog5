@@ -17,7 +17,7 @@ namespace Ninja_manager.View.Crud_Gear
     /// <summary>
     /// Interaction logic for GearListView.xaml
     /// </summary>
-    public partial class GearListView : Window
+    public partial class GearListView : Page
     {
         public GearListView()
         {

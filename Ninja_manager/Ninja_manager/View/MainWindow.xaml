@@ -9,8 +9,22 @@
         DataContext="{Binding Main, Source={StaticResource Locator}}"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Button Content="Ninja Manager" Command="{Binding GoToNinjaCrudCommand}" HorizontalAlignment="Left" Margin="356,106,0,0" VerticalAlignment="Top" Width="150"/>
-        <Button Content="Gear Manager" Command="{Binding GoToGearCrudCommand}" HorizontalAlignment="Left" Margin="382,216,0,0" VerticalAlignment="Top" Width="150"/>
-
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Content="MANAGER" FontWeight="Bold" Foreground="White" Margin="15"/>
+            <Button Grid.Row="1" Content="Ninja" Command="{Binding GoToNinjaCrudCommand}" HorizontalAlignment="Stretch" Height="30" VerticalAlignment="Top" />
+            <Button Grid.Row="2" Content="Gear" Command="{Binding GoToGearCrudCommand}" HorizontalAlignment="Stretch" Height="30" VerticalAlignment="Top"/>
+        </Grid>
+        <DockPanel Grid.Column="1">
+            <Frame x:Name="PageView" Content="{Binding PageView}" NavigationUIVisibility="Hidden" />
+        </DockPanel>
     </Grid>
 </Window>
