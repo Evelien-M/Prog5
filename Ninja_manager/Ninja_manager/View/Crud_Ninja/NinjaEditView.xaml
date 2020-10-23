@@ -8,91 +8,125 @@
                 Background="#909396"
         DataContext="{Binding NinjaEdit, Source={StaticResource Locator}}"
         Title="NinjaEditView" Height="auto" Width="800">
+    <Window.Resources>
+        <Style x:Key="ErrorLabel" TargetType="{x:Type Label}">
+            <Style.Triggers>
+                <Trigger Property="Content" Value="">
+                    <Setter Property="Visibility" Value="Hidden" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="SellButton" TargetType="{x:Type Button}">
+            <Style.Triggers>
+                <Trigger Property="Content" Value="{x:Null}">
+                    <Setter Property="Visibility" Value="Hidden" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
     <Grid>
-        <!-- HEADER -->
-        <StackPanel x:Name="Header" Grid.Row="0" Height="45" Background="#728196" VerticalAlignment="Top">
-            <Label Content="Ninja berwerken/aanmaken" HorizontalAlignment="Center" Margin="0,8,0,0" FontSize="16" FontWeight="Bold" Foreground="White" FontFamily="Open Sans" />
-        </StackPanel>
-        <Grid x:Name="Container" Margin="0,45,0,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Grid x:Name="LeftSection" Background="#40444A" Grid.Column="0" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="30"/>
-                    <RowDefinition Height="auto"/>
-                </Grid.RowDefinitions>
-                <Label Grid.Row="0" Content="Ninja name:" HorizontalAlignment="Left" Foreground="White" Margin="15,15,0,0" VerticalAlignment="Top"/>
-                <TextBox Grid.Row="1" HorizontalAlignment="Stretch" Height="25"  Margin="15,0,15,0" TextWrapping="Wrap" Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" />
-                <Label Grid.Row="2" Content="Gold Amount:" HorizontalAlignment="Left" Foreground="White" Margin="15,15,0,0" VerticalAlignment="Top"/>
-                <Label Grid.Row="3" Content="{Binding Gold}" HorizontalAlignment="Left" FontWeight="Bold" Foreground="White" Margin="15,0,0,15" VerticalAlignment="Top"/>
-                <Grid Grid.Row="4" Background="#4A4640">
+        <Grid x:Name="Container">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <!-- HEADER -->
+            <StackPanel x:Name="Header" Grid.Row="0" Height="45" Background="#7D6E65" VerticalAlignment="Top">
+                <Label Content="Ninja berwerken/aanmaken" HorizontalAlignment="Center" Margin="0,8,0,0" FontSize="16" FontWeight="Bold" Foreground="White" FontFamily="Open Sans" />
+            </StackPanel>
+            <Grid x:Name="Content" Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="2*" />
+                </Grid.ColumnDefinitions>
+                <Grid x:Name="LeftSection" Grid.Column="0" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
                     </Grid.RowDefinitions>
-                    <Label Grid.Row="0" Content="{Binding TotalStrength}" ContentStringFormat="Strength: {0}" FontSize="10" Foreground="#E07E7E" FontWeight="Bold" HorizontalAlignment="Left" Margin="5,15,0,0" VerticalAlignment="Bottom"/>
-                    <Label Grid.Row="1" Content="{Binding TotalIntelligence}" ContentStringFormat="Intelligence: {0}" FontSize="10" Foreground="#8991E0" FontWeight="Bold" HorizontalAlignment="Left" Margin="5,15,0,0" VerticalAlignment="Bottom"/>
-                    <Label Grid.Row="2" Content="{Binding TotalAgility}" ContentStringFormat="Agility: {0}"  FontSize="10" Foreground="#7EE09A" FontWeight="Bold" HorizontalAlignment="Left" Margin="5,15,0,0" VerticalAlignment="Bottom"/>
-                </Grid>
-                <Label Grid.Row="5" Content="{Binding ErrorMessage}" Margin="0, 0, 0 ,5" HorizontalAlignment="Center" Foreground="#E07E7E" VerticalAlignment="Bottom"/>
-                <Label Grid.Row="5" Content="{Binding SuccesMessage}" Margin="0, 0, 0 ,5" HorizontalAlignment="Center" Foreground="#7EE09A" VerticalAlignment="Bottom"/>
-                <Grid x:Name="Footer" Grid.Row="6" Height="45" Background="#728196" VerticalAlignment="Top">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Button Command="{Binding ResetNinjaCommand}" Grid.Column="0" Margin="15, 0, 0, 0" Content="Reset" HorizontalAlignment="Left" VerticalAlignment="Center" Width="75"/>
-                    <Button Command="{Binding SaveNinjaCommand}" IsEnabled="{Binding CanExecuteSave}" Grid.Column="1" Margin="0, 0, 15, 0" Content="Save" HorizontalAlignment="Right" VerticalAlignment="Center" Width="75"/>
-                </Grid>
-            </Grid>
-            <Grid x:Name="RightSection" Grid.Column="1" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Center">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-     
-                    <RowDefinition Height="auto"/>
-                </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Content="Ninja name:" HorizontalAlignment="Left" Foreground="White" Margin="15,15,0,0" VerticalAlignment="Top"/>
+                    <TextBox Grid.Row="1" HorizontalAlignment="Stretch" Height="25"  Margin="15,0,15,0" TextWrapping="Wrap" Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" />
 
-                <ListView Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Top" ItemsSource="{Binding InventoryList}">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <Grid x:Name="GearItem" HorizontalAlignment="Stretch" Width="450" VerticalAlignment="Stretch" Background="#40444A">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="50"/>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Rectangle Grid.Column="0" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="50" Stroke="Black" VerticalAlignment="Center" Width="50"/>
-                                <Label Grid.Column="1" Content="{Binding Gear.Name}" Foreground="White" FontWeight="Bold" HorizontalAlignment="Left" Margin="5,0,0,0" VerticalAlignment="Top"/>
-                                <Grid Grid.Column="1">
+                    <Grid Grid.Row="2" Margin="0 30 0 0" Background="#40444A">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" Content="{Binding Gold}" ContentStringFormat="Gold amount: {0}" HorizontalAlignment="Left" FontWeight="Bold" Foreground="White" Margin="15,30,0,15" VerticalAlignment="Top"/>
+                        <Label Grid.Row="1" Content="{Binding TotalStrength}" ContentStringFormat="Strength: {0}" FontSize="10" Foreground="#E07E7E" FontWeight="Bold" HorizontalAlignment="Left" Margin="15,15,0,0" VerticalAlignment="Bottom"/>
+                        <Label Grid.Row="2" Content="{Binding TotalIntelligence}" ContentStringFormat="Intelligence: {0}" FontSize="10" Foreground="#8991E0" FontWeight="Bold" HorizontalAlignment="Left" Margin="15,15,0,0" VerticalAlignment="Bottom"/>
+                        <Label Grid.Row="3" Content="{Binding TotalAgility}" ContentStringFormat="Agility: {0}"  FontSize="10" Foreground="#7EE09A" FontWeight="Bold" HorizontalAlignment="Left" Margin="15,15,0,30" VerticalAlignment="Bottom"/>
+                    </Grid>
+                    <Button Grid.Row="3" Command="{Binding ShopNinjaGearCommand}" Background="#FFC569" Margin="0, 30, 0, 15" Content="Shop" HorizontalAlignment="Right" VerticalAlignment="Top" Width="75"/>
+                </Grid>
+                <Grid x:Name="RightSection" Grid.Column="1" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Top">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+
+                    <ListView Grid.Row="0" HorizontalAlignment="Stretch"  VerticalAlignment="Top" BorderBrush="Transparent" Background="Transparent" ItemsSource="{Binding InventoryList}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid x:Name="GearItem" VerticalAlignment="Stretch" Margin="15 15 0 0" Background="#40444A">
                                     <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50"/>
                                         <ColumnDefinition Width="auto"/>
-                                        <ColumnDefinition Width="auto"/>
-                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
-                                    <Label Grid.Column="0" Content="{Binding Gear.Strength}" ContentStringFormat="Strength: {0}" FontSize="10" Foreground="#E07E7E" FontWeight="Bold" HorizontalAlignment="Right" Margin="5,15,0,0" VerticalAlignment="Bottom"/>
-                                    <Label Grid.Column="1" Content="{Binding Gear.Intelligence}" ContentStringFormat="Intelligence: {0}" FontSize="10" Foreground="#8991E0" FontWeight="Bold" HorizontalAlignment="Right" Margin="5,15,0,0" VerticalAlignment="Bottom"/>
-                                    <Label Grid.Column="2" Content="{Binding Gear.Agility}" ContentStringFormat="Agility: {0}"  FontSize="10" Foreground="#7EE09A" FontWeight="Bold" HorizontalAlignment="Right" Margin="5,15,0,0" VerticalAlignment="Bottom"/>
+                                    <Rectangle Grid.Column="0" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="50" Stroke="Black" VerticalAlignment="Center" Width="50"/>
+                                    <Label Grid.Column="1" Content="{Binding Gear.Name}" Foreground="White" FontWeight="Bold" HorizontalAlignment="Left" Margin="5,0,0,0" VerticalAlignment="Top"/>
+                                    <Grid Grid.Column="1">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition Width="auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Label Grid.Column="0" Content="{Binding Gear.Strength}" ContentStringFormat="Strength: {0}" FontSize="10" Foreground="#E07E7E" FontWeight="Bold" HorizontalAlignment="Right" Margin="5,15,0,0" VerticalAlignment="Bottom"/>
+                                        <Label Grid.Column="1" Content="{Binding Gear.Intelligence}" ContentStringFormat="Intelligence: {0}" FontSize="10" Foreground="#8991E0" FontWeight="Bold" HorizontalAlignment="Right" Margin="5,15,0,0" VerticalAlignment="Bottom"/>
+                                        <Label Grid.Column="2" Content="{Binding Gear.Agility}" ContentStringFormat="Agility: {0}"  FontSize="10" Foreground="#7EE09A" FontWeight="Bold" HorizontalAlignment="Right" Margin="5,15,0,0" VerticalAlignment="Bottom"/>
+                                    </Grid>
+                                    <Label Grid.Column="2" Foreground="White" Content="{Binding Category}" HorizontalAlignment="Right" Margin="0,0,0,0" VerticalAlignment="Top"/>
+                                    <Button Grid.Column="2" Style="{StaticResource SellButton}" Content="{Binding Gear.Price}" Command="{Binding DataContext.SellItemCommand, RelativeSource={RelativeSource AncestorType=ListView}}" CommandParameter="{Binding Gear}" ContentStringFormat="Sell ({0}g)" HorizontalAlignment="Right"  VerticalAlignment="Bottom" Width="75"/>
                                 </Grid>
-                                <Label Grid.Column="2" Foreground="White" Content="{Binding Category}" HorizontalAlignment="Right" Margin="0,0,0,0" VerticalAlignment="Top"/>
-                                <Button Grid.Column="2" Content="{Binding Gear.Price}" Command="{Binding DataContext.SellItemCommand, RelativeSource={RelativeSource AncestorType=ListView}}" CommandParameter="{Binding Gear}" ContentStringFormat="Sell ({0}g)" HorizontalAlignment="Right"  VerticalAlignment="Bottom" Width="75"/>
-                            </Grid>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="{x:Type ListViewItem}">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                            <ContentPresenter />
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                    </ListView>
+                </Grid>
 
-               
-                <Button Grid.Row="1" Command="{Binding ShopNinjaGearCommand}" Margin="0, 15, 0, 15" Content="Shop" HorizontalAlignment="Right" VerticalAlignment="Top" Width="75"/>
             </Grid>
-
+            <Label Grid.Row="2" Style="{StaticResource ErrorLabel}" Content="{Binding ErrorMessage}" FontWeight="Bold" Margin="0, 15, 0 ,15" Background="#E07E7E" Padding="15 5 15 5" HorizontalAlignment="Center" Foreground="#ffffff" VerticalAlignment="Bottom">
+                <Label.BitmapEffect>
+                    <DropShadowBitmapEffect Color="Black"  ShadowDepth="0" Opacity="0.5" Softness=".2" />
+                </Label.BitmapEffect>
+            </Label>
+            <Label Grid.Row="2" Content="{Binding SuccesMessage}" Margin="0, 15, 0 ,15"  Padding="15 5 15 5" HorizontalAlignment="Center" Foreground="#ffffff" VerticalAlignment="Bottom"/>
+            <Grid x:Name="Footer" Grid.Row="3" Height="45" Background="#7D6E65" VerticalAlignment="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button Command="{Binding ResetNinjaCommand}" Grid.Column="0" Margin="15, 0, 0, 0" Content="Reset" HorizontalAlignment="Left" VerticalAlignment="Center" Width="75"/>
+                <Button Command="{Binding SaveNinjaCommand}" IsEnabled="{Binding CanExecuteSave}" Grid.Column="1" Margin="0, 0, 15, 0" Content="Save" HorizontalAlignment="Right" VerticalAlignment="Center" Width="75"/>
+            </Grid>
         </Grid>
-
     </Grid>
 </Window>

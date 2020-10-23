@@ -5,9 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Ninja_manager.View.Crud_Gear"
         mc:Ignorable="d"
-        Background="#40444A" 
+        Background="#909396" 
         DataContext="{Binding GearEdit, Source={StaticResource Locator}}"
         Title="GearEditView" Height="450" Width="800">
+        <Window.Resources>
+            <Style x:Key="ErrorLabel" TargetType="{x:Type Label}">
+                <Style.Triggers>
+                    <Trigger Property="Content" Value="">
+                        <Setter Property="Visibility" Value="Hidden" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -16,41 +25,57 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <!-- HEADER -->
-        <StackPanel x:Name="Header" Grid.Row="0" Height="45" Background="#728196" VerticalAlignment="Top">
+        <StackPanel x:Name="Header" Grid.Row="0" Height="45" Background="#7D6E65" VerticalAlignment="Top">
             <Label Content="Gear berwerken/aanmaken" HorizontalAlignment="Center" Margin="0,8,0,0" FontSize="16" FontWeight="Bold" Foreground="White" FontFamily="Open Sans" />
         </StackPanel>
-        <Grid x:Name="Container" Grid.Row="1" Margin="0,45,0,0">
+        <Grid x:Name="Container" Grid.Row="1" >
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="2*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid x:Name="LeftSection" Grid.Column="0" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch">
-                <Label Content="Name:" Foreground="White" Margin="24,0,0,0"/>
-                <TextBox HorizontalAlignment="Left" Height="23" Margin="24,22,0,0" TextWrapping="Wrap" Text="{Binding Name}" VerticalAlignment="Top" Width="120"/>
-                <Label Content="Price:" Foreground="White" Margin="197,0,0,0"/>
-                <TextBox HorizontalAlignment="Left" Height="23" Margin="197,22,0,0" TextWrapping="Wrap" Text="{Binding Price}" VerticalAlignment="Top" Width="120"/>
-                <Label Content="Intelligence:" Foreground="White" Margin="24,70,0,0"/>
-                <TextBox HorizontalAlignment="Left" Height="23" Margin="24,95,0,0" TextWrapping="Wrap" Text="{Binding Intelligence}" VerticalAlignment="Top" Width="120"/>
-                <Label Content="Agility:" Foreground="White" Margin="197,70,0,0"/>
-                <TextBox HorizontalAlignment="Left" Height="23" Margin="197,95,0,0" TextWrapping="Wrap" Text="{Binding Agility}" VerticalAlignment="Top" Width="120"/>
-                <Label Content="Strength:" Foreground="White" Margin="24,120,0,0"/>
-                <TextBox HorizontalAlignment="Left" Height="23" Margin="24,146,0,0" TextWrapping="Wrap" Text="{Binding Strength}" VerticalAlignment="Top" Width="120"/>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Grid.ColumnSpan="2" Content="Name:" Foreground="White" Margin="15,0,0,0"/>
+                <TextBox Grid.Column="0" Grid.ColumnSpan="2" Height="23" Margin="15,25,0,0" TextWrapping="Wrap" Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  VerticalAlignment="Top"/>
+                <Label Grid.Column="2" Content="Price:" Foreground="White" Margin="15,0,0,0"/>
+                <TextBox Grid.Column="2" Height="23" Margin="15,25,0,0" TextWrapping="Wrap" Text="{Binding Price, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" />
+                <Label Grid.Column="0" Content="Strength:" Foreground="White" Margin="15,60,0,0"/>
+                <TextBox Grid.Column="0" Height="23" Margin="15,85,0,0" TextWrapping="Wrap" Text="{Binding Strength, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top"/>
+                <Label Grid.Column="1" Content="Agility:" Foreground="White" Margin="15,60,0,0"/>
+                <TextBox Grid.Column="1" Height="23" Margin="15,85,0,0" TextWrapping="Wrap" Text="{Binding Agility, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top"/>
+                <Label Grid.Column="2" Content="Intelligence:" Foreground="White" Margin="15,60,0,0"/>
+                <TextBox Grid.Column="2" Height="23" Margin="15,85,0,0" TextWrapping="Wrap" Text="{Binding Intelligence, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top"/>
+                <Label Grid.Column="1" Content="Category:" Foreground="White" Margin="15,120,0,0"/>
+                <ComboBox Grid.Column="1" Margin="15,145,0,0" VerticalAlignment="Top" ItemsSource="{Binding Categories}" x:Name="cmbList" SelectedItem="{Binding Path=Category,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             </Grid>
-            <Grid x:Name="RightSection" Grid.Column="1" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Stretch">
-                <Image HorizontalAlignment="Left" Height="100" Margin="287,10,0,0" VerticalAlignment="Top" Width="100" RenderTransformOrigin="1.355,-0.488"/>
-                <ComboBox HorizontalAlignment="Left" Margin="171,133,0,0" VerticalAlignment="Top" Width="120" ItemsSource="{Binding Categories}" x:Name="cmbList" SelectedItem="{Binding Path=Category,Mode=TwoWay}"/>
+            <Grid x:Name="RightSection" Grid.Column="1" Background="#40444A" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Image Grid.Row="0" HorizontalAlignment="Center" Source="/Assets/img/placeholder.png" Height="auto" VerticalAlignment="Top" Width="auto" Margin="60 15 60 15"/>
+                <Button Grid.Row="1" Width="90" Margin="0 15 0 15" Content="Upload image" />
             </Grid>
         </Grid>
-        <Label Grid.Row="2" Content="{Binding ErrorMessage}" Margin="0, 0, 0 ,5" HorizontalAlignment="Center" Foreground="#E07E7E" VerticalAlignment="Bottom"/>
-        <Label Grid.Row="2" Content="{Binding SuccesMessage}" Margin="0, 0, 0 ,5" HorizontalAlignment="Center" Foreground="#7EE09A" VerticalAlignment="Bottom"/>
+        <Label Grid.Row="2" Style="{StaticResource ErrorLabel}" Content="{Binding ErrorMessage}" FontWeight="Bold" Margin="0, 15, 0 ,15" Background="#E07E7E" Padding="15 5 15 5" HorizontalAlignment="Center" Foreground="#ffffff" VerticalAlignment="Bottom">
+            <Label.BitmapEffect>
+                <DropShadowBitmapEffect Color="Black"  ShadowDepth="0" Opacity="0.5" Softness=".2" />
+            </Label.BitmapEffect>
+        </Label>
+        <Label Grid.Row="2" Content="{Binding SuccesMessage}" Margin="0, 15, 0 ,15"  Padding="15 5 15 5" HorizontalAlignment="Center" Foreground="#ffffff" VerticalAlignment="Bottom"/>
         <!-- HEADER -->
-        <Grid x:Name="Footer" Grid.Row="3" Height="45" Background="#728196" VerticalAlignment="Bottom">
+        <Grid x:Name="Footer" Grid.Row="3" Height="45" Background="#7D6E65" VerticalAlignment="Bottom">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Content="Reset" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Right" Command="{Binding ResetGearCommand}" Width="45" Margin="0, 13, 15, 0"/>
-            <Button Content="Save" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Left" Command="{Binding SaveGearCommand}" Width="45" Margin="15, 13, 0, 0"/>
+            <Button Content="Reset" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Command="{Binding ResetGearCommand}" Width="45" Margin="15, 13, 0, 0"/>
+            <Button Content="Save" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Right" Command="{Binding SaveGearCommand}" IsEnabled="{Binding CanExecuteSave}" Width="45" Margin="0, 13, 15, 0"/>
         </Grid>
         
     </Grid>

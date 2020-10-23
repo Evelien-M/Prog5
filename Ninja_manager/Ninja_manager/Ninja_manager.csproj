@@ -214,6 +214,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Resource Include="Assets\img\placeholder.png" />
     <Content Include="Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model.edmx</DependentUpon>
