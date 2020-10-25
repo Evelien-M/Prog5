@@ -215,6 +215,10 @@
   <ItemGroup />
   <ItemGroup>
     <Resource Include="Assets\img\placeholder.png" />
+    <Resource Include="Assets\icon\edit-regular.png" />
+    <Content Include="Assets\icon\edit-regular.svg" />
+    <Resource Include="Assets\icon\trash-alt-regular.png" />
+    <Content Include="Assets\icon\trash-alt-regular.svg" />
     <Content Include="Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model.edmx</DependentUpon>

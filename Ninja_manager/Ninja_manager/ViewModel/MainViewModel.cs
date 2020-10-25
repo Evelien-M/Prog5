@@ -31,6 +31,8 @@ namespace Ninja_manager.ViewModel
 
         public MainViewModel()
         {
+            this._ninjaCrudView = new NinjaListView();
+            this._gearCrudView = new GearListView();
             this.GoToNinjaCrudCommand = new RelayCommand(GoToNinjaCrud);
             this.GoToGearCrudCommand = new RelayCommand(GoToGearCrud);
         }
@@ -38,12 +40,12 @@ namespace Ninja_manager.ViewModel
 
         private void GoToNinjaCrud()
         {
-            this.PageView = new NinjaListView();
+            this.PageView = this._ninjaCrudView;
         }
 
         private void GoToGearCrud()
         {
-            this.PageView = new GearListView();
+            this.PageView = this._gearCrudView;
         }
     }
 }

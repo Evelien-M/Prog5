@@ -62,7 +62,7 @@
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
                 <Image Grid.Row="0" HorizontalAlignment="Center" Source="/Assets/img/placeholder.png" Height="auto" VerticalAlignment="Top" Width="auto" Margin="60 15 60 15"/>
-                <Button Grid.Row="1" Width="90" Margin="0 15 0 15" Content="Upload image" />
+                <Button Grid.Row="1" Style="{StaticResource ButtonYellow}" HorizontalAlignment="Center" Margin="0 0 0 15" Content="Upload image"/>
             </Grid>
         </Grid>
         <Label Grid.Row="2" Style="{StaticResource ErrorLabel}" Content="{Binding ErrorMessage}" FontWeight="Bold" Margin="0, 15, 0 ,15" Background="#E07E7E" Padding="15 5 15 5" HorizontalAlignment="Center" Foreground="#ffffff" VerticalAlignment="Bottom">
@@ -71,14 +71,14 @@
             </Label.BitmapEffect>
         </Label>
         <Label Grid.Row="2" Content="{Binding SuccesMessage}" FontWeight="Bold" Margin="0, 15, 0 ,15"  Padding="15 5 15 5" HorizontalAlignment="Center" Foreground="#ffffff" VerticalAlignment="Bottom"/>
-        <!-- HEADER -->
-        <Grid x:Name="Footer" Grid.Row="3" Height="45" Background="#7D6E65" VerticalAlignment="Bottom">
+        <!-- FOOTER -->
+        <Grid x:Name="Footer" Grid.Row="3" Background="#7D6E65" VerticalAlignment="Bottom">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Content="Reset" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Command="{Binding ResetGearCommand}" Width="45" Margin="15, 13, 0, 0"/>
-            <Button Content="Save" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Right" Command="{Binding SaveGearCommand}" IsEnabled="{Binding CanExecuteSave}" Width="45" Margin="0, 13, 15, 0"/>
+            <Button Content="Reset" Grid.Column="0" VerticalAlignment="Top" Style="{StaticResource ButtonReset}" HorizontalAlignment="Left" Command="{Binding ResetGearCommand}" Margin="15"/>
+            <Button Content="Save" Grid.Column="1" VerticalAlignment="Top" Style="{StaticResource ButtonSave}" HorizontalAlignment="Right" Command="{Binding SaveGearCommand}" IsEnabled="{Binding CanExecuteSave}" Margin="15"/>
             <Grid.BitmapEffect>
                 <DropShadowBitmapEffect Color="Black"  Direction="100" ShadowDepth="2" Opacity="0.4" Softness=".5" />
             </Grid.BitmapEffect>

@@ -59,8 +59,11 @@ namespace Ninja_manager.ViewModel.Crud_Gear
                 if (!this._gearEditView.ClosePrompt())
                     return;
 
-            this._gearEditView = new GearEditView();
-            this._gearEditView.Show();
+            if (this.SelectedGear != null)
+            {
+                this._gearEditView = new GearEditView();
+                this._gearEditView.Show();
+            }
         }
         private void DeleteItem()
         {
