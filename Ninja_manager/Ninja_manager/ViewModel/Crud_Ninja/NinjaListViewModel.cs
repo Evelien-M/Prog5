@@ -67,8 +67,11 @@ namespace Ninja_manager.ViewModel.Crud_Ninja
                 if (!this._ninjaEditView.ClosePrompt())
                     return;
 
-            this._ninjaEditView = new NinjaEditView();
-            this._ninjaEditView.Show();
+            if (this.SelectedNinja != null)
+            {
+                this._ninjaEditView = new NinjaEditView();
+                this._ninjaEditView.Show();
+            }
         }
         private void DeleteItem()
         {

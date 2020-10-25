@@ -17,6 +17,10 @@
             </Style.Triggers>
         </Style>
         <Style x:Key="SellButton" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="#ffffff"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Padding" Value="0 4 0 4"/>
+            <Setter Property="BorderBrush" Value="#40444A"/>
             <Style.Triggers>
                 <Trigger Property="Content" Value="{x:Null}">
                     <Setter Property="Visibility" Value="Hidden" />
@@ -66,7 +70,7 @@
                         <Label Grid.Row="2" Content="{Binding TotalIntelligence}" ContentStringFormat="Intelligence: {0}" FontSize="10" Foreground="#8991E0" FontWeight="Bold" HorizontalAlignment="Left" Margin="15,15,0,0" VerticalAlignment="Bottom"/>
                         <Label Grid.Row="3" Content="{Binding TotalAgility}" ContentStringFormat="Agility: {0}"  FontSize="10" Foreground="#7EE09A" FontWeight="Bold" HorizontalAlignment="Left" Margin="15,15,0,30" VerticalAlignment="Bottom"/>
                     </Grid>
-                    <Button Grid.Row="3" Command="{Binding ShopNinjaGearCommand}" Background="#FFC569" Margin="0, 30, 0, 15" Content="Shop" HorizontalAlignment="Right" VerticalAlignment="Top" Width="75"/>
+                    <Button Grid.Row="3" Style="{StaticResource ButtonYellow}" Command="{Binding ShopNinjaGearCommand}" Margin="0,15,0,0" Content="Shop" HorizontalAlignment="Right"/>
                 </Grid>
                 <Grid x:Name="RightSection" Grid.Column="1" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Top">
                     <Grid.RowDefinitions>
@@ -84,7 +88,7 @@
                                         <ColumnDefinition Width="auto"/>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
-                                    <Rectangle Grid.Column="0" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="50" Stroke="Black" VerticalAlignment="Center" Width="50"/>
+                                    <Rectangle Grid.Column="0" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="50" Stroke="#40444A" VerticalAlignment="Center" Width="50"/>
                                     <Label Grid.Column="1" Content="{Binding Gear.Name}" Foreground="White" FontWeight="Bold" HorizontalAlignment="Left" Margin="5,0,0,0" VerticalAlignment="Top"/>
                                     <Grid Grid.Column="1">
                                         <Grid.ColumnDefinitions>
@@ -122,13 +126,13 @@
                 </Label.BitmapEffect>
             </Label>
             <Label Grid.Row="2" Content="{Binding SuccesMessage}" FontWeight="Bold" Margin="0, 15, 0 ,15"  Padding="15 5 15 5" HorizontalAlignment="Center" Foreground="#ffffff" VerticalAlignment="Bottom"/>
-            <Grid x:Name="Footer" Grid.Row="3" Height="45" Background="#4D8A75" VerticalAlignment="Top">
+            <Grid x:Name="Footer" Grid.Row="3" Background="#4D8A75">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Button Command="{Binding ResetNinjaCommand}" Grid.Column="0" Margin="15, 0, 0, 0" Content="Reset" HorizontalAlignment="Left" VerticalAlignment="Center" Width="75"/>
-                <Button Command="{Binding SaveNinjaCommand}" IsEnabled="{Binding CanExecuteSave}" Grid.Column="1" Margin="0, 0, 15, 0" Content="Save" HorizontalAlignment="Right" VerticalAlignment="Center" Width="75"/>
+                <Button Command="{Binding ResetNinjaCommand}" Style="{StaticResource ButtonReset}" Grid.Column="0" Margin="15" Content="Reset" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <Button Command="{Binding SaveNinjaCommand}" Style="{StaticResource ButtonSave}" IsEnabled="{Binding CanExecuteSave}" Grid.Column="1" Margin="15" Content="Save" HorizontalAlignment="Right" VerticalAlignment="Center"/>
                 <Grid.BitmapEffect>
                     <DropShadowBitmapEffect Color="Black" Direction="100" ShadowDepth="2" Opacity="0.4" Softness=".5" />
                 </Grid.BitmapEffect>

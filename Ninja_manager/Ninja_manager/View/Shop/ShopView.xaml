@@ -5,18 +5,42 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Ninja_manager.View.Shop"
         mc:Ignorable="d"
-        Background="#40444A"
+        Background="#909396"
         DataContext="{Binding Shop, Source={StaticResource Locator}}"
         Title="ShopView" Height="450" Width="800">
+    <Window.Resources>
+        <Style x:Key="ErrorLabel" TargetType="{x:Type Label}">
+            <Style.Triggers>
+                <Trigger Property="Content" Value="">
+                    <Setter Property="Visibility" Value="Hidden" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
     <Grid>
-        <Grid x:Name="Container">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <!-- HEADER -->
+        <StackPanel x:Name="Header" Grid.Row="0" Height="45" Background="#FFC569" VerticalAlignment="Top">
+            <Label Content="Shop" HorizontalAlignment="Center" Margin="0,8,0,0" FontSize="16" FontWeight="Bold" Foreground="Black" FontFamily="Open Sans" />
+            <StackPanel.BitmapEffect>
+                <DropShadowBitmapEffect Color="Black"  Direction="-100" ShadowDepth="2" Opacity="0.4" Softness=".5" />
+            </StackPanel.BitmapEffect>
+        </StackPanel>
+        <Grid x:Name="Container" Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
             <Grid x:Name="Section1" Grid.Column="0" Margin="15, 15, 15, 15">
-                <ListView Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Top" ItemsSource="{Binding Categories}" SelectedItem="{Binding Path=SelectedCategory}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <ListView Grid.Row="0" ItemsSource="{Binding Categories}" SelectedItem="{Binding Path=SelectedCategory}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <StackPanel>
@@ -26,6 +50,7 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
+                <Label Grid.Row="1" Content="{Binding Gold}" Foreground="#FFC569" FontWeight="Bold" VerticalAlignment="Bottom" Margin="0,15,0,0" ContentStringFormat="You have {0} gold left" />
             </Grid>
             <Grid x:Name="Section2" Grid.Column="1" Margin="15, 15, 15, 15">
                 <ListView Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Top" ItemsSource="{Binding GearList}" SelectedItem="{Binding Path=SelectedGear}">
@@ -45,21 +70,19 @@
             <Grid x:Name="Section3" Grid.Column="2">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
                 <DockPanel Grid.Row="0">
                     <Frame x:Name="GearItem" Content="{Binding GearItemView}" NavigationUIVisibility="Hidden" />
                 </DockPanel>
                 <Grid Grid.Row="1">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <Label Grid.Row="0" Content="{Binding ErrorMessage}" Margin="0, 0, 0 ,15" HorizontalAlignment="Center" Foreground="#E07E7E" VerticalAlignment="Bottom"/>
-                    <Label Grid.Row="0" Content="{Binding SuccesMessage}" Margin="0, 0, 0 ,15" HorizontalAlignment="Center" Foreground="#7EE09A" VerticalAlignment="Bottom"/>
-                    <Button Grid.Row="1" Content="Buy" Command="{Binding BuyItemCommand}" IsEnabled="{Binding CanExecuteBuyItem}" Width="50" Margin="0 15 0 0" VerticalAlignment="Top"/>
-                    <Label Grid.Row="2" Content="{Binding Gold}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,15" ContentStringFormat="You have {0} gold left" />
+                    <Label Style="{StaticResource ErrorLabel}" Content="{Binding ErrorMessage}" FontWeight="Bold" Margin="0, 15, 0 ,15" Background="#E07E7E" Padding="15 5 15 5" HorizontalAlignment="Center" Foreground="#ffffff" VerticalAlignment="Bottom">
+                        <Label.BitmapEffect>
+                            <DropShadowBitmapEffect Color="Black"  ShadowDepth="0" Opacity="0.5" Softness=".2" />
+                        </Label.BitmapEffect>
+                    </Label>
+                    <Label Content="{Binding SuccesMessage}" FontWeight="Bold" Margin="0, 15, 0 ,15"  Padding="15 5 15 5" HorizontalAlignment="Center" Foreground="#ffffff" VerticalAlignment="Bottom"/>
+                    <Button Style="{StaticResource ButtonYellow}" Content="Buy" Margin="0, 15, 0 ,15" Command="{Binding BuyItemCommand}" VerticalAlignment="Top" IsEnabled="{Binding CanExecuteBuyItem}" HorizontalAlignment="Center"/>
                 </Grid>
             </Grid>
         </Grid>

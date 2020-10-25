@@ -118,7 +118,7 @@ namespace Ninja_manager.ViewModel.Crud_Ninja
             this._ninja.Name = this.Name;
             this._ninja.Gold = this.Gold;
 
-            if (this._ninjaRepository.AddOrUpdate(this._ninja))
+            if (this._ninjaRepository.AddOrUpdate(this._ninja, this.InventoryList.ToList()))
             {
                 if (this._isNew)
                 {

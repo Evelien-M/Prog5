@@ -5,8 +5,8 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Ninja_manager.View.Shop"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Background="Yellow"
+      d:DesignWidth="800"
+      Background="#40444A"
         DataContext="{Binding GearItem, Source={StaticResource Locator}}"
       Title="GearItemView">
 
@@ -16,8 +16,23 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Image Grid.Column="0" HorizontalAlignment="Stretch" Height="100" VerticalAlignment="Stretch" Width="100"/>
-            <Label Content="{Binding Category}" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,15"/>
+            <Grid x:Name="LeftSection" Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Image Grid.Row="0" Source="/Assets/img/placeholder.png" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="15"/>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Category:" Grid.Column="0" Margin="15 0 0 0" Foreground="White" FontWeight="Bold"/>
+                    <Label Grid.Column="0" Margin="15 20 0 15" Foreground="White" Content="{Binding Category}"/>
+                    <Label Content="Price:" Grid.Column="1" Margin="15 0 0 0" Foreground="White" FontWeight="Bold"/>
+                    <Label Grid.Column="1" Content="{Binding Price}" Foreground="White" Margin="15,20,0,15"/>
+                </Grid>
+            </Grid>
             <Grid x:Name="Stats" Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
@@ -25,11 +40,11 @@
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
-                <Label Grid.Row="0" Content="{Binding Name}" VerticalAlignment="Bottom" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,15,0,15"/>
-                <Label Grid.Row="1" Content="{Binding Strength}" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,15,0,0"/>
-                <Label Grid.Row="2" Content="{Binding Agility}" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,15,0,0"/>
-                <Label Grid.Row="3" Content="{Binding Intelligence}" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,15,0,15"/>
-                <Label Grid.Row="4" Content="{Binding Price}" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,15,0,0"/>
+                <Label Grid.Row="0" Content="{Binding Name}" FontWeight="Bold" FontSize="16" Foreground="White" HorizontalAlignment="Center" Margin="0,5,0,5"/>
+                <Label Grid.Row="1" Content="{Binding Strength}" Foreground="#E07E7E" ContentStringFormat="Strength: {0}" HorizontalAlignment="Left" Margin="0,15,0,0"/>
+                <Label Grid.Row="2" Content="{Binding Intelligence}" Foreground="#8991E0" ContentStringFormat="Intelligence: {0}" HorizontalAlignment="Left" Margin="0,15,0,0"/>
+                <Label Grid.Row="3" Content="{Binding Agility}" Foreground="#7EE09A" ContentStringFormat="Agility: {0}" HorizontalAlignment="Left" Margin="0,15,0,0"/>
+
             </Grid>
         </Grid>
 
