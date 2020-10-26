@@ -23,8 +23,8 @@
             <Button Grid.Row="1" Content="Ninja" Command="{Binding GoToNinjaCrudCommand}" HorizontalAlignment="Stretch" Height="30" VerticalAlignment="Top" />
             <Button Grid.Row="2" Content="Gear" Command="{Binding GoToGearCrudCommand}" HorizontalAlignment="Stretch" Height="30" VerticalAlignment="Top"/>
         </Grid>
-        <DockPanel Grid.Column="1">
+        <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto">
             <Frame x:Name="PageView" Content="{Binding PageView}" NavigationUIVisibility="Hidden" />
-        </DockPanel>
+        </ScrollViewer>
     </Grid>
 </Window>

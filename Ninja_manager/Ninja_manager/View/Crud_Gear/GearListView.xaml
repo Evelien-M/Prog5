@@ -16,13 +16,16 @@
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
             <!-- HEADER -->
-            <StackPanel x:Name="Header" Grid.Row="0" Height="auto" Background="#7D6E65" VerticalAlignment="Top">
+            <StackPanel x:Name="Header" Grid.Row="0" Height="auto" Background="#7D6E65" VerticalAlignment="Top" Margin="0 0 0 15">
                 <Label Content="GEAR MANAGER" HorizontalAlignment="Center" Margin="0,15,0,0" FontSize="20"
                    FontWeight="Bold" Foreground="White" FontFamily="Open Sans" />
                 <Button Style="{StaticResource ButtonYellow}" Content="Add new Gear" Command="{Binding AddItemCommand}" HorizontalAlignment="Center" Margin="0,15,0,15"/>
+                <StackPanel.BitmapEffect>
+                    <DropShadowBitmapEffect Color="Black"  Direction="-100" ShadowDepth="2" Opacity="0.4" Softness=".5" />
+                </StackPanel.BitmapEffect>
             </StackPanel>
 
-            <DataGrid Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedGear}" ItemsSource="{Binding GearList}" Margin="0,6,0,0" BorderBrush="#FF979494" GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#FFF0E0E0" HeadersVisibility="Column">
+            <DataGrid Grid.Row="1" Style="{StaticResource CrudDataGrid}" AutoGenerateColumns="False" IsReadOnly="True" SelectedItem="{Binding SelectedGear}" ItemsSource="{Binding GearList}" GridLinesVisibility="None" HeadersVisibility="Column">
                 <DataGrid.InputBindings>
                     <MouseBinding MouseAction="LeftClick" Command="{Binding DataContext.EditItemCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
                 </DataGrid.InputBindings>
@@ -34,7 +37,7 @@
                     <DataGridTemplateColumn MinWidth="40" >
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Command="{Binding DataContext.EditItemCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" Background="#2570B3" Width="35" Height="35" BorderBrush="Transparent">
+                                <Button Command="{Binding DataContext.EditItemCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" Background="#2570B3" Width="30" Height="30" BorderBrush="Transparent">
                                     <Button.Resources>
                                         <Style TargetType="Border">
                                             <Setter Property="CornerRadius" Value="5"/>
@@ -48,7 +51,7 @@
                     <DataGridTemplateColumn MinWidth="40">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Command="{Binding DataContext.DeleteItemCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" Background="#E07E7E" Width="35" Height="35" BorderBrush="Transparent">
+                                <Button Command="{Binding DataContext.DeleteItemCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" Background="#E07E7E" Width="30" Height="30" BorderBrush="Transparent">
                                     <Button.Resources>
                                         <Style TargetType="Border">
                                             <Setter Property="CornerRadius" Value="5"/>

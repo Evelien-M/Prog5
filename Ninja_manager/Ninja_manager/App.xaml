@@ -105,6 +105,85 @@
                     </Trigger>
                 </Style.Triggers>
             </Style>
+            <Style x:Key="InputField" TargetType="{x:Type TextBox}">
+                <Setter Property="Height" Value="30"/>
+                <Setter Property="Padding" Value="5 0 5 0"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="TextWrapping" Value="Wrap"/>
+                <Setter Property="BorderBrush" Value="#40444A"/>
+                <Style.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="5" />
+                    </Style>
+                </Style.Resources>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="BorderBrush" Value="#40444A"/>
+                        <Setter Property="TextBox.Effect">
+                            <Setter.Value>
+                                <DropShadowEffect Color="Black" Direction="320" ShadowDepth="3" BlurRadius="5" Opacity="0.5" />
+                            </Setter.Value>
+                        </Setter>
+                    </Trigger>
+                    <Trigger Property="IsFocused" Value="True">
+                        <Setter Property="BorderBrush" Value="#40444A"/>
+                        <Setter Property="TextBox.Effect">
+                            <Setter.Value>
+                                <DropShadowEffect Color="Black" Direction="320" ShadowDepth="3" BlurRadius="5" Opacity="0.5" />
+                            </Setter.Value>
+                        </Setter>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            <Style x:Key="CrudRowCell" TargetType="{x:Type DataGridCell}">
+                <Setter Property="Foreground" Value="#000" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type DataGridCell}">
+                            <Grid Background="{TemplateBinding Background}" Margin="5">
+                                <ContentPresenter VerticalAlignment="Center"/>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="Transparent"/>
+                    </Trigger>
+                    <Trigger Property="IsSelected" Value="True">
+                        <Setter Property="Background" Value="Transparent"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            <Style x:Key="CrudRow" TargetType="{x:Type DataGridRow}">
+                <Setter Property="BorderBrush" Value="Yellow" />
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="#F5EEE1"/>
+                    </Trigger>
+                    <Trigger Property="IsSelected" Value="True">
+                        <Setter Property="Background" Value="#F5EEE1"/>
+                    </Trigger>
+                    <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                        <Setter Property="Background" Value="#FFFFFF"/>
+                    </Trigger>
+                    <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                        <Setter Property="Background" Value="#F5EEE1"/>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            <Style x:Key="CrudDataGrid" TargetType="{x:Type DataGrid}">
+                <Setter Property="AlternationCount" Value="2" />
+                <Setter Property="BorderBrush" Value="#40444A"/>
+                <Style.Resources>
+                    <Style TargetType="{x:Type DataGridColumnHeader}" >
+                        <Setter Property="Background" Value="#FFC569" />
+                        <Setter Property="Padding" Value="5"/>
+                    </Style>
+                    <Style TargetType="{x:Type DataGridCell}" BasedOn="{StaticResource CrudRowCell}" />
+                    <Style TargetType="{x:Type DataGridRow}" BasedOn="{StaticResource CrudRow}" />
+                </Style.Resources>
+            </Style>
         </ResourceDictionary>
       </Application.Resources>
 </Application>
