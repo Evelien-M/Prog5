@@ -91,6 +91,7 @@ namespace Ninja_manager.ViewModel.Crud_Gear
         private string _errorMessage;
         private bool _canExecuteSave;
         private bool _isNew = false;
+        private bool _imageAdded;
 
         public GearEditViewModel(GearListViewModel gearList)
         {
@@ -146,7 +147,7 @@ namespace Ninja_manager.ViewModel.Crud_Gear
         private void SaveImage()
         {
             // check if there is a file been uploaded 
-            if (this.ImagePath != null && this.ImagePath != "")
+            if (this._imageAdded)
             {
                 GearImageManagement.DeleteImage(this._gear.Id);  // removes the previous uploaded file if necessary
                 GearImageManagement.SaveImage(this._gear.Id, this.ImagePath);
@@ -190,6 +191,7 @@ namespace Ninja_manager.ViewModel.Crud_Gear
             this.Agility = this._gear.Agility;
             this.Category = this._gear.Category;
             this.ImagePath = this._gear.Image != null ? Path.Combine(GearImageManagement.SourceFolder, this._gear.Image) : null;
+            this._imageAdded = false;
         }
 
         private void UploadFile()
@@ -198,9 +200,15 @@ namespace Ninja_manager.ViewModel.Crud_Gear
             fileDialog.Filter = "Image Files(*.PNG;*.JPG;*.JPEG;*.GIF)|*.PNG;*.JPG;*.JPEG;*.GIF|All files (*.*)|*.*";
       
             if (fileDialog.ShowDialog() == DialogResult.OK)
+            {
                 this.ImagePath = fileDialog.FileName;
+                this._imageAdded = true;
+            }
             else
+            {
                 this.ImagePath = null;
+                this._imageAdded = false;
+            }
 
         }
         
