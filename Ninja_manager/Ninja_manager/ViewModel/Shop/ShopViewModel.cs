@@ -132,10 +132,10 @@ namespace Ninja_manager.ViewModel.Shop
         {
             if (this._selectedGear != null)
             {
-                var invItem = this._ninjaEdit.InventoryList.FirstOrDefault(i => i.Category == this._selectedCategory.Name);
-                if (invItem.Id_Gear != null)
+                var invItem = this._ninjaEdit.InventoryList.FirstOrDefault(i => i.Inventory.Category == this._selectedCategory.Name);
+                if (invItem.Inventory.Id_Gear != null)
                 {
-                    this.ErrorMessage = "You already have " + invItem.Category + " item";
+                    this.ErrorMessage = "You already have " + invItem.Inventory.Category + " item";
                     this.CanExecuteBuyItem = false;
                     return false;
                 }

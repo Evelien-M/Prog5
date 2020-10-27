@@ -56,6 +56,7 @@ namespace Ninja_manager.ViewModel
             SimpleIoc.Default.Register<GearListViewModel>();
 
             SimpleIoc.Default.Register<ShopViewModel>();
+            SimpleIoc.Default.Register<GearItemViewModel>();
         }
 
         public MainViewModel Main
@@ -108,11 +109,11 @@ namespace Ninja_manager.ViewModel
             }
         }
 
-        public Gear GearItem
+        public GearItemViewModel GearItem
         {
             get
             {
-                return this._shop.SelectedGear;
+                return new GearItemViewModel(this._shop.SelectedGear);
             }
         }
 

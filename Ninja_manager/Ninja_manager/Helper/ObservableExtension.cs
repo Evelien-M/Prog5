@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ninja_manager.ViewModel.Crud_Ninja;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -24,12 +25,13 @@ namespace Ninja_manager.Helper
             observer[j] = gear;
             CollectionViewSource.GetDefaultView(observer).Refresh();
         }
-        public static void Update(this ObservableCollection<Inventory> observer, string category, Gear gear)
+        public static void Update(this ObservableCollection<InventoryViewModel> observer, string category,  Gear gear)
         {
-            var item = observer.FirstOrDefault(i => i.Category == category);
+            var item = observer.FirstOrDefault(i => i.Inventory.Category == category);
             int j = observer.IndexOf(item);
-            observer[j].Gear = gear;
-            observer[j].Id_Gear = gear != null ? gear.Id : (int?)null;
+            observer[j].Inventory.Gear = gear;
+            observer[j].Inventory.Id_Gear = gear != null ? gear.Id : (int?)null;
+            observer[j] = new InventoryViewModel(observer[j].Inventory);
             CollectionViewSource.GetDefaultView(observer).Refresh();
         }
     }

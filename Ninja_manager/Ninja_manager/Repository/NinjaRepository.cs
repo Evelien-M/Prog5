@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Ninja_manager.ViewModel.Crud_Ninja;
+using Ninja_manager.ViewModel.Shop;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
@@ -21,17 +23,18 @@ namespace Ninja_manager.Repository
             return list;
         }
 
-        public List<Inventory> GetInventory(int ninjaId)
+        public List<InventoryViewModel> GetInventory(int ninjaId)
         {
-            var list = new List<Inventory>();
+            var list = new List<InventoryViewModel>();
             using (Ninja_managerEntities db = new Ninja_managerEntities())
             {
-                list = db.Inventory.Include(i => i.Category1).Include(j => j.Gear).Where(w => w.Id_Ninja == ninjaId).OrderBy(o => o.Category1.Order).ToList();
+                var templist = db.Inventory.Include(i => i.Category1).Include(j => j.Gear).Where(w => w.Id_Ninja == ninjaId).OrderBy(o => o.Category1.Order);
+                list = templist.ToList().Select(s => new InventoryViewModel(s)).ToList();
             }
             return list;
         }
 
-        public bool AddOrUpdate(Ninja ninja, List<Inventory> inventory)
+        public bool AddOrUpdate(Ninja ninja, List<InventoryViewModel> inventory)
         {
             try
             {
@@ -40,19 +43,20 @@ namespace Ninja_manager.Repository
                     db.Ninja.AddOrUpdate(ninja);
                     foreach(var i in inventory)
                     {
-                        if (db.Entry(i.Category1).State == EntityState.Added)
+                        var j = i.Inventory;
+                        if (db.Entry(j.Category1).State == EntityState.Added)
                         {
-                            db.Category.Attach(i.Category1);
+                            db.Category.Attach(j.Category1);
                             
-                            if (i.Gear != null)
+                            if (j.Gear != null)
                             {
-                                db. Gear.Attach(i.Gear);
-                                db.Category.Attach(i.Gear.Category1);
+                                db. Gear.Attach(j.Gear);
+                                db.Category.Attach(j.Gear.Category1);
                             }
                     
                         }
 
-                        db.Inventory.AddOrUpdate(i);
+                        db.Inventory.AddOrUpdate(j);
                     }
                     db.SaveChanges();
                 }

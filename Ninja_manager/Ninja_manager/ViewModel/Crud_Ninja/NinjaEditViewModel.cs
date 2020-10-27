@@ -62,7 +62,7 @@ namespace Ninja_manager.ViewModel.Crud_Ninja
             get { return this._totalIntelligence; }
             set { this._totalIntelligence = value; base.RaisePropertyChanged(); }
         }
-        public ObservableCollection<Inventory> InventoryList { get; private set; }
+        public ObservableCollection<InventoryViewModel> InventoryList { get; private set; }
         public ShopViewModel ShopViewModel { get; set; }
 
         private NinjaListViewModel _ninjaList;
@@ -92,7 +92,7 @@ namespace Ninja_manager.ViewModel.Crud_Ninja
             this.SaveNinjaCommand = new RelayCommand(SaveNinja);
             this.ResetNinjaCommand = new RelayCommand(ResetNinja);
             this.ShopNinjaGearCommand = new RelayCommand(ShopNinjaGear);
-            this.SellItemCommand = new RelayCommand<Gear>(RemoveFromInventory);
+            this.SellItemCommand = new RelayCommand<GearItemViewModel>(RemoveFromInventory);
 
             this.Name = this._ninja.Name;
             this.Gold = this._ninja.Gold;
@@ -104,12 +104,13 @@ namespace Ninja_manager.ViewModel.Crud_Ninja
             if (this._ninja.Name.Length == 0)
             {
                 this._isNew = true;
-                this.InventoryList = new ObservableCollection<Inventory>(this._ninja.Inventory);
+                var list = this._ninja.Inventory.Select(s => new InventoryViewModel(s));
+                this.InventoryList = new ObservableCollection<InventoryViewModel>(list);
             }
             else
             {
                 var list = this._ninjaRepository.GetInventory(this._ninja.Id);
-                this.InventoryList = new ObservableCollection<Inventory>(list);
+                this.InventoryList = new ObservableCollection<InventoryViewModel>(list);
             }
         }
 
@@ -156,7 +157,8 @@ namespace Ninja_manager.ViewModel.Crud_Ninja
                 foreach (var cat in categories)
                 {
                     var inv = new Inventory() { Id_Ninja = this._ninja.Id, Category = cat.Name, Category1 = cat };
-                    this.InventoryList.Add(inv);
+                    var model = new InventoryViewModel(inv);
+                    this.InventoryList.Add(model);
                 }
             }
 
@@ -204,12 +206,13 @@ namespace Ninja_manager.ViewModel.Crud_Ninja
                 this.ShopViewModel.Update(this);
         }
 
-        public void RemoveFromInventory(Gear gear)
+        public void RemoveFromInventory(GearItemViewModel gear)
         {
             if (gear != null)
             {
-                this.Gold += gear.Price;
-                this.InventoryList.Update(gear.Category, null);
+                var i = gear.Gear;
+                this.Gold += i.Price;
+                this.InventoryList.Update(i.Category, null);
                 this.CalcStats();
 
                 if (this.ShopViewModel != null)
@@ -225,11 +228,12 @@ namespace Ninja_manager.ViewModel.Crud_Ninja
 
             foreach(var inv in this.InventoryList)
             {
-                if (inv.Gear != null)
+                var j = inv.Inventory;
+                if (j.Gear != null)
                 {
-                    s += inv.Gear.Strength != null ? (int)inv.Gear.Strength : 0;
-                    a += inv.Gear.Agility != null ? (int)inv.Gear.Agility : 0;
-                    i += inv.Gear.Intelligence != null ? (int)inv.Gear.Intelligence : 0;
+                    s += j.Gear.Strength != null ? (int)j.Gear.Strength : 0;
+                    a += j.Gear.Agility != null ? (int)j.Gear.Agility : 0;
+                    i += j.Gear.Intelligence != null ? (int)j.Gear.Intelligence : 0;
                 }
             }
             this.TotalStrength = s;
