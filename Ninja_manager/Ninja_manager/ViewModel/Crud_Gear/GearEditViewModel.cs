@@ -8,6 +8,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Controls;
+using System.Windows.Media.Imaging;
+using System.IO;
+using System.Windows.Forms;
 
 namespace Ninja_manager.ViewModel.Crud_Gear
 {
@@ -15,6 +19,8 @@ namespace Ninja_manager.ViewModel.Crud_Gear
     {
         public ICommand SaveGearCommand { get; set; }
         public ICommand ResetGearCommand { get; set; }
+
+        public ICommand UploadFileCommand { get; set; }
 
         public string Name
         {
@@ -46,6 +52,11 @@ namespace Ninja_manager.ViewModel.Crud_Gear
             get { return this._category; }
             set { this._category = value; base.RaisePropertyChanged(); this.CanExecuteSaveGear(); }
         }
+        public string ImagePath
+        {
+            get { return this._image; }
+            set { this._image = value; base.RaisePropertyChanged(); }
+        }
         public string SuccesMessage
         {
             get { return this._succesMessage; }
@@ -70,6 +81,7 @@ namespace Ninja_manager.ViewModel.Crud_Gear
         private int? _agility;
         private int? _intelligence;
         private string _category;
+        private string _image;
 
         private GearListViewModel _gearList;
         private Gear _gear;
@@ -96,10 +108,11 @@ namespace Ninja_manager.ViewModel.Crud_Gear
 
             this.SaveGearCommand = new RelayCommand(SaveGear);
             this.ResetGearCommand = new RelayCommand(ResetGear);
+            this.UploadFileCommand = new RelayCommand(UploadFile);
         }
 
 
-        public void SaveGear()
+        private void SaveGear()
         {
             this._gear.Name = this.Name;
             this._gear.Price = this.Price;
@@ -107,8 +120,8 @@ namespace Ninja_manager.ViewModel.Crud_Gear
             this._gear.Strength = this.Strength;
             this._gear.Agility = this.Agility;
             this._gear.Category = this.Category;
+            this._gear.Image = this.ImagePath != null ? this._gear.Id + Path.GetExtension(this.ImagePath) : null; 
 
-            
             if (this._gearRepository.AddOrUpdate(this._gear))
             {
                 if (this._isNew)
@@ -122,11 +135,21 @@ namespace Ninja_manager.ViewModel.Crud_Gear
                     this._gearList.GearList.Update(this._gear);
                     this.SuccesMessage = "Gear " + this.Name + " succesfully updatet!";
                 }
+                this.SaveImage();
             }
             else
             {
                 this.SuccesMessage = "";
                 this.ErrorMessage = "An error occured with the database!";
+            }
+        }
+        private void SaveImage()
+        {
+            // check if there is a file been uploaded 
+            if (this.ImagePath != null && this.ImagePath != "")
+            {
+                GearImageManagement.DeleteImage(this._gear.Id);  // removes the previous uploaded file if necessary
+                GearImageManagement.SaveImage(this._gear.Id, this.ImagePath);
             }
         }
         private bool CanExecuteSaveGear()
@@ -158,7 +181,7 @@ namespace Ninja_manager.ViewModel.Crud_Gear
             return true;
         }
 
-        public void ResetGear()
+        private void ResetGear()
         {
             this.Name = this._gear.Name;
             this.Price = this._gear.Price;
@@ -166,6 +189,20 @@ namespace Ninja_manager.ViewModel.Crud_Gear
             this.Strength = this._gear.Strength;
             this.Agility = this._gear.Agility;
             this.Category = this._gear.Category;
+            this.ImagePath = this._gear.Image != null ? Path.Combine(GearImageManagement.SourceFolder, this._gear.Image) : null;
         }
+
+        private void UploadFile()
+        {
+            OpenFileDialog fileDialog = new OpenFileDialog();
+            fileDialog.Filter = "Image Files(*.PNG;*.JPG;*.JPEG;*.GIF)|*.PNG;*.JPG;*.JPEG;*.GIF|All files (*.*)|*.*";
+      
+            if (fileDialog.ShowDialog() == DialogResult.OK)
+                this.ImagePath = fileDialog.FileName;
+            else
+                this.ImagePath = null;
+
+        }
+        
     }
 }

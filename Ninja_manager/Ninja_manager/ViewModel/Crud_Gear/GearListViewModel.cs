@@ -79,9 +79,11 @@ namespace Ninja_manager.ViewModel.Crud_Gear
 
                 if (rsltMessageBox.Equals(MessageBoxResult.Yes))
                 {
+                    int id = this.SelectedGear.Id;
                     if (this._gearRepository.Delete(this.SelectedGear))
                     {
                         this.GearList.Remove(this.SelectedGear);
+                        GearImageManagement.DeleteImage(id);
                     }
                 }
             }

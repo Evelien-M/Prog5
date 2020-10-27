@@ -61,6 +61,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -88,6 +89,7 @@
     <Compile Include="Gear.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Helper\GearImageManagement.cs" />
     <Compile Include="Helper\WindowExtension.cs" />
     <Compile Include="Helper\ObservableExtension.cs" />
     <Compile Include="Inventory.cs">
@@ -212,13 +214,10 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <Resource Include="Assets\img\placeholder.png" />
-    <Resource Include="Assets\icon\edit-regular.png" />
-    <Content Include="Assets\icon\edit-regular.svg" />
-    <Resource Include="Assets\icon\trash-alt-regular.png" />
-    <Content Include="Assets\icon\trash-alt-regular.svg" />
+    <Folder Include="Assets\img\gear\" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Model.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model.edmx</DependentUpon>
@@ -229,6 +228,11 @@
       <DependentUpon>Model.edmx</DependentUpon>
       <LastGenOutput>Model.cs</LastGenOutput>
     </Content>
+    <Resource Include="Assets\img\placeholder.png" />
+    <Resource Include="Assets\icon\edit-regular.png" />
+    <Content Include="Assets\icon\edit-regular.svg" />
+    <Resource Include="Assets\icon\trash-alt-regular.png" />
+    <Content Include="Assets\icon\trash-alt-regular.svg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
