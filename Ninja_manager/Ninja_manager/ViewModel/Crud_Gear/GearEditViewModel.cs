@@ -134,7 +134,7 @@ namespace Ninja_manager.ViewModel.Crud_Gear
                 else
                 {
                     this._gearList.GearList.Update(this._gear);
-                    this.SuccesMessage = "Gear " + this.Name + " succesfully updatet!";
+                    this.SuccesMessage = "Gear " + this.Name + " succesfully updated!";
                 }
                 this.SaveImage();
             }

@@ -3,8 +3,9 @@
             <ResourceDictionary>
                 <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" xmlns:vm="clr-namespace:Ninja_manager.ViewModel" />
             <Style x:Key="ButtonYellow" TargetType="{x:Type Button}">
-                <Setter Property="Padding" Value="15 5 15 6" />
+                <Setter Property="Padding" Value="15 7 15 8" />
                 <Setter Property="FontWeight" Value="Bold"/>
+                <Setter Property="FontFamily" Value="Verdana" />
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="Button">
@@ -40,6 +41,7 @@
                 <Setter Property="Padding" Value="13 3 13 5" />
                 <Setter Property="Foreground" Value="Black"/>
                 <Setter Property="FontWeight" Value="Bold"/>
+                <Setter Property="FontFamily" Value="Verdana" />
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="Button">
@@ -76,6 +78,7 @@
                 <Setter Property="Padding" Value="13 3 13 5" />
                 <Setter Property="Foreground" Value="White"/>
                 <Setter Property="FontWeight" Value="Bold"/>
+                <Setter Property="FontFamily" Value="Verdana" />
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="Button">

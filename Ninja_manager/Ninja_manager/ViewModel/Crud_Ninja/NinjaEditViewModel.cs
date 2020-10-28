@@ -130,7 +130,7 @@ namespace Ninja_manager.ViewModel.Crud_Ninja
                 else
                 {
                     this._ninjaList.NinjaList.Update(this._ninja);
-                    this.SuccesMessage = "Ninja " + this.Name + " succesfully updatet!";
+                    this.SuccesMessage = "Ninja " + this.Name + " succesfully updated!";
                 }
             }
             else

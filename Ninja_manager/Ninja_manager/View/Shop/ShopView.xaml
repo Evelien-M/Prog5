@@ -24,7 +24,7 @@
         </Grid.RowDefinitions>
         <!-- HEADER -->
         <StackPanel x:Name="Header" Grid.Row="0" Height="45" Background="#FFC569" VerticalAlignment="Top">
-            <Label Content="Shop" HorizontalAlignment="Center" Margin="0,8,0,0" FontSize="16" FontWeight="Bold" Foreground="Black" FontFamily="Open Sans" />
+            <Label Content="SHOP" HorizontalAlignment="Center" Margin="0,8,0,0" FontSize="16" FontWeight="Bold" Foreground="Black" FontFamily="Open Sans" />
             <StackPanel.BitmapEffect>
                 <DropShadowBitmapEffect Color="Black"  Direction="-100" ShadowDepth="2" Opacity="0.4" Softness=".5" />
             </StackPanel.BitmapEffect>

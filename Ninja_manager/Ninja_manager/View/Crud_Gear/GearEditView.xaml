@@ -26,7 +26,7 @@
         </Grid.RowDefinitions>
         <!-- HEADER -->
         <StackPanel x:Name="Header" Grid.Row="0" Height="45" Background="#7D6E65" VerticalAlignment="Top">
-            <Label Content="Gear" HorizontalAlignment="Center" Margin="0,8,0,0" FontSize="16" FontWeight="Bold" Foreground="White" FontFamily="Open Sans" />
+            <Label Content="GEAR" HorizontalAlignment="Center" Margin="0,8,0,0" FontSize="16" FontWeight="Bold" Foreground="White" FontFamily="Open Sans" />
             <StackPanel.BitmapEffect>
                 <DropShadowBitmapEffect Color="Black"  Direction="-100" ShadowDepth="2" Opacity="0.4" Softness=".5" />
             </StackPanel.BitmapEffect>
@@ -54,7 +54,8 @@
                 <Label Grid.Column="2" Content="Intelligence:" Foreground="White" Margin="15,60,0,0"/>
                 <TextBox Grid.Column="2" Style="{StaticResource InputField}" Margin="15,85,0,0" Text="{Binding Intelligence, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top"/>
                 <Label Grid.Column="1" Content="Category:" Foreground="White" Margin="15,120,0,0"/>
-                <ComboBox Grid.Column="1" Margin="15,145,0,0" VerticalAlignment="Top" ItemsSource="{Binding Categories}" x:Name="cmbList" SelectedItem="{Binding Path=Category,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <ComboBox Grid.Column="1" Margin="15,145,0,0" VerticalAlignment="Top" ItemsSource="{Binding Categories}" x:Name="cmbList" SelectedItem="{Binding Path=Category,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                          Background="White" BorderBrush="#40444A"/>
             </Grid>
             <Grid x:Name="RightSection" Grid.Column="1" Background="#40444A" HorizontalAlignment="Stretch" VerticalAlignment="Top">
                 <Grid.RowDefinitions>
