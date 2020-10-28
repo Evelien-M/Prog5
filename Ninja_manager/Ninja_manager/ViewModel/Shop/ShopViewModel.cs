@@ -32,7 +32,7 @@ namespace Ninja_manager.ViewModel.Shop
                 this.UpdateGearList();
             }
         }
-        public List<Gear> GearList
+        public List<GearItemViewModel> GearList
         {
             get
             {
@@ -44,7 +44,7 @@ namespace Ninja_manager.ViewModel.Shop
                 base.RaisePropertyChanged();
             }
         }
-        public Gear SelectedGear 
+        public GearItemViewModel SelectedGear 
         {
             get
             {
@@ -92,9 +92,9 @@ namespace Ninja_manager.ViewModel.Shop
             set { this._errorMessage = value; base.RaisePropertyChanged(); }
         }
 
-        private List<Gear> _gearList;
+        private List<GearItemViewModel> _gearList;
         private Category _selectedCategory;
-        private Gear _selectedGear;
+        private GearItemViewModel _selectedGear;
         private GearRepository _gearRepsotory;
         private GearItemView _gearItemView;
         private NinjaEditViewModel _ninjaEdit;
@@ -107,6 +107,7 @@ namespace Ninja_manager.ViewModel.Shop
         {
             this._ninjaEdit = ninjaEdit;
             this.Gold = ninjaEdit.Gold;
+            this.ErrorMessage = "";
             var repo = new CategoryRepository();
             this.Categories = repo.GetCategories();
             this._gearRepsotory = new GearRepository();
@@ -126,7 +127,7 @@ namespace Ninja_manager.ViewModel.Shop
 
         public void BuyItem()
         {
-            this._ninjaEdit.AddToInventory(this.SelectedGear);
+            this._ninjaEdit.AddToInventory(this.SelectedGear.Gear);
         }
         public bool CanExecuteBuyGearItem()
         {
@@ -139,7 +140,7 @@ namespace Ninja_manager.ViewModel.Shop
                     this.CanExecuteBuyItem = false;
                     return false;
                 }
-                if (this._selectedGear.Price > this.Gold)
+                if (this._selectedGear.Gear.Price > this.Gold)
                     {
                     this.ErrorMessage = "You don't have enough gold.";
                     this.CanExecuteBuyItem = false;

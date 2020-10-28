@@ -25,7 +25,6 @@ namespace Ninja_manager.ViewModel.Crud_Gear
 
         private GearEditView _gearEditView;
         private GearRepository _gearRepository;
-        private List<Category> _gearcategories;
         private int _newId;
 
         public GearListViewModel()
@@ -36,7 +35,6 @@ namespace Ninja_manager.ViewModel.Crud_Gear
             this._gearRepository = new GearRepository();
 
             var repo = new CategoryRepository();
-            this._gearcategories = repo.GetCategories();
 
             this.GearList = new ObservableCollection<Gear>(this._gearRepository.Get());
             this._newId = this.GearList.OrderByDescending(o => o.Id).Select(s => s.Id).FirstOrDefault() + 1;

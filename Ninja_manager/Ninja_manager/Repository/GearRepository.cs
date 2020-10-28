@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ninja_manager.ViewModel.Shop;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
@@ -40,13 +41,14 @@ namespace Ninja_manager.Repository
             }
         }
 
-        public List<Gear> GetByCategory(string name)
+        public List<GearItemViewModel> GetByCategory(string name)
         {
-            var list = new List<Gear>();
+            var list = new List<GearItemViewModel>();
 
             using (Ninja_managerEntities db = new Ninja_managerEntities())
             {
-                list = db.Gear.Where(w => w.Category == name).ToList();
+                var templist = db.Gear.Where(w => w.Category == name).ToList();
+                list = templist.Select(s => new GearItemViewModel(s)).ToList();
             }
 
             return list;

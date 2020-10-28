@@ -52,17 +52,19 @@
                 </ListView>
                 <Label Grid.Row="1" Content="{Binding Gold}" Foreground="#FFC569" FontWeight="Bold" VerticalAlignment="Bottom" Margin="0,15,0,0" ContentStringFormat="You have {0} gold left" />
             </Grid>
-            <Grid x:Name="Section2" Grid.Column="1" Margin="15, 15, 15, 15">
+            <Grid x:Name="Section2" Grid.Column="1" Margin="0, 15, 15, 15">
                 <ListView Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Top" ItemsSource="{Binding GearList}" SelectedItem="{Binding Path=SelectedGear}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <Grid>
-                                <StackPanel>
-                                    <Label Content="{Binding Name}"/>
-                                </StackPanel>
+                            <Grid Height="40">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="50"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Image Grid.Column="0" Source="{Binding ImageLink}" VerticalAlignment="Center"/>
+                                <Label Grid.Column="1" Margin="5 0 0 0" Content="{Binding Gear.Name}" FontWeight="Bold"/>
+                                <Label Grid.Column="1" Margin="5 15 0 0" Content="{Binding Gear.Price}" ContentStringFormat="  {0}g"/>
                             </Grid>
-
-
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
@@ -72,9 +74,9 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
-                <DockPanel Grid.Row="0">
+                <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto">
                     <Frame x:Name="GearItem" Content="{Binding GearItemView}" NavigationUIVisibility="Hidden" />
-                </DockPanel>
+                </ScrollViewer>
                 <Grid Grid.Row="1">
                     <Label Style="{StaticResource ErrorLabel}" Content="{Binding ErrorMessage}" FontWeight="Bold" Margin="0, 15, 0 ,15" Background="#E07E7E" Padding="15 5 15 5" HorizontalAlignment="Center" Foreground="#ffffff" VerticalAlignment="Bottom">
                         <Label.BitmapEffect>

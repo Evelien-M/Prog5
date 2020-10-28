@@ -22,16 +22,10 @@
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
                 <Image Grid.Row="0" Source="{Binding ImageLink}" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="15"/>
-                <Grid Grid.Row="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="2*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Content="Category:" Grid.Column="0" Margin="15 0 0 0" Foreground="White" FontWeight="Bold"/>
-                    <Label Grid.Column="0" Margin="15 20 0 15" Foreground="White" Content="{Binding Gear.Category}"/>
-                    <Label Content="Price:" Grid.Column="1" Margin="15 0 0 0" Foreground="White" FontWeight="Bold"/>
-                    <Label Grid.Column="1" Content="{Binding Gear.Price}" Foreground="White" Margin="15,20,0,15"/>
-                </Grid>
+                <StackPanel Grid.Row="1" Background="#FFC569" Margin="15 0 15 15">
+                    <Label ContentStringFormat="Category: {0}" Content="{Binding Gear.Category}" Margin="15 15 0 0" Foreground="Black" FontWeight="Bold"/>
+                    <Label ContentStringFormat="Price: {0}" Margin="15 0 0 15" FontWeight="Bold" Foreground="Black" Content="{Binding Gear.Price}"/>
+                </StackPanel>
             </Grid>
             <Grid x:Name="Stats" Grid.Column="1">
                 <Grid.RowDefinitions>
@@ -41,9 +35,9 @@
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
                 <Label Grid.Row="0" Content="{Binding Gear.Name}" FontWeight="Bold" FontSize="16" Foreground="White" HorizontalAlignment="Center" Margin="0,5,0,5"/>
-                <Label Grid.Row="1" Content="{Binding Gear.Strength}" Foreground="#E07E7E" ContentStringFormat="Strength: {0}" HorizontalAlignment="Left" Margin="0,15,0,0"/>
-                <Label Grid.Row="2" Content="{Binding Gear.Intelligence}" Foreground="#8991E0" ContentStringFormat="Intelligence: {0}" HorizontalAlignment="Left" Margin="0,15,0,0"/>
-                <Label Grid.Row="3" Content="{Binding Gear.Agility}" Foreground="#7EE09A" ContentStringFormat="Agility: {0}" HorizontalAlignment="Left" Margin="0,15,0,0"/>
+                <Label Grid.Row="1" Content="{Binding Gear.Strength}" Foreground="#E07E7E" FontWeight="Bold" ContentStringFormat="Strength: {0}" HorizontalAlignment="Left" Margin="0,15,0,0"/>
+                <Label Grid.Row="2" Content="{Binding Gear.Intelligence}" Foreground="#8991E0" FontWeight="Bold" ContentStringFormat="Intelligence: {0}" HorizontalAlignment="Left" Margin="0,15,0,0"/>
+                <Label Grid.Row="3" Content="{Binding Gear.Agility}" Foreground="#7EE09A" FontWeight="Bold" ContentStringFormat="Agility: {0}" HorizontalAlignment="Left" Margin="0,15,0,0"/>
 
             </Grid>
         </Grid>

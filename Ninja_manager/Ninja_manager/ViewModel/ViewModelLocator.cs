@@ -27,7 +27,9 @@ namespace Ninja_manager.ViewModel
     /// </summary>
     public class ViewModelLocator
     {
+        private NinjaListViewModel _ninjaList;
         private NinjaEditViewModel _ninjaEdit;
+        private GearListViewModel _gearList;
         private ShopViewModel _shop;
         /// <summary>
         /// Initializes a new instance of the ViewModelLocator class.
@@ -71,7 +73,7 @@ namespace Ninja_manager.ViewModel
         {
             get
             {
-                this._ninjaEdit = new NinjaEditViewModel(this.NinjaList);
+                this._ninjaEdit = new NinjaEditViewModel(this._ninjaList);
                 return this._ninjaEdit;
             }
         }
@@ -80,7 +82,8 @@ namespace Ninja_manager.ViewModel
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<NinjaListViewModel>();
+                this._ninjaList = new NinjaListViewModel();
+                return this._ninjaList;
             }
         }
 
@@ -88,7 +91,7 @@ namespace Ninja_manager.ViewModel
         {
             get
             {
-                return new GearEditViewModel(this.GearList);
+                return new GearEditViewModel(this._gearList);
             }
         }
 
@@ -96,7 +99,8 @@ namespace Ninja_manager.ViewModel
         {
             get
             {
-                return ServiceLocator.Current.GetInstance<GearListViewModel>();
+                this._gearList = new GearListViewModel();
+                return this._gearList;
             }
         }
 
@@ -113,7 +117,7 @@ namespace Ninja_manager.ViewModel
         {
             get
             {
-                return new GearItemViewModel(this._shop.SelectedGear);
+                return this._shop.SelectedGear;
             }
         }
 

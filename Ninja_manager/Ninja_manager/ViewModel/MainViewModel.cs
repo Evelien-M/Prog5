@@ -25,27 +25,26 @@ namespace Ninja_manager.ViewModel
             }
         }
 
-        private NinjaListView _ninjaCrudView;
-        private GearListView _gearCrudView;
         private Page _pageView;
 
         public MainViewModel()
         {
-            this._ninjaCrudView = new NinjaListView();
-            this._gearCrudView = new GearListView();
             this.GoToNinjaCrudCommand = new RelayCommand(GoToNinjaCrud);
             this.GoToGearCrudCommand = new RelayCommand(GoToGearCrud);
+
+            this.GoToNinjaCrud();
         }
 
 
         private void GoToNinjaCrud()
         {
-            this.PageView = this._ninjaCrudView;
+            this.PageView = new NinjaListView();
         }
 
         private void GoToGearCrud()
         {
-            this.PageView = this._gearCrudView;
+            this.PageView = new GearListView();
         }
+
     }
 }
