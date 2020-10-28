@@ -13,10 +13,16 @@ MERGE INTO dbo.Inventory AS Target
 USING (values 
 	(1, 'Head', NULL),
 	(1, 'Shoulders', NULL),
-	(1, 'Chest', NULL),
+	(1, 'Chest', 8),
 	(1, 'Belt', NULL),
 	(1, 'Legs', NULL),
-	(1, 'Boots', NULL)
+	(1, 'Boots', NULL),
+	(2, 'Head', 3),
+	(2, 'Shoulders', NULL),
+	(2, 'Chest', NULL),
+	(2, 'Belt', 10),
+	(2, 'Legs', NULL),
+	(2, 'Boots', 16)
 ) AS Source (Id_Ninja, Category, Id_Gear)  
 ON Target.Id_Ninja = Source.Id_Ninja AND Target.Category = Source.Category
 WHEN NOT MATCHED BY TARGET THEN  

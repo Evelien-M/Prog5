@@ -75,4 +75,7 @@
     <None Include="Scripts\Seed\Category.sql" />
     <None Include="Scripts\Seed\Inventory.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Scripts\Seed\Gear.sql" />
+  </ItemGroup>
 </Project>

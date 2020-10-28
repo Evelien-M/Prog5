@@ -11,7 +11,8 @@ Post-Deployment Script Template
 */
 MERGE INTO dbo.Ninja AS Target  
 USING (values 
-	(1, 'Henk', 500)
+	(1, 'Henk', 500),
+	(2, 'Marco Borsato', 420)
 ) AS Source (Id, Name, Gold)  
 ON Target.Id = Source.Id  
 WHEN NOT MATCHED BY TARGET THEN  

@@ -10,5 +10,6 @@ Post-Deployment Script Template
 --------------------------------------------------------------------------------------
 */
 :r .\Seed\Category.sql	
+:r .\Seed\Gear.sql	
 :r .\Seed\Ninja.sql	
 :r .\Seed\Inventory.sql	
