@@ -30,14 +30,24 @@
             <Grid x:Name="Stats" Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Label Grid.Row="0" Content="{Binding Gear.Name}" FontWeight="Bold" FontSize="16" Foreground="White" HorizontalAlignment="Center" Margin="0,5,0,5"/>
-                <Label Grid.Row="1" Content="{Binding Gear.Strength}" Foreground="#E07E7E" FontWeight="Bold" ContentStringFormat="Strength: {0}" HorizontalAlignment="Left" Margin="0,15,0,0"/>
-                <Label Grid.Row="2" Content="{Binding Gear.Intelligence}" Foreground="#8991E0" FontWeight="Bold" ContentStringFormat="Intelligence: {0}" HorizontalAlignment="Left" Margin="0,15,0,0"/>
-                <Label Grid.Row="3" Content="{Binding Gear.Agility}" Foreground="#7EE09A" FontWeight="Bold" ContentStringFormat="Agility: {0}" HorizontalAlignment="Left" Margin="0,15,0,0"/>
+                <ListView Grid.Row="1" Style="{StaticResource StatsViewer}" ItemsSource="{Binding Gear.GearStat}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="15 0 15 0">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0" Content="{Binding Stat_Name}" Padding="15 15 0 0" Foreground="{Binding Stat.Colour}" />
+                                <Label Grid.Column="1" Content="{Binding Amount}" Margin="5 15 0 0" FontWeight="Bold" Foreground="{Binding Stat.Colour}" Padding="0" />
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
 
             </Grid>
         </Grid>

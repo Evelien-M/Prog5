@@ -47,14 +47,18 @@
                 <TextBox Grid.Column="0" Style="{StaticResource InputField}" Grid.ColumnSpan="2" Margin="15,25,0,0" Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  VerticalAlignment="Top"/>
                 <Label Grid.Column="2" Content="Price:" Foreground="White" Margin="15,0,0,0"/>
                 <TextBox Grid.Column="2" Style="{StaticResource InputField}" Margin="15,25,0,0" Text="{Binding Price, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" />
-                <Label Grid.Column="0" Content="Strength:" Foreground="White" Margin="15,60,0,0"/>
-                <TextBox Grid.Column="0" Style="{StaticResource InputField}" Margin="15,85,0,0" Text="{Binding Strength, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top"/>
-                <Label Grid.Column="1" Content="Agility:" Foreground="White" Margin="15,60,0,0"/>
-                <TextBox Grid.Column="1" Style="{StaticResource InputField}" Margin="15,85,0,0" Text="{Binding Agility, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top"/>
-                <Label Grid.Column="2" Content="Intelligence:" Foreground="White" Margin="15,60,0,0"/>
-                <TextBox Grid.Column="2" Style="{StaticResource InputField}" Margin="15,85,0,0" Text="{Binding Intelligence, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top"/>
-                <Label Grid.Column="1" Content="Category:" Foreground="White" Margin="15,120,0,0"/>
-                <ComboBox Grid.Column="1" Margin="15,145,0,0" VerticalAlignment="Top" ItemsSource="{Binding Categories}" x:Name="cmbList" SelectedItem="{Binding Path=Category,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                <ListView Grid.Column="1" Margin="15,60,0,0" HorizontalAlignment="Stretch"  VerticalAlignment="Top" BorderBrush="Transparent" Background="Transparent" ItemsSource="{Binding Stats}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Margin="15 0 0 0">
+                                <Label Content="{Binding Stat_Name}" Foreground="White"/>
+                                <TextBox Style="{StaticResource InputField}" Text="{Binding Amount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <Label Grid.Column="0" Content="Category:" Foreground="White" Margin="15,60,0,0"/>
+                <ComboBox Grid.Column="0" Margin="15,85,0,0" VerticalAlignment="Top" ItemsSource="{Binding Categories}" x:Name="cmbList" SelectedItem="{Binding Path=Category,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                           Background="White" BorderBrush="#40444A"/>
             </Grid>
             <Grid x:Name="RightSection" Grid.Column="1" Background="#40444A" HorizontalAlignment="Stretch" VerticalAlignment="Top">

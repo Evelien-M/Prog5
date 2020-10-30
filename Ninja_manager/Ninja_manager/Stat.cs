@@ -12,25 +12,18 @@ namespace Ninja_manager
     using System;
     using System.Collections.Generic;
     
-    public partial class Gear
+    public partial class Stat
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Gear()
+        public Stat()
         {
             this.GearStat = new HashSet<GearStat>();
-            this.Inventory = new HashSet<Inventory>();
         }
     
-        public int Id { get; set; }
         public string Name { get; set; }
-        public string Image { get; set; }
-        public int Price { get; set; }
-        public string Category { get; set; }
+        public string Colour { get; set; }
     
-        public virtual Category Category1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GearStat> GearStat { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Inventory> Inventory { get; set; }
     }
 }

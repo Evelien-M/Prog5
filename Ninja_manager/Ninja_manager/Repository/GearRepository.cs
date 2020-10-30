@@ -1,10 +1,11 @@
-﻿using Ninja_manager.ViewModel.Shop;
+﻿using Ninja_manager.ViewModel.Crud_Ninja;
+using Ninja_manager.ViewModel.Shop;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Ninja_manager.Repository
 {
@@ -18,6 +19,17 @@ namespace Ninja_manager.Repository
             using (Ninja_managerEntities db = new Ninja_managerEntities())
             {
                 list = db.Gear.ToList();
+            }
+
+            return list;
+        }
+        public List<GearStat> GetStats(int id)
+        {
+            var list = new List<GearStat>();
+
+            using (Ninja_managerEntities db = new Ninja_managerEntities())
+            {
+                list = db.GearStat.Include(i => i.Stat).Where(w => w.Id_Gear == id).ToList();
             }
 
             return list;
@@ -47,7 +59,7 @@ namespace Ninja_manager.Repository
 
             using (Ninja_managerEntities db = new Ninja_managerEntities())
             {
-                var templist = db.Gear.Where(w => w.Category == name).ToList();
+                var templist = db.Gear.Include(i => i.GearStat).Include(j => j.GearStat.Select(s => s.Stat)).Where(w => w.Category == name).ToList();
                 list = templist.Select(s => new GearItemViewModel(s)).ToList();
             }
 

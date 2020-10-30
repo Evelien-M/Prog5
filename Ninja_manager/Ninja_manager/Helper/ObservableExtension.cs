@@ -1,4 +1,5 @@
 ﻿using Ninja_manager.ViewModel.Crud_Ninja;
+using Ninja_manager.ViewModel.Other;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -33,6 +34,21 @@ namespace Ninja_manager.Helper
             observer[j].Inventory.Id_Gear = gear != null ? gear.Id : (int?)null;
             observer[j] = new InventoryViewModel(observer[j].Inventory);
             CollectionViewSource.GetDefaultView(observer).Refresh();
+        }
+
+        public static void AddOrUpdate(this List<StatViewModel> list, GearStat stat)
+        {
+            var item = list.FirstOrDefault(i => i.Name == stat.Stat_Name);
+            if (item == null)
+            {
+                var newitem = new StatViewModel { Name = stat.Stat_Name, Amount = stat.Amount, Colour = stat.Stat.Colour };
+                list.Add(newitem);
+            }   
+            else
+            {
+                int j = list.IndexOf(item);
+                list[j].Amount += stat.Amount;
+            }
         }
     }
 }

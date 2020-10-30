@@ -6,7 +6,6 @@ using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Ninja_manager.Repository
 {
@@ -28,35 +27,39 @@ namespace Ninja_manager.Repository
             var list = new List<InventoryViewModel>();
             using (Ninja_managerEntities db = new Ninja_managerEntities())
             {
-                var templist = db.Inventory.Include(i => i.Category1).Include(j => j.Gear).Where(w => w.Id_Ninja == ninjaId).OrderBy(o => o.Category1.Order);
+                var templist = db.Inventory.Include(i => i.Category1).Include(j => j.Gear).Include(k => k.Gear.GearStat).Include(k => k.Gear.GearStat.Select(s => s.Stat)).Where(w => w.Id_Ninja == ninjaId).OrderBy(o => o.Category1.Order);
                 list = templist.ToList().Select(s => new InventoryViewModel(s)).ToList();
             }
             return list;
         }
 
-        public bool AddOrUpdate(Ninja ninja, List<InventoryViewModel> inventory)
+        public bool AddOrUpdate(Ninja ninja, List<InventoryViewModel> inventory, bool isNew)
         {
             try
             {
                 using (Ninja_managerEntities db = new Ninja_managerEntities())
                 {
-                    db.Ninja.AddOrUpdate(ninja);
+                    if (isNew) // make new model, otherwise entity will be annoying
+                    {
+                        var n = new Ninja { Id = ninja.Id, Gold = ninja.Gold, Name = ninja.Name };
+                        db.Ninja.AddOrUpdate(n);
+                    }
+                    else
+                    {
+                        db.Ninja.AddOrUpdate(ninja);
+                    }
                     foreach(var i in inventory)
                     {
                         var j = i.Inventory;
-                        if (db.Entry(j.Category1).State == EntityState.Added)
+                        if (isNew)
                         {
-                            db.Category.Attach(j.Category1);
-                            
-                            if (j.Gear != null)
-                            {
-                                db. Gear.Attach(j.Gear);
-                                db.Category.Attach(j.Gear.Category1);
-                            }
-                    
+                            var b = new Inventory { Id_Ninja = j.Id_Ninja, Category = j.Category, Id_Gear = j.Id_Gear};
+                            db.Inventory.AddOrUpdate(b);
+                        } 
+                        else
+                        {
+                          db.Inventory.AddOrUpdate(j);
                         }
-
-                        db.Inventory.AddOrUpdate(j);
                     }
                     db.SaveChanges();
                 }

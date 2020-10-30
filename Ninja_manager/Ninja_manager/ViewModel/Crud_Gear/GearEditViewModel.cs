@@ -12,6 +12,7 @@ using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using System.IO;
 using System.Windows.Forms;
+using System.Collections.ObjectModel;
 
 namespace Ninja_manager.ViewModel.Crud_Gear
 {
@@ -31,21 +32,6 @@ namespace Ninja_manager.ViewModel.Crud_Gear
         {
             get { return this._price; }
             set { this._price = value; base.RaisePropertyChanged(); this.CanExecuteSaveGear(); }
-        }
-        public int? Strength
-        {
-            get { return this._strength; }
-            set { this._strength = value; base.RaisePropertyChanged(); }
-        }
-        public int? Agility
-        {
-            get { return this._agility; }
-            set { this._agility = value; base.RaisePropertyChanged(); }
-        }
-        public int? Intelligence
-        {
-            get { return this._intelligence; }
-            set { this._intelligence = value; base.RaisePropertyChanged(); }
         }
         public string Category
         {
@@ -72,6 +58,8 @@ namespace Ninja_manager.ViewModel.Crud_Gear
             get { return this._canExecuteSave; }
             set { this._canExecuteSave = value; base.RaisePropertyChanged(); }
         }
+
+        public ObservableCollection<GearStat> Stats { get; set; }
 
         public List<string> Categories { get; private set; }
 
@@ -117,9 +105,7 @@ namespace Ninja_manager.ViewModel.Crud_Gear
         {
             this._gear.Name = this.Name;
             this._gear.Price = this.Price;
-            this._gear.Intelligence = this.Intelligence;
-            this._gear.Strength = this.Strength;
-            this._gear.Agility = this.Agility;
+            this._gear.GearStat = this.Stats; 
             this._gear.Category = this.Category;
             this._gear.Image = this.ImagePath != null ? this._gear.Id + Path.GetExtension(this.ImagePath) : null; 
 
@@ -186,9 +172,8 @@ namespace Ninja_manager.ViewModel.Crud_Gear
         {
             this.Name = this._gear.Name;
             this.Price = this._gear.Price;
-            this.Intelligence = this._gear.Intelligence;
-            this.Strength = this._gear.Strength;
-            this.Agility = this._gear.Agility;
+            var list = this._gearRepository.GetStats(this._gear.Id);
+            this.Stats = new ObservableCollection<GearStat>(list);
             this.Category = this._gear.Category;
             this.ImagePath = this._gear.Image != null ? Path.Combine(GearImageManagement.SourceFolder, this._gear.Image) : null;
             this._imageAdded = false;
