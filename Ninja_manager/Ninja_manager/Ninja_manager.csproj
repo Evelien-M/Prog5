@@ -89,6 +89,9 @@
     <Compile Include="Gear.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="GearStat.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Helper\GearImageManagement.cs" />
     <Compile Include="Helper\WindowExtension.cs" />
     <Compile Include="Helper\ObservableExtension.cs" />
@@ -116,6 +119,9 @@
     <Compile Include="Repository\CategoryRepository.cs" />
     <Compile Include="Repository\GearRepository.cs" />
     <Compile Include="Repository\NinjaRepository.cs" />
+    <Compile Include="Stat.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\Crud_Gear\GearEditViewModel.cs" />
     <Compile Include="ViewModel\Crud_Gear\GearListViewModel.cs" />
     <Compile Include="ViewModel\Crud_Ninja\InventoryViewModel.cs" />
@@ -124,6 +130,7 @@
     <Compile Include="ViewModel\Crud_Ninja\NinjaListViewModel.cs" />
     <Compile Include="ViewModel\Shop\GearItemViewModel.cs" />
     <Compile Include="ViewModel\Shop\ShopViewModel.cs" />
+    <Compile Include="ViewModel\Other\StatViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>

@@ -20,10 +20,16 @@
           <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Image" Type="text" />
           <Property Name="Price" Type="int" Nullable="false" />
-          <Property Name="Strength" Type="int" />
-          <Property Name="Intelligence" Type="int" />
-          <Property Name="Agility" Type="int" />
           <Property Name="Category" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GearStat">
+          <Key>
+            <PropertyRef Name="Id_Gear" />
+            <PropertyRef Name="Stat_Name" />
+          </Key>
+          <Property Name="Id_Gear" Type="int" Nullable="false" />
+          <Property Name="Stat_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Amount" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Inventory">
           <Key>
@@ -42,6 +48,13 @@
           <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Gold" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Stat">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Colour" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <Association Name="FK_Gear_Category">
           <End Role="Category" Type="Self.Category" Multiplicity="1" />
           <End Role="Gear" Type="Self.Gear" Multiplicity="*" />
@@ -51,6 +64,30 @@
             </Principal>
             <Dependent Role="Gear">
               <PropertyRef Name="Category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GearStat_Gear">
+          <End Role="Gear" Type="Self.Gear" Multiplicity="1" />
+          <End Role="GearStat" Type="Self.GearStat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gear">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GearStat">
+              <PropertyRef Name="Id_Gear" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GearStat_Stat">
+          <End Role="Stat" Type="Self.Stat" Multiplicity="1" />
+          <End Role="GearStat" Type="Self.GearStat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stat">
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="GearStat">
+              <PropertyRef Name="Stat_Name" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -93,11 +130,21 @@
         <EntityContainer Name="Ninja_managerModelStoreContainer">
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Gear" EntityType="Self.Gear" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GearStat" EntityType="Self.GearStat" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Inventory" EntityType="Self.Inventory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ninja" EntityType="Self.Ninja" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Stat" EntityType="Self.Stat" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Gear_Category" Association="Self.FK_Gear_Category">
             <End Role="Category" EntitySet="Category" />
             <End Role="Gear" EntitySet="Gear" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GearStat_Gear" Association="Self.FK_GearStat_Gear">
+            <End Role="Gear" EntitySet="Gear" />
+            <End Role="GearStat" EntitySet="GearStat" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GearStat_Stat" Association="Self.FK_GearStat_Stat">
+            <End Role="Stat" EntitySet="Stat" />
+            <End Role="GearStat" EntitySet="GearStat" />
           </AssociationSet>
           <AssociationSet Name="FK_Inventory_Category" Association="Self.FK_Inventory_Category">
             <End Role="Category" EntitySet="Category" />
@@ -134,12 +181,21 @@
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="Price" Type="Int32" Nullable="false" />
-          <Property Name="Strength" Type="Int32" />
-          <Property Name="Intelligence" Type="Int32" />
-          <Property Name="Agility" Type="Int32" />
           <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Category1" Relationship="Self.FK_Gear_Category" FromRole="Gear" ToRole="Category" />
+          <NavigationProperty Name="GearStat" Relationship="Self.FK_GearStat_Gear" FromRole="Gear" ToRole="GearStat" />
           <NavigationProperty Name="Inventory" Relationship="Self.FK_Inventory_Gear" FromRole="Gear" ToRole="Inventory" />
+        </EntityType>
+        <EntityType Name="GearStat">
+          <Key>
+            <PropertyRef Name="Id_Gear" />
+            <PropertyRef Name="Stat_Name" />
+          </Key>
+          <Property Name="Id_Gear" Type="Int32" Nullable="false" />
+          <Property Name="Stat_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Amount" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Gear" Relationship="Self.FK_GearStat_Gear" FromRole="GearStat" ToRole="Gear" />
+          <NavigationProperty Name="Stat" Relationship="Self.FK_GearStat_Stat" FromRole="GearStat" ToRole="Stat" />
         </EntityType>
         <EntityType Name="Inventory">
           <Key>
@@ -161,6 +217,14 @@
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Gold" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Inventory" Relationship="Self.FK_Inventory_Ninja" FromRole="Ninja" ToRole="Inventory" />
+        </EntityType>
+        <EntityType Name="Stat">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Colour" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="GearStat" Relationship="Self.FK_GearStat_Stat" FromRole="Stat" ToRole="GearStat" />
         </EntityType>
         <Association Name="FK_Gear_Category">
           <End Role="Category" Type="Self.Category" Multiplicity="1" />
@@ -186,6 +250,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_GearStat_Gear">
+          <End Role="Gear" Type="Self.Gear" Multiplicity="1" />
+          <End Role="GearStat" Type="Self.GearStat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gear">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GearStat">
+              <PropertyRef Name="Id_Gear" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Inventory_Gear">
           <End Role="Gear" Type="Self.Gear" Multiplicity="0..1" />
           <End Role="Inventory" Type="Self.Inventory" Multiplicity="*" />
@@ -195,6 +271,18 @@
             </Principal>
             <Dependent Role="Inventory">
               <PropertyRef Name="Id_Gear" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GearStat_Stat">
+          <End Role="Stat" Type="Self.Stat" Multiplicity="1" />
+          <End Role="GearStat" Type="Self.GearStat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Stat">
+              <PropertyRef Name="Name" />
+            </Principal>
+            <Dependent Role="GearStat">
+              <PropertyRef Name="Stat_Name" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -213,8 +301,10 @@
         <EntityContainer Name="Ninja_managerEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Category" EntityType="Self.Category" />
           <EntitySet Name="Gear" EntityType="Self.Gear" />
+          <EntitySet Name="GearStat" EntityType="Self.GearStat" />
           <EntitySet Name="Inventory" EntityType="Self.Inventory" />
           <EntitySet Name="Ninja" EntityType="Self.Ninja" />
+          <EntitySet Name="Stat" EntityType="Self.Stat" />
           <AssociationSet Name="FK_Gear_Category" Association="Self.FK_Gear_Category">
             <End Role="Category" EntitySet="Category" />
             <End Role="Gear" EntitySet="Gear" />
@@ -223,9 +313,17 @@
             <End Role="Category" EntitySet="Category" />
             <End Role="Inventory" EntitySet="Inventory" />
           </AssociationSet>
+          <AssociationSet Name="FK_GearStat_Gear" Association="Self.FK_GearStat_Gear">
+            <End Role="Gear" EntitySet="Gear" />
+            <End Role="GearStat" EntitySet="GearStat" />
+          </AssociationSet>
           <AssociationSet Name="FK_Inventory_Gear" Association="Self.FK_Inventory_Gear">
             <End Role="Gear" EntitySet="Gear" />
             <End Role="Inventory" EntitySet="Inventory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GearStat_Stat" Association="Self.FK_GearStat_Stat">
+            <End Role="Stat" EntitySet="Stat" />
+            <End Role="GearStat" EntitySet="GearStat" />
           </AssociationSet>
           <AssociationSet Name="FK_Inventory_Ninja" Association="Self.FK_Inventory_Ninja">
             <End Role="Ninja" EntitySet="Ninja" />
@@ -253,10 +351,16 @@
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Image" ColumnName="Image" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="Strength" ColumnName="Strength" />
-                <ScalarProperty Name="Intelligence" ColumnName="Intelligence" />
-                <ScalarProperty Name="Agility" ColumnName="Agility" />
                 <ScalarProperty Name="Category" ColumnName="Category" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GearStat">
+            <EntityTypeMapping TypeName="Ninja_managerModel.GearStat">
+              <MappingFragment StoreEntitySet="GearStat">
+                <ScalarProperty Name="Id_Gear" ColumnName="Id_Gear" />
+                <ScalarProperty Name="Stat_Name" ColumnName="Stat_Name" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -275,6 +379,14 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Gold" ColumnName="Gold" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stat">
+            <EntityTypeMapping TypeName="Ninja_managerModel.Stat">
+              <MappingFragment StoreEntitySet="Stat">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Colour" ColumnName="Colour" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

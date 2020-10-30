@@ -27,7 +27,9 @@ namespace Ninja_manager
     
         public virtual DbSet<Category> Category { get; set; }
         public virtual DbSet<Gear> Gear { get; set; }
+        public virtual DbSet<GearStat> GearStat { get; set; }
         public virtual DbSet<Inventory> Inventory { get; set; }
         public virtual DbSet<Ninja> Ninja { get; set; }
+        public virtual DbSet<Stat> Stat { get; set; }
     }
 }

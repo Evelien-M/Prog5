@@ -1,0 +1,5 @@
+﻿CREATE TABLE [dbo].[Stat]
+(
+	[Name] VARCHAR(50) NOT NULL PRIMARY KEY, 
+    [Colour] VARCHAR(50) NOT NULL
+)
