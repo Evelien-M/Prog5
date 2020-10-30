@@ -49,15 +49,7 @@ namespace Ninja_manager.ViewModel.Crud_Ninja
             var gold = rng.Next(40, 80) * 10;
             var newId = this.NinjaList.OrderByDescending(o => o.Id).Select(s => s.Id).FirstOrDefault() + 1;
             this.SelectedNinja = new Ninja() { Id = newId, Name = "" , Gold = gold };
-            var list = new List<Inventory>();
-            var repo = new CategoryRepository();
 
-            foreach (var cat in repo.GetCategories())
-            {
-                var inv = new Inventory() { Id_Ninja = newId, Category = cat.Name, Category1 = cat };
-                list.Add(inv);
-            }
-            this.SelectedNinja.Inventory = list;
             this._ninjaEditView = new NinjaEditView();
             this._ninjaEditView.Show();
         }

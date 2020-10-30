@@ -116,11 +116,21 @@ namespace Ninja_manager.ViewModel.Crud_Ninja
         private void Reset()
         {
             this.InventoryList.Clear();
-            IEnumerable<InventoryViewModel> list;
+            List<InventoryViewModel> list = new List<InventoryViewModel>();
             if (this._isNew)
-                list = this._ninja.Inventory.Select(s => new InventoryViewModel(s));
+            {
+                var repo = new CategoryRepository();
+
+                foreach (var cat in repo.GetCategories())
+                {
+                    var inv = new Inventory() { Id_Ninja = this._ninja.Id, Category = cat.Name, Category1 = cat };
+                    list.Add(new InventoryViewModel(inv));
+                }
+            }
             else
+            {
                 list = this._ninjaRepository.GetInventory(this._ninja.Id);
+            }
 
             foreach (var i in list)
                 this.InventoryList.Add(i);
