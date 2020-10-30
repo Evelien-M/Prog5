@@ -1,4 +1,5 @@
-﻿using Ninja_manager.ViewModel.Crud_Ninja;
+﻿using Ninja_manager.Helper;
+using Ninja_manager.ViewModel.Crud_Ninja;
 using Ninja_manager.ViewModel.Shop;
 using System;
 using System.Collections.Generic;
@@ -29,19 +30,55 @@ namespace Ninja_manager.Repository
 
             using (Ninja_managerEntities db = new Ninja_managerEntities())
             {
-                list = db.GearStat.Include(i => i.Stat).Where(w => w.Id_Gear == id).ToList();
+                var allStats = db.Stat;
+                foreach (var i in allStats)
+                    list.Add(new GearStat { Id_Gear = id, Stat = i, Stat_Name = i.Name });
+          
+                var currentStats = db.GearStat.Include(i => i.Stat).Where(w => w.Id_Gear == id).ToList();
+               
+                foreach (var i in currentStats)
+                    list.Update(i);     
             }
 
             return list;
         }
 
-        public bool AddOrUpdate(Gear gear)
+        public bool AddOrUpdate(Gear gear, List<GearStat> stats, bool isNew)
         {
             try
             {
                 using (Ninja_managerEntities db = new Ninja_managerEntities())
                 {
-                    db.Gear.AddOrUpdate(gear);
+                    if (isNew) // make new model, otherwise entity will be annoying
+                    {
+                        var g = new Gear { Id = gear.Id, Name = gear.Name, Image = gear.Image, Price = gear.Price, Category = gear.Category };
+                        db.Gear.AddOrUpdate(g);
+                    }
+                    else
+                    {
+                        db.Gear.AddOrUpdate(gear);
+                    }
+                    foreach (var i in stats)
+                    {
+                        if (i.Amount == 0)
+                        {
+                            var remove = db.GearStat.FirstOrDefault(f => f.Id_Gear == gear.Id && f.Stat_Name == i.Stat_Name);
+                            if (remove != null)
+                                db.GearStat.Remove(remove);
+                            
+                            continue;
+                        }
+
+                        if (isNew)
+                        {
+                            var s = new GearStat { Id_Gear = i.Id_Gear, Stat_Name = i.Stat_Name, Amount = i.Amount };
+                            db.GearStat.AddOrUpdate(s);
+                        }
+                        else
+                        {
+                            db.GearStat.AddOrUpdate(i);
+                        }
+                    }
                     db.SaveChanges();
                 }
 
@@ -85,6 +122,11 @@ namespace Ninja_manager.Repository
                         db.Inventory.AddOrUpdate(i);
                     }
                     var g = db.Gear.FirstOrDefault(i => i.Id == gear.Id);
+                    var stats = db.GearStat.Where(w => w.Id_Gear == gear.Id);
+                    
+                    foreach(var s in stats)
+                        db.GearStat.Remove(s);
+
                     db.Gear.Remove(g);
                     db.SaveChanges();
                 }

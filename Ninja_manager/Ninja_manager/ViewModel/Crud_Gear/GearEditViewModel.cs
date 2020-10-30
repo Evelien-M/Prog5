@@ -65,9 +65,6 @@ namespace Ninja_manager.ViewModel.Crud_Gear
 
         private string _name;
         private int _price;
-        private int? _strength;
-        private int? _agility;
-        private int? _intelligence;
         private string _category;
         private string _image;
 
@@ -89,11 +86,11 @@ namespace Ninja_manager.ViewModel.Crud_Gear
             if (this._gear.Name.Length == 0)
                 this._isNew = true;
 
-            this.ResetGear();
-
             this._gearRepository = new GearRepository();
             var repo = new CategoryRepository();
             this.Categories = repo.GetCategoryNames();
+            
+            this.ResetGear();
 
             this.SaveGearCommand = new RelayCommand(SaveGear);
             this.ResetGearCommand = new RelayCommand(ResetGear);
@@ -109,7 +106,7 @@ namespace Ninja_manager.ViewModel.Crud_Gear
             this._gear.Category = this.Category;
             this._gear.Image = this.ImagePath != null ? this._gear.Id + Path.GetExtension(this.ImagePath) : null; 
 
-            if (this._gearRepository.AddOrUpdate(this._gear))
+            if (this._gearRepository.AddOrUpdate(this._gear, this.Stats.ToList(), this._isNew))
             {
                 if (this._isNew)
                 {

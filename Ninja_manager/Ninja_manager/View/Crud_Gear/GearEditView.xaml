@@ -47,18 +47,23 @@
                 <TextBox Grid.Column="0" Style="{StaticResource InputField}" Grid.ColumnSpan="2" Margin="15,25,0,0" Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  VerticalAlignment="Top"/>
                 <Label Grid.Column="2" Content="Price:" Foreground="White" Margin="15,0,0,0"/>
                 <TextBox Grid.Column="2" Style="{StaticResource InputField}" Margin="15,25,0,0" Text="{Binding Price, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" />
-                <ListView Grid.Column="1" Margin="15,60,0,0" HorizontalAlignment="Stretch"  VerticalAlignment="Top" BorderBrush="Transparent" Background="Transparent" ItemsSource="{Binding Stats}">
+                <Label Grid.Column="0" Content="Stats:" Foreground="White" Margin="15,60,0,0"/>
+                <ListView Grid.Column="0" Grid.ColumnSpan="2" Margin="15,85,0,0" Style="{StaticResource StatsViewer}" Background="#40444A" HorizontalAlignment="Stretch" VerticalAlignment="Top" ItemsSource="{Binding Stats}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Margin="15 0 0 0">
-                                <Label Content="{Binding Stat_Name}" Foreground="White"/>
-                                <TextBox Style="{StaticResource InputField}" Text="{Binding Amount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top"/>
-                            </StackPanel>
+                            <Grid Margin="15 0 0 0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0" Content="{Binding Stat_Name}" Foreground="{Binding Stat.Colour}" VerticalAlignment="Center" FontSize="14" HorizontalAlignment="Stretch"/>
+                                <TextBox Grid.Column="1" Style="{StaticResource InputField}" Text="{Binding Amount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="60" Margin="0 5 15 5" HorizontalAlignment="Right"/>
+                            </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-                <Label Grid.Column="0" Content="Category:" Foreground="White" Margin="15,60,0,0"/>
-                <ComboBox Grid.Column="0" Margin="15,85,0,0" VerticalAlignment="Top" ItemsSource="{Binding Categories}" x:Name="cmbList" SelectedItem="{Binding Path=Category,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                <Label Grid.Column="2" Content="Category:" Foreground="White" Margin="15,60,0,0"/>
+                <ComboBox Grid.Column="2" Margin="15,85,0,0" VerticalAlignment="Top" ItemsSource="{Binding Categories}" x:Name="cmbList" SelectedItem="{Binding Path=Category,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                           Background="White" BorderBrush="#40444A"/>
             </Grid>
             <Grid x:Name="RightSection" Grid.Column="1" Background="#40444A" HorizontalAlignment="Stretch" VerticalAlignment="Top">

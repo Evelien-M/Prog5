@@ -50,5 +50,14 @@ namespace Ninja_manager.Helper
                 list[j].Amount += stat.Amount;
             }
         }
+        public static void Update(this List<GearStat> list, GearStat stat)
+        {
+            var item = list.FirstOrDefault(i => i.Stat_Name == stat.Stat_Name);
+            if (item != null)
+            {
+                int j = list.IndexOf(item);
+                list[j].Amount += stat.Amount;
+            }
+        }
     }
 }
