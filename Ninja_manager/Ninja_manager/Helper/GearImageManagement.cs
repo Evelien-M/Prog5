@@ -4,12 +4,13 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Ninja_manager.Helper
 {
     public class GearImageManagement
     {
-        public static string SourceFolder => @"C:\Users\Evelien\Documents\GitHub\Prog5\Prog5\Ninja_manager\Ninja_manager\Assets\img\gear\";
+        public static string SourceFolder => Path.Combine(Directory.GetParent(Environment.CurrentDirectory).Parent.FullName, @"Assets\img\gear\"); 
         public static void SaveImage(int id, string path)
         {
             string destination = Path.Combine(SourceFolder, id + Path.GetExtension(path));
