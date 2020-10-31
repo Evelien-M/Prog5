@@ -25,7 +25,6 @@ namespace Ninja_manager.ViewModel.Crud_Gear
 
         private GearEditView _gearEditView;
         private GearRepository _gearRepository;
-        private int _newId;
 
         public GearListViewModel()
         {
@@ -34,10 +33,7 @@ namespace Ninja_manager.ViewModel.Crud_Gear
             this.DeleteItemCommand = new RelayCommand(DeleteItem);
             this._gearRepository = new GearRepository();
 
-            var repo = new CategoryRepository();
-
             this.GearList = new ObservableCollection<Gear>(this._gearRepository.Get());
-            this._newId = this.GearList.OrderByDescending(o => o.Id).Select(s => s.Id).FirstOrDefault() + 1;
         }
 
         private void AddItem()
@@ -46,7 +42,8 @@ namespace Ninja_manager.ViewModel.Crud_Gear
                 if (!this._gearEditView.ClosePrompt())
                     return;
 
-            this.SelectedGear = new Gear() { Name = "", Id = this._newId};
+            int newId = this.GearList.OrderByDescending(o => o.Id).Select(s => s.Id).FirstOrDefault() + 1;
+            this.SelectedGear = new Gear() { Name = "", Id = newId};
 
             this._gearEditView = new GearEditView();
             this._gearEditView.Show();

@@ -12,7 +12,7 @@ namespace Ninja_manager.Repository
     public class NinjaRepository
     {
 
-        public List<Ninja> GetNinjas()
+        public List<Ninja> Get()
         {
             var list = new List<Ninja>();
             using (Ninja_managerEntities db = new Ninja_managerEntities())
@@ -39,7 +39,7 @@ namespace Ninja_manager.Repository
             {
                 using (Ninja_managerEntities db = new Ninja_managerEntities())
                 {
-                    if (isNew) // make new model, otherwise entity will be annoying
+                    if (isNew) // make new model, to make it easier to insert the new data
                     {
                         var n = new Ninja { Id = ninja.Id, Gold = ninja.Gold, Name = ninja.Name };
                         db.Ninja.AddOrUpdate(n);

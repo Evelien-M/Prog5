@@ -11,7 +11,7 @@ namespace Ninja_manager.Helper
     {
         //
         // Summary:
-        //     Returns true if user confirmed to close window.
+        //     Returns true if user confirmed the prompt
         public static bool ClosePrompt(this Window window)
         {
             if (window.IsLoaded)

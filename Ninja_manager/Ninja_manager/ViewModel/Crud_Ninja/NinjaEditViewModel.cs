@@ -120,8 +120,8 @@ namespace Ninja_manager.ViewModel.Crud_Ninja
             if (this._isNew)
             {
                 var repo = new CategoryRepository();
-
-                foreach (var cat in repo.GetCategories())
+                // the ninja is new, so it creates a new empty inventory
+                foreach (var cat in repo.GetAllCategories()) 
                 {
                     var inv = new Inventory() { Id_Ninja = this._ninja.Id, Category = cat.Name, Category1 = cat };
                     list.Add(new InventoryViewModel(inv));
@@ -170,7 +170,7 @@ namespace Ninja_manager.ViewModel.Crud_Ninja
 
         public void AddToInventory(Gear gear)
         {
-            this.Gold -= gear.Price;
+            this.Gold -= gear.Price; // subtract the gear price from the amount of gold from ninja inventory
             this.InventoryList.Update(gear.Category, gear);
             this.CalcStats();
 
@@ -183,12 +183,12 @@ namespace Ninja_manager.ViewModel.Crud_Ninja
             if (gear != null)
             {
                 var i = gear.Gear;
-                this.Gold += i.Price;
+                this.Gold += i.Price; // refund te money to the ninja inventory
                 this.InventoryList.Update(i.Category, null);
                 this.CalcStats();
 
                 if (this.ShopViewModel != null)
-                    this.ShopViewModel.Update(this);
+                    this.ShopViewModel.Update(this); // tells the shop that there's been an update
             }
         }
 
@@ -196,7 +196,7 @@ namespace Ninja_manager.ViewModel.Crud_Ninja
         {
             List<StatViewModel> totalStat = new List<StatViewModel>();
 
-            foreach(var inv in this.InventoryList)
+            foreach(var inv in this.InventoryList) // loops through the inventory
             {
                 var j = inv.Inventory;
                 if (j.Gear != null)
@@ -205,7 +205,7 @@ namespace Ninja_manager.ViewModel.Crud_Ninja
                     
                     if (stats != null)
                     {
-                        foreach(var s in stats)
+                        foreach(var s in stats) // adds to the total stats list
                         {
                             totalStat.AddOrUpdate(s);
                         }

@@ -124,11 +124,11 @@
     </Compile>
     <Compile Include="ViewModel\Crud_Gear\GearEditViewModel.cs" />
     <Compile Include="ViewModel\Crud_Gear\GearListViewModel.cs" />
-    <Compile Include="ViewModel\Crud_Ninja\InventoryViewModel.cs" />
+    <Compile Include="ViewModel\Other\InventoryViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\Crud_Ninja\NinjaEditViewModel.cs" />
     <Compile Include="ViewModel\Crud_Ninja\NinjaListViewModel.cs" />
-    <Compile Include="ViewModel\Shop\GearItemViewModel.cs" />
+    <Compile Include="ViewModel\Other\GearItemViewModel.cs" />
     <Compile Include="ViewModel\Shop\ShopViewModel.cs" />
     <Compile Include="ViewModel\Other\StatViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />

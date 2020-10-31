@@ -129,11 +129,11 @@ namespace Ninja_manager.ViewModel.Crud_Gear
         }
         private void SaveImage()
         {
-            // check if there is a file been uploaded 
+            // check if there has a file been uploaded 
             if (this._imageAdded)
             {
                 GearImageManagement.DeleteImage(this._gear.Id);  // removes the previous uploaded file if necessary
-                GearImageManagement.SaveImage(this._gear.Id, this.ImagePath);
+                GearImageManagement.SaveImage(this._gear.Id, this.ImagePath); 
             }
         }
         private bool CanExecuteSaveGear()
@@ -188,8 +188,7 @@ namespace Ninja_manager.ViewModel.Crud_Gear
             }
             else
             {
-                this.ImagePath = null;
-                this._imageAdded = false;
+                this.ImagePath = null; // removes the image
             }
 
         }

@@ -8,7 +8,7 @@ namespace Ninja_manager.Repository
 {
     public class CategoryRepository
     {
-        public List<Category> GetCategories()
+        public List<Category> GetAllCategories()
         {
             var list = new List<Category>();
             using (Ninja_managerEntities db = new Ninja_managerEntities())

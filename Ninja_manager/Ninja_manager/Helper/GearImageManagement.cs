@@ -13,8 +13,7 @@ namespace Ninja_manager.Helper
         public static void SaveImage(int id, string path)
         {
             string destination = Path.Combine(SourceFolder, id + Path.GetExtension(path));
-            File.Copy(path, destination, true);
-            
+            File.Copy(path, destination, true);  
         }
         public static void DeleteImage(int id)
         {

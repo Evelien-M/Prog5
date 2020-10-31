@@ -36,6 +36,7 @@ namespace Ninja_manager.Repository
           
                 var currentStats = db.GearStat.Include(i => i.Stat).Where(w => w.Id_Gear == id).ToList();
                
+                // left joins the stats table into the gearstats table, so that the gear stats can gets the 0 values for each stat
                 foreach (var i in currentStats)
                     list.Update(i);     
             }
@@ -49,7 +50,7 @@ namespace Ninja_manager.Repository
             {
                 using (Ninja_managerEntities db = new Ninja_managerEntities())
                 {
-                    if (isNew) // make new model, otherwise entity will be annoying
+                    if (isNew) // make new model, to make it easier to insert the new data
                     {
                         var g = new Gear { Id = gear.Id, Name = gear.Name, Image = gear.Image, Price = gear.Price, Category = gear.Category };
                         db.Gear.AddOrUpdate(g);
@@ -62,6 +63,7 @@ namespace Ninja_manager.Repository
                     {
                         if (i.Amount == 0)
                         {
+                            // removes the 0 values from stat, so it won't be displayed
                             var remove = db.GearStat.FirstOrDefault(f => f.Id_Gear == gear.Id && f.Stat_Name == i.Stat_Name);
                             if (remove != null)
                                 db.GearStat.Remove(remove);
@@ -109,6 +111,7 @@ namespace Ninja_manager.Repository
             {
                 using (Ninja_managerEntities db = new Ninja_managerEntities())
                 {
+                    // makes list of every ninja who has bought the gear
                     var used = db.Inventory.Where(w => w.Gear.Id == gear.Id);
                     foreach(var i in used)
                     {
@@ -117,6 +120,7 @@ namespace Ninja_manager.Repository
                         ninja.Gold += i.Gear.Price;
                         db.Ninja.AddOrUpdate(ninja);
 
+                        // removes the gear from the inventory
                         i.Id_Gear = null;
                         i.Gear = null;
                         db.Inventory.AddOrUpdate(i);

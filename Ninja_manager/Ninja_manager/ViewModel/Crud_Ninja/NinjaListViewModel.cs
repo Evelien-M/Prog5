@@ -34,21 +34,20 @@ namespace Ninja_manager.ViewModel.Crud_Ninja
             this.DeleteItemCommand = new RelayCommand(DeleteItem);
             this._ninjaRepository = new NinjaRepository();
 
-
-            this.NinjaList = new ObservableCollection<Ninja>(this._ninjaRepository.GetNinjas());
+            this.NinjaList = new ObservableCollection<Ninja>(this._ninjaRepository.Get());
         }
 
 
         private void AddItem()
         {
             if (this._ninjaEditView != null)
-                if (!this._ninjaEditView.ClosePrompt())
+                if (!this._ninjaEditView.ClosePrompt()) // cancels the action if user changes his mind
                     return;
 
             var rng = new Random();
             var gold = rng.Next(40, 80) * 10;
-            var newId = this.NinjaList.OrderByDescending(o => o.Id).Select(s => s.Id).FirstOrDefault() + 1;
-            this.SelectedNinja = new Ninja() { Id = newId, Name = "" , Gold = gold };
+            var newId = this.NinjaList.OrderByDescending(o => o.Id).Select(s => s.Id).FirstOrDefault() + 1; 
+            this.SelectedNinja = new Ninja() { Id = newId, Name = "" , Gold = gold }; // makes a new empty ninja model and make it as selected
 
             this._ninjaEditView = new NinjaEditView();
             this._ninjaEditView.Show();
@@ -61,7 +60,7 @@ namespace Ninja_manager.ViewModel.Crud_Ninja
 
             if (this.SelectedNinja != null)
             {
-                this._ninjaEditView = new NinjaEditView();
+                this._ninjaEditView = new NinjaEditView(); // opens the edit window
                 this._ninjaEditView.Show();
             }
         }

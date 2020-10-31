@@ -109,12 +109,12 @@ namespace Ninja_manager.ViewModel.Shop
             this.Gold = ninjaEdit.Gold;
             this.ErrorMessage = "";
             var repo = new CategoryRepository();
-            this.Categories = repo.GetCategories();
+            this.Categories = repo.GetAllCategories();
             this._gearRepsotory = new GearRepository();
             this._ninjaEdit.ShopViewModel = this;
             this.BuyItemCommand = new RelayCommand(BuyItem);
         }
-
+        // updates the gearlist if category is selected
         private void UpdateGearList()
         {
             this.GearList = this._gearRepsotory.GetByCategory(this.SelectedCategory.Name);
@@ -133,6 +133,7 @@ namespace Ninja_manager.ViewModel.Shop
         {
             if (this._selectedGear != null)
             {
+                // checks if user has already item from selected category
                 var invItem = this._ninjaEdit.InventoryList.FirstOrDefault(i => i.Inventory.Category == this._selectedCategory.Name);
                 if (invItem.Inventory.Id_Gear != null)
                 {
@@ -140,13 +141,14 @@ namespace Ninja_manager.ViewModel.Shop
                     this.CanExecuteBuyItem = false;
                     return false;
                 }
+                // checks if user has enough gold
                 if (this._selectedGear.Gear.Price > this.Gold)
                     {
                     this.ErrorMessage = "You don't have enough gold.";
                     this.CanExecuteBuyItem = false;
                     return false;
                 }
-
+                // reset error message, user is able te buy the item
                 this.ErrorMessage = "";
                 this.CanExecuteBuyItem = true;
                 return true;
